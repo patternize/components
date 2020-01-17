@@ -12,7 +12,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
   "dependencies": {
     "@vx/gradient": "^0.0.193-alpha.2",
     "@vx/group": "^0.0.193-alpha.2",
