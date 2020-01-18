@@ -7,7 +7,7 @@ git clone https://github.com/patternize/patternize-components.git
 cd components
 ```
 
-## Run styleguidist
+## Run Storybook
 
 ```
 yarn start
