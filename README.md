@@ -25,3 +25,10 @@ yarn build
 npm login
 npm pubilsh
 ```
+
+## Add Style
+
+```
+// add this line to your index.ts file
+import "@patternize/components/lib/styles.css";
+```
