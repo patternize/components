@@ -1,4 +1,4 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const postcssPresetEnv = require('postcss-preset-env')
 const path = require('path')
 
@@ -23,20 +23,26 @@ module.exports = {
     }
   },
   module: {
+
     rules: [
       {
-          test: /.scss$/,
-          use: ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: [
-                  {
-                      loader: 'css-loader'
-                  },
-                  {
-                      loader: 'sass-loader'
-                  }
+        test: /\.(c|sc)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: () => [
+                  postcssPresetEnv({
+                      stage: 4
+                  })
               ]
-          })
+            }
+          },
+          'sass-loader'
+        ]
       },
       {
         test: /\.tsx?$/,
@@ -60,6 +66,8 @@ module.exports = {
     ]
   },
   plugins: [
-      new ExtractTextPlugin('[name].[chunkhash].css')
+      new MiniCssExtractPlugin({
+          filename: 'styles.css'
+      })
   ]
 }

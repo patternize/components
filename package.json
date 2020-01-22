@@ -27,7 +27,6 @@
     "@types/react-test-renderer": "^16.0.1",
     "@types/storybook__react": "^3.0.7",
     "css-loader": "^2.1.1",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "mini-css-extract-plugin": "^0.7.0",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.6.0",
@@ -45,5 +44,10 @@
   "peerDependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
+  },
+  "resolutions": {
+    "lodash": "^4.17.12",
+    "braces": "^2.3.1",
+    "minimatch": "^3.0.2"
   }
 }
