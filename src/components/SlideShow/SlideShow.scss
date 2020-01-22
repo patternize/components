@@ -28,28 +28,29 @@
 
     .slides-nav {
         display: flex;
-        height: 10%;
+        height: 40px;
         justify-content: space-between;
+    }
+
+    .button {
+        background-color: #30b73d;
+        border: none;
+        color: white;
+        padding: 3px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-flex;
+        font-size: 16px;
+        margin: 2px 2px;
+        cursor: pointer;
+
+        .left{
+            float: left;
+        }
+        .right{
+            float: right;
+        }
     }
 }
 
-.button {
-    background-color: #30b73d;
-    border: none;
-    color: white;
-    padding: 3px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-flex;
-    font-size: 16px;
-    margin: 2px 2px;
-    cursor: pointer;
-}
 
-
-.left{
-    float: left;
-}
-.right{
-    float: right;
-}

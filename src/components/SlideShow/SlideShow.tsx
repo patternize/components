@@ -4,32 +4,50 @@ import './SlideShow.scss';
 
 const { useState } = React;
 
-export type SlideEffect = 'fade' | 'slide';
-export type ControllerPostition = 'top' | 'bottom';
+const Extensions = {
+    SVG: '.svg',
+    JPG: '.jpg',
+    JPEG: '.jpeg',
+    NULL: 'NULL'
+};
 
-// interface SlidesProps {
-//     effect?: SlideEffect;
-//     style?: React.CSSProperties;
-//     controllerPostition?: ControllerPostition;
-//     images?: React.ReactNode | string[] // React Node for <div>, string for url addresses
-// }
-
-interface ICounter {
+interface ISlideShowProps {
     initialState: number,
-    totalSize: number,
     images: string[],
+    maxWidth?: number | string,
+    maxHeight?: number | string
 }
 
 interface ISlides {
-    images: string[],
-    currentSlide: number
+    images: string[], // image URLs
+    index: number // current Index
+    maxWidth?: number | string,
+    maxHeight?: number | string
 }
 
-const Slides =  ({ images, currentSlide} : ISlides): JSX.Element => {
+const Slides =  ({ images, index, maxWidth, maxHeight} : ISlides): JSX.Element => {
     let slides = images.map((imgUrl: string, i: number) => {
-        return (
-        <img className={`img ${currentSlide === i ? 'active' : ''}`} key={i} src={imgUrl} />
-        )
+        let extensionMatch = imgUrl.match(/\.[0-9a-z]+$/i);
+        let extension = extensionMatch == null ? '' : extensionMatch[0];
+        switch(extension){
+            case Extensions.SVG:
+                return <object
+                    className={`img ${index === i ? 'active' : ''}`}
+                    key={i}
+                    type="image/svg+xml"
+                    data={imgUrl}
+                    width={maxWidth}
+                    height={maxHeight}>
+                    Your browser does not support SVG.
+                </object>
+            default:
+                return <img
+                    className={`img ${index === i ? 'active' : ''}`}
+                    key={i}
+                    src={imgUrl}
+                />
+
+        }
     });
     return (
         <div className='slides'>
@@ -38,21 +56,22 @@ const Slides =  ({ images, currentSlide} : ISlides): JSX.Element => {
     )
 };
 
-export const SlideShow = ({ initialState=0 , totalSize=3, images}: ICounter): JSX.Element => {
-    const [count, setCount] = useState<number>(0);
+export const SlideShow = ({ initialState=0 , images, maxWidth, maxHeight}: ISlideShowProps): JSX.Element => {
+    const [index, setIndex] = useState<number>(0);
     const normalize = (count: number) => {
-        let normalizedIndex = count % totalSize;
+        let len = images.length;
+        let normalizedIndex = count % len;
         if (normalizedIndex < 0) {
-            normalizedIndex += totalSize;
+            normalizedIndex += len;
         }
         return normalizedIndex;
     };
-    const increment = () => setCount(normalize(count + 1));
-    const decrement = () => setCount(normalize(count - 1));
+    const increment = () => setIndex(normalize(index + 1));
+    const decrement = () => setIndex(normalize(index - 1));
 
     return (
-        <div className='slideshow'>
-            <Slides images={images} currentSlide={count}/>
+        <div className='slideshow' style={{maxWidth: maxWidth, maxHeight: maxHeight}}>
+            <Slides images={images} index={index} {...maxWidth} {...maxHeight}/>
 
             <div className="slides-nav">
                 <Button onClick={decrement}>Previous</Button>

@@ -44,5 +44,10 @@
   "peerDependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
+  },
+  "resolutions": {
+    "lodash": "^4.17.12",
+    "braces": "^2.3.1",
+    "minimatch": "^3.0.2"
   }
 }
