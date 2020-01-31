@@ -1,6 +1,8 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const postcssPresetEnv = require('postcss-preset-env')
-const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const postcssPresetEnv = require('postcss-preset-env');
+
+const path = require('path');
 
 module.exports = {
   mode: 'production',

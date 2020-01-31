@@ -39,7 +39,13 @@ export const BarChart = () => {
         svg
             .selectAll(".bar")
             .data(data)
-            .join("rect")
+            .join(
+                enter => enter.append("rect")
+                    .attr("fill", "green")
+                    .text(d => d),
+                update => update
+                    .attr("fill", "gray")
+            )
             .attr("class", "bar")
 
             .style("transform", "scale(1, -1)")
@@ -53,7 +59,7 @@ export const BarChart = () => {
 
     return (
         <>
-            <svg ref={svgRef}>
+            <svg ref={svgRef} width={500} height={500}>
                 <g className="x-axis" />
                 <g className="y-axis" />
             </svg>
@@ -66,5 +72,3 @@ export const BarChart = () => {
         </>
     );
 }
-
-export default BarChart;

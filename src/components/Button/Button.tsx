@@ -36,5 +36,3 @@ export class Button extends React.PureComponent<IProps> {
     size: "regular"
   };
 }
-
-export default Button;
