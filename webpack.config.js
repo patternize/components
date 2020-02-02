@@ -8,6 +8,7 @@ module.exports = {
   mode: 'production',
   entry: './src/components/index.ts',
   output: {
+    globalObject: "this",
     path: path.resolve(__dirname, 'lib'),
     filename: 'index.js',
     library: 'seed',
