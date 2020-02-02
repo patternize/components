@@ -80,5 +80,3 @@ export const SlideShow = ({ initialState=0 , images, maxWidth, maxHeight}: ISlid
         </div>
     );
 }
-
-export default SlideShow;
