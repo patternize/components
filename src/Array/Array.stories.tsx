@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { storiesOf } from '@storybook/react'
-import { Array } from './Array'
+import Array from './index'
 
 storiesOf('Array', module).add('Array', () => <Array data={[
     [5,1,4,2,8],

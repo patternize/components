@@ -1,5 +1,7 @@
 import * as React from "react";
 import BarChart from "./BarChart";
+import { Button } from 'components/Button';
+
 import "./BarChart.scss";
 
 const { useState } = React;
@@ -10,17 +12,17 @@ function App() {
     return (
         <div className={'root'}>
             <BarChart data={data} />
-            <button onClick={() => setData(data.map(value => value + 5))}>
+            <Button onClick={() => setData(data.map(value => value + 5))}>
                 Update data
-            </button>
-            <button onClick={() => setData(data.filter(value => value < 35))}>
+            </Button>
+            <Button onClick={() => setData(data.filter(value => value < 35))}>
                 Filter data
-            </button>
-            <button
+            </Button>
+            <Button
                 onClick={() => setData([...data, Math.round(Math.random() * 100)])}
             >
                 Add data
-            </button>
+            </Button>
         </div>
     );
 }
