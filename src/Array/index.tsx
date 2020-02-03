@@ -8,7 +8,7 @@ interface IProps {
     data: number[][];
 }
 
-function App({ data }: IProps) {
+export default function ArrayController({ data }: IProps) {
     const [index, setIndex] = useState(0);
 
     return (
@@ -25,5 +25,3 @@ function App({ data }: IProps) {
         </div>
     );
 }
-
-export default App;

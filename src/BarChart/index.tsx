@@ -2,8 +2,6 @@ import * as React from "react";
 import BarChart from "./BarChart";
 import { Button } from 'components/Button';
 
-import "./BarChart.scss";
-
 const { useState } = React;
 
 function App() {
