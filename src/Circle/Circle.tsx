@@ -32,5 +32,4 @@ export const Circle = (props: IProps): JSX.Element => {
             <button onClick={() => setData(data.filter(value => value < 35))} > Filter Data </button>
         </>
     );
-
-}
+};

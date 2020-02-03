@@ -4,7 +4,7 @@ const path = require('path')
 
 module.exports = {
   mode: 'production',
-  entry: './src/components/index.ts',
+  entry: './src/index.ts',
   output: {
     globalObject: "this",
     path: path.resolve(__dirname, 'lib'),
@@ -13,7 +13,10 @@ module.exports = {
     libraryTarget: 'umd'
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      components: path.resolve(__dirname, 'src/components')
+    }
   },
   externals: {
     react: {
@@ -24,7 +27,6 @@ module.exports = {
     }
   },
   module: {
-
     rules: [
       {
         test: /\.(c|sc)ss$/,

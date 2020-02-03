@@ -1,14 +1,11 @@
-// src/components/button/Button.tsx
-
 import * as React from "react";
+import "./Button.scss";
 
 interface IProps {
-  /**
-   * CSS properties
-   */
   size: "regular" | "large";
   children: React.ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 export class Button extends React.PureComponent<IProps> {
@@ -17,15 +14,8 @@ export class Button extends React.PureComponent<IProps> {
     return (
       <button
           onClick={onClick}
-        {...rest}
-        style={{
-          border: "none",
-          padding: size === "regular" ? "8px 12px" : "12px 16px",
-          margin: "4px",
-          background: "green",
-          borderRadius: "4px",
-          color: "white"
-        }}
+          className={'pat-button'}
+          {...rest}
       >
         {children}
       </button>

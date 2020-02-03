@@ -33,7 +33,6 @@ const BarChart = ({ data }: IBarChartProps) => {
     // will be called initially and on every data change
     useEffect(() => {
         const svg = select(svgRef.current);
-        console.log(dimensions);
 
         if (!dimensions) return;
 
