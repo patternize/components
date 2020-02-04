@@ -52,7 +52,7 @@ export const BarChart = ({ data }: IBarChartProps) => {
         // draw the bars
         svg
             .selectAll(".bar")
-            .data(data, d => d)
+            .data(data)
             .join("rect")
             .attr("class", "bar")
             .style("transform", "scale(1, -1)")
