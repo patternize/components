@@ -12,9 +12,8 @@ export default function ArrayController({ data }: IProps) {
     const [index, setIndex] = useState(0);
 
     return (
-        <div className={'root'}>
+        <div className={'controller'}>
             <Array data={data[index]} />
-
             <br/>
             <Button onClick={() => setIndex(index-1)} disabled={index == 0}>
                 Previous

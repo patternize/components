@@ -3,7 +3,7 @@ import * as React from 'react'
 import { storiesOf } from '@storybook/react'
 import Array from './index'
 
-storiesOf('Array', module).add('Array', () => <Array data={[
+storiesOf('D3 Modules', module).add('Array', () => <Array data={[
     [5,1,4,2,8],
     [1,5,4,2,8],
     [1,4,5,2,8],

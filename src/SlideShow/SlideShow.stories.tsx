@@ -7,7 +7,7 @@ const images = ['https://patternize.github.io//img/pattern.svg',
     'https://patternize.github.io/img/association.svg',
     'https://patternize.github.io/img/brain.svg'];
 
-storiesOf('SlideShow', module).add('SlideShow', () => <SlideShow
+storiesOf('React Components', module).add('SlideShow', () => <SlideShow
     initialState={0}
     images={images}
     maxWidth={1000}

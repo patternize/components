@@ -87,4 +87,4 @@ const tree = {
 };
 
 
-storiesOf('Hierarchy', module).add('Hierarchy', () => <Hierarchy tree={tree}/>)
+storiesOf('Lab', module).add('Hierarchy', () => <Hierarchy tree={tree}/>)

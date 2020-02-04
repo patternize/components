@@ -6,7 +6,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "start-storybook",
+    "start": "start-storybook -p 4001",
     "build": "rimraf lib && webpack --config webpack.config.js",
     "prepublish": "npm run build"
   },

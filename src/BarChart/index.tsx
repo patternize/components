@@ -1,5 +1,5 @@
 import * as React from "react";
-import BarChart from "./BarChart";
+import { BarChart } from "./BarChart";
 import { Button } from 'components/Button';
 
 const { useState } = React;
@@ -8,7 +8,7 @@ function App() {
     const [data, setData] = useState([25, 30, 45, 60, 10, 65, 75]);
 
     return (
-        <div className={'root'}>
+        <div className={'controller'}>
             <BarChart data={data} />
             <Button onClick={() => setData(data.map(value => value + 5))}>
                 Update data
