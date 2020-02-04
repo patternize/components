@@ -17,7 +17,8 @@ module.exports = ({ config }) => {
   ];
   config.resolve.extensions.push('.ts', '.tsx');
   config.resolve.alias = {
-    components: path.resolve(__dirname, '../src/components')
+    components: path.resolve(__dirname, '../src/components'),
+    hooks: path.resolve(__dirname, '../src/hooks')
   };
   return config
 };

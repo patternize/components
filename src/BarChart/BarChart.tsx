@@ -1,31 +1,15 @@
 import * as React from "react";
 import { select, axisBottom, axisRight, scaleLinear, scaleBand } from "d3";
-import ResizeObserver from "resize-observer-polyfill";
+import { useResizeObserver } from 'hooks';
+import "./BarChart.scss";
 
-const { useRef, useEffect, useState } = React;
+const { useRef, useEffect } = React;
 
 interface IBarChartProps {
     data: number[];
 }
-const useResizeObserver = ref => {
-    const [dimensions, setDimensions] = useState(null as any);
-    useEffect(() => {
-        const observeTarget = ref.current;
-        const resizeObserver = new ResizeObserver(entries => {
-            entries.forEach(entry => {
-                setDimensions(entry.contentRect as any);
-            });
-        });
-        resizeObserver.observe(observeTarget);
-        return () => {
-            resizeObserver.unobserve(observeTarget);
-        };
-    }, [ref]);
-    return dimensions;
-};
 
-
-const BarChart = ({ data }: IBarChartProps) => {
+export const BarChart = ({ data }: IBarChartProps) => {
     const svgRef = useRef(null);
     const wrapperRef = useRef(null);
     const dimensions = useResizeObserver(wrapperRef);
@@ -43,7 +27,7 @@ const BarChart = ({ data }: IBarChartProps) => {
             .padding(0.5);
 
         const yScale = scaleLinear()
-            .domain([0, 150]) // todo
+            .domain([0, Math.max(...data)])
             .range([dimensions.height, 0]); // change
 
         const colorScale = scaleLinear()
@@ -96,12 +80,10 @@ const BarChart = ({ data }: IBarChartProps) => {
 
     return (
         <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
-            <svg ref={svgRef}>
+            <svg ref={svgRef} className={'bar-chart'}>
                 <g className="x-axis" />
                 <g className="y-axis" />
             </svg>
         </div>
     );
 }
-
-export default BarChart;

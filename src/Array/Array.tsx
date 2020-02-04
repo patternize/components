@@ -1,5 +1,7 @@
 import * as React from 'react';
 import * as d3 from 'd3';
+// import { useResizeObserver } from 'hooks';
+import "./Array.scss";
 
 const { useRef, useEffect } = React;
 const { select } = d3;
@@ -12,14 +14,20 @@ interface ArrayProps {
 export const Array = (props: ArrayProps): JSX.Element => {
 
     const svgRef = useRef(null);
+    const wrapperRef = useRef(null);
+    // const dimensions = useResizeObserver(wrapperRef);
+
     const { data } = props;
 
     useEffect(
         () => {
-            if (props.data && svgRef.current) {
+            if (data && svgRef.current) {
                 const svg = select(svgRef.current);
-                svg.attr("width", 300)
+                const textWidth = 18;
+                const totalWidth = textWidth * data.length;
+                svg.attr("width", totalWidth)
                     .attr("height", 33)
+
                 const t = svg.transition()
                     .duration(750);
 
@@ -28,7 +36,7 @@ export const Array = (props: ArrayProps): JSX.Element => {
                     .join(
                         enter => enter.append("text")
                             .attr("fill", "green")
-                            .attr("x", (d, i) => i * 18)
+                            .attr("x", (d, i) => i * textWidth)
                             .attr("y", -30)
                             .style('font-size', 24)
                             .text(d => d)
@@ -38,7 +46,8 @@ export const Array = (props: ArrayProps): JSX.Element => {
                             .attr("fill", "black")
                             .attr("y", 0)
                             .call(update => update.transition(t)
-                                .attr("x", (d, i) => i * 18)),
+                                .attr("x", (d, i) => i * textWidth)
+                            ),
                         exit => exit
                             .attr("fill", "brown")
                             .call(exit => exit.transition(t)
@@ -49,12 +58,11 @@ export const Array = (props: ArrayProps): JSX.Element => {
         }, [data]);
 
     return (
-        <>
+        <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
             <svg
-                className="d3-component"
+                className="array"
                 ref={svgRef}
             />
-        </>
+        </div>
     );
-
 }
