@@ -56,7 +56,3 @@ storiesOf('Demo', module).add('Selection Sort', () => React.createElement(() => 
         </div>
     )
 }));
-<<<<<<< HEAD
-=======
-
->>>>>>> 1d314095ce7468e59608254ce25b09dc94eb5f46
