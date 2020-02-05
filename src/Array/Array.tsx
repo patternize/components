@@ -23,7 +23,7 @@ export const Array = (props: ArrayProps): JSX.Element => {
         () => {
             if (data && svgRef.current) {
                 const svg = select(svgRef.current);
-                const textWidth = 18;
+                const textWidth = 35;
                 const totalWidth = textWidth * data.length;
                 svg.attr("width", totalWidth)
                     .attr("height", 33)
