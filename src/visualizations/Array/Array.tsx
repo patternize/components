@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as d3 from 'd3';
-// import { useResizeObserver } from 'hooks';
+// import { useLocalStorage } from 'hooks';
 import "./Array.scss";
 
 const { useRef, useEffect } = React;
@@ -15,18 +15,23 @@ export const Array = (props: ArrayProps): JSX.Element => {
 
     const svgRef = useRef(null);
     const wrapperRef = useRef(null);
+    // const theme = useLocalStorage('theme', 'light');
     // const dimensions = useResizeObserver(wrapperRef);
 
     const { data } = props;
 
     useEffect(
         () => {
+            // console.log('theme changed: ', theme);
+
             if (data && svgRef.current) {
                 const svg = select(svgRef.current);
                 const textWidth = 35;
                 const totalWidth = textWidth * data.length;
                 svg.attr("width", totalWidth)
                     .attr("height", 33)
+
+                // console.log('theme changed: ', theme);
 
                 const t = svg.transition()
                     .duration(750);

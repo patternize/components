@@ -25,7 +25,7 @@ export function TreeChart({ data }) {
 
         // transform hierarchical data
         const root = hierarchy(data);
-        const treeLayout = tree().size([height, width]);
+        const treeLayout = tree().size([height, width - 100]);
 
         // give linkVertical source node and target node
         const linkGenerator = linkHorizontal()
@@ -98,8 +98,7 @@ export function TreeChart({ data }) {
         <div ref={wrapperRef} style={{marginBottom: '2rem'}}>
             <svg ref={svgRef}
                  className={'tree-chart'}
-                 height={600}
-                 width={300}
+                 height={700}
             />
         </div>
     )
