@@ -1,6 +1,6 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const postcssPresetEnv = require('postcss-preset-env')
-const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const postcssPresetEnv = require('postcss-preset-env');
+const path = require('path');
 
 module.exports = {
   mode: 'production',
@@ -16,7 +16,8 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
       components: path.resolve(__dirname, 'src/components'),
-      hooks: path.resolve(__dirname, 'src/hooks')
+        hooks: path.resolve(__dirname, 'src/hooks'),
+        visualizations: path.resolve(__dirname, 'src/visualizations')
     }
   },
   externals: {

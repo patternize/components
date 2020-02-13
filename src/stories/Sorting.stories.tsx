@@ -1,9 +1,9 @@
 import * as React from 'react'
 
 import { storiesOf } from '@storybook/react'
-import { Array } from '../Array/Array';
-import { BarChart } from "../BarChart/BarChart";
-import { Button } from "components/Button";
+import { Array } from 'visualizations/Array';
+import { BarChart } from "visualizations/BarChart";
+import { Button } from "components";
 
 storiesOf('Demo', module).add('Bubble Sort', () => React.createElement(() => {
     const [index, setIndex] = React.useState(0);

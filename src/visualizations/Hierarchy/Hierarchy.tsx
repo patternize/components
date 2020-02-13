@@ -135,6 +135,7 @@ export const Hierarchy = ({
     height,
     width
 }: SlideShowProps) => {
+
     // this is boilerplate code, because other with `yarn build` will have a 'window' not defined error since this is backend rendering
     if (typeof window === 'undefined') {
         (window as any).global = window;

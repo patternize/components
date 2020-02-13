@@ -1,0 +1,28 @@
+.tree-chart{
+  overflow: visible;
+  display: block;
+  width: 100%;
+  padding-left: 30px;
+}
+
+.label {
+  text-anchor: middle;
+  font-size: 24px;
+  fill:  var(--color-bg);
+}
+
+.link {
+  stroke: var(--color-bg);
+}
+
+.node {
+  fill:  var(--color-bg);
+}
+
+:root {
+  --color-bg: #000000;
+}
+
+[data-theme="dark"]{
+  --color-bg: #ffffff;
+}
