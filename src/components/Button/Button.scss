@@ -3,13 +3,13 @@
   border: 1px solid black;
   margin: 0 auto 5px;
   height: 30px;
-  background-color:  var(--color-bg);
+  background-color:  var(--btn-color-bg);
 }
 
 :root {
-  --color-bg: yellow;
+  --btn-color-bg: #f23900;
 }
 
 [data-theme="dark"]{
-  --color-bg: #ffffff;
+  --btn-color-bg: #ffffff;
 }

@@ -18,7 +18,7 @@ export function TreeChart({ data }) {
         const svg = select(svgRef.current);
 
         /*
-
+            initial render doesn't have dimensions, so we need to use getBoundingClientRect
          */
         const { width, height } =
             dimensions || wrapperRef.current.getBoundingClientRect();
