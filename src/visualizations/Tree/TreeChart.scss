@@ -4,3 +4,17 @@
   width: 100%;
   padding-left: 30px;
 }
+
+.label {
+  text-anchor: middle;
+  font-size: 24px;
+  fill:  var(--color-bg);
+}
+
+:global {
+  --color-bg: #000000;
+}
+
+[data-theme="dark"]{
+  --color-bg: #ffffff;
+}

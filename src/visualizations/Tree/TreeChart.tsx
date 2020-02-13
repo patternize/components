@@ -85,8 +85,6 @@ export function TreeChart({ data }) {
             .attr("class", "label")
             .attr("x", node => node.y)
             .attr("y", node => node.x - 12)
-            .attr("text-anchor", "middle")
-            .attr("font-size", 24)
             .text(node => node.data.name)
             .transition()
             .duration(500)
