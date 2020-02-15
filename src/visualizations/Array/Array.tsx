@@ -15,8 +15,6 @@ export const Array = (props: ArrayProps): JSX.Element => {
 
     const svgRef = useRef(null);
     const wrapperRef = useRef(null);
-    // const theme = useLocalStorage('theme', 'light');
-    // const dimensions = useResizeObserver(wrapperRef);
 
     const { data } = props;
 
