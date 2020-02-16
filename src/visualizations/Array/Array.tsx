@@ -48,7 +48,7 @@ export const Array = (props: ArrayProps): JSX.Element => {
                             .call(enter => enter.transition(t)
                             .attr("y", 0)),
                         update => update
-                            .attr("fill", "black")
+                            .attr("class", "text")
                             .attr("y", 0)
                             .call(update => update.transition(t)
                                 .attr("x", (d, i) => i * textWidth)

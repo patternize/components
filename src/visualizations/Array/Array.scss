@@ -3,3 +3,15 @@
   display: block;
   margin: auto;
 }
+
+.text{
+  fill: var(--btn-text-color);
+}
+
+:root {
+  --btn-text-color: black;
+}
+
+[data-theme="dark"]{
+  --btn-text-color: white;
+}
