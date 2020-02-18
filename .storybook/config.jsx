@@ -30,15 +30,15 @@ addDecorator(storyFn => React.createElement(() => {
     const [isDark, setDark] = useState(false);
 
     const setTheme = (dark) => {
+        console.log('dark : ', dark);
         if (dark === true) {
             document.documentElement.setAttribute('data-theme', 'dark');
             setDark(true);
-            console.log(isDark);
         } else if (dark === false) {
             document.documentElement.removeAttribute('data-theme');
             setDark(false);
         }
-    }
+    };
 
     useEffect(() => {
         channel.on('DARK_MODE', setTheme);
@@ -46,7 +46,7 @@ addDecorator(storyFn => React.createElement(() => {
     }, [channel, setDark]);
 
     return (
-        <>
-            {storyFn()}
-        </>);
-}));
+        storyFn()
+    )
+})
+);
