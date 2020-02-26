@@ -9,6 +9,12 @@ interface IProps {
 }
 
 export class Button extends React.PureComponent<IProps> {
+  componentDidMount(){
+    document.addEventListener("keydown", event => {
+      event.stopPropagation();
+      console.log('key pressed', event);
+    });
+  }
   render() {
     const { size, children, onClick, ...rest } = this.props;
     return (

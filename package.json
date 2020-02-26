@@ -13,12 +13,7 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "@vx/gradient": "^0.0.193-alpha.2",
-    "@vx/group": "^0.0.193-alpha.2",
-    "@vx/hierarchy": "^0.0.193-alpha.2",
-    "@vx/shape": "^0.0.193-alpha.2",
     "d3": "^5.15.0",
-    "d3-hierarchy": "^1.1.9",
     "node-sass": "^4.13.1",
     "resize-observer-polyfill": "^1.5.1",
     "sass-loader": "^8.0.2"
