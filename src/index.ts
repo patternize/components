@@ -5,7 +5,7 @@ import { BarChart } from 'visualizations/BarChart';
 import { TreeChart } from 'visualizations/Tree/TreeChart';
 import './index.scss';
 
-module.exports = {
+export {
     Array,
     BarChart,
     SlideShow,
