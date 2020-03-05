@@ -17,7 +17,7 @@ storiesOf('D3 Modules', module).add('Array', () => React.createElement(() => {
             <Array data={data[index]} />
             <br/>
             <Button onClick={() => setIndex(index-1)} disabled={index == 0}>
-                <p>Previous</p>
+                Previous
             </Button>
             <Button onClick={() => setIndex(index+1)} disabled={index == data.length - 1}>
                 Next
