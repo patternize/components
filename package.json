@@ -32,7 +32,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "rimraf": "^2.6.3",
-    "storybook": "5.3.17",
+    "storybook": "^5.3.17",
     "storybook-dark-mode": "^0.3.0",
     "style-loader": "^0.23.1",
     "ts-loader": "^6.0.2",
