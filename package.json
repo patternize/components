@@ -32,7 +32,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "rimraf": "^2.6.3",
-    "storybook": "^1.0.0",
+    "storybook": "5.3.17",
     "storybook-dark-mode": "^0.3.0",
     "style-loader": "^0.23.1",
     "ts-loader": "^6.0.2",
@@ -48,6 +48,8 @@
   "resolutions": {
     "lodash": "^4.17.12",
     "braces": "^2.3.1",
-    "minimatch": "^3.0.2"
+    "minimatch": "^3.0.2",
+    "acorn": "^6.4.1",
+    "minimist": "^1.2.2"
   }
 }
