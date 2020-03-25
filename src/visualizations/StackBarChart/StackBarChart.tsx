@@ -1,127 +1,214 @@
 import * as React from "react";
 import * as d3 from "d3";
+import { useResizeObserver } from "hooks";
 
 const { useRef, useEffect } = React;
 
-interface IStackBarChartProps {
-    data: number[];
-}
+// interface IStackBarChartProps {
+//     data: number[];
+// }
 
-export const StackBarChart = ({ data }: any) => {
+// const randInt = (min, max) => {
+//     let range = max - min;
+//     let rnd = Math.random() * range + min;
+//     return Math.round(rnd);
+// }
+
+export const StackBarChart = () => {
     const svgRef = useRef(null);
     const wrapperRef = useRef(null);
     const dimensions = useResizeObserver(wrapperRef);
 
-    let margin = {top: 20, right: 20, bottom: 30, left: 40};
-    var x = d3.scaleBand()
-        .rangeRound([0, width])
-        .paddingInner(0.05)
-        .align(0.1);
+    const data = [
+        [2007, "Inpatient Care", 65830],
+        [2007, "Outpatient Care", 22742],
+        [2007, "Medication and Supplies", 27684],
+        [2007, "Reduced Productivity", 23400],
+        [2007, "Reduced Labor Force", 7900],
+        [2007, "Early Mortality", 26900],
+        [2012, "Inpatient Care", 90652],
+        [2012, "Outpatient Care", 31798],
+        [2012, "Medication and Supplies", 52306],
+        [2012, "Reduced Productivity", 28500],
+        [2012, "Reduced Labor Force", 21600],
+        [2012, "Early Mortality", 18500],
+        [2017, "Inpatient Care", 76164],
+        [2017, "Outpatient Care", 54001],
+        [2017, "Medication and Supplies", 107104],
+        [2017, "Reduced Productivity", 32500],
+        [2017, "Reduced Labor Force", 37500],
+        [2017, "Early Mortality", 19900]
+    ].map(row => {
+        return {
+            year: +row[0],
+            source: row[1],
+            cost: +row[2]
+        };
+    });
 
-    var y = d3.scaleLinear()
-        .rangeRound([height, 0]);
-
-    var z = d3.scaleOrdinal()
-        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-
-    var xAxis = d3.axisBottom(x);
-
-    function update(data, keys) {
-      data = [...data];
-      const sortFn = (a, b) => d3.ascending(a.State, b.State);
-      const xCopy = x.domain(data.sort(sortFn).map(d => d.State)).copy();
-      const t = d3.transition().duration(750);
-      const delay = (d, i) => i * 20;
-
-      const groups = d3.selectAll("g.bar-group")
-        .data(d3.stack().keys(keys)(data))
-        .attr("fill", function(d) { return z(d.key); });
-
-      const bars = groups.selectAll(".bar")
-        .data(d => d, d => d.data.State)
-        .sort((a, b) => xCopy(a.data.State) - xCopy(b.data.State))
-
-      t.selectAll("g.bar-group")
-        .selectAll(".bar")
-        .delay(delay)
-        .attr("x", function(d) { return xCopy(d.data.State)})
-
-      t.select(".axis.x")
-        .call(xAxis)
-        .selectAll("g")
-        .delay(delay)
+    const width = 900;
+    const height = 500;
+    const margin = {
+        top: 20,
+        left: 120,
+        right: 20,
+        bottom: 20
     }
+
+    const years = data.map(d => d.year).sort().reduce((prev: any[], curr: any) => {
+        if (prev.indexOf(curr) === -1) {
+            prev.push(curr);
+        }
+        return prev;
+    }, []);
+
+    const yearSort = (a, b) => {
+        return b.cost - a.cost;
+    }
+
+    const sources = data.map(d => d.source).sort().reduce((prev: any[], curr) => {
+        if (prev.indexOf(curr) === -1) {
+            prev.push(curr);
+        }
+        return prev;
+    }, []);
+
+    const color = (source) => {
+        let colors = sources.map((source, i) => {
+            return {
+                source: source,
+                color: d3.schemeSet2[i]
+            };
+        });
+        let found = colors.find(c => c.source === source);
+        return (found) ? found.color : "black";
+    }
+
+    const y = d3.scaleBand()
+        .domain(sources)
+        .range([0, height - margin.top - margin.bottom])
+        .padding(0.2)
+
+    const yAxis = (g) => {
+        return g.attr("transform", `translate(${margin.left}, ${margin.top})`)
+            .call(d3.axisLeft(y).tickSizeInner(0).tickSizeOuter(0));
+    }
+
+    const x = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.cost)])
+        .range([0, width - margin.left - margin.right])
+        .nice()
+
+    const xAxis = (g) => {
+        return g.attr("transform", `translate(${margin.left}, ${height - margin.bottom})`)
+            .call(d3.axisBottom(x).tickSizeOuter(0));
+    }
+
+    const fontFamily = "Arial, sans-serif"
+
+    const format = (x) => {
+        let suffix = "";
+        if (x > 1e9) {
+            x /= 1e9;
+            suffix = "B";
+        }
+        else if (x > 1e6) {
+            x /= 1e6;
+            suffix = "M";
+        }
+        else if (x > 1e3) {
+            x /= 1e3;
+            suffix = "k";
+        }
+        return "US$" + (x).toFixed(0) + suffix;
+    }
+
+    const titleText = (yearData) => {
+        let year = yearData[0].year;
+        let values = yearData.map(d => d.cost * 1e3);
+        let sum = d3.sum(values);
+        return `US Diabetes Spending, ${year}, ${format(sum)}`;
+    }
+
+    const titleFontSize = 16
+
+    const timerInterval = 2000;
+
+    const transitionDuration = 500
+
 
     // will be called initially and on every data change
     useEffect(() => {
-      const svg = d3.select(svgRef.current);
-      let width = +svg.attr("width") - margin.left - margin.right,
-          height = +svg.attr("height") - margin.top - margin.bottom,
-          g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        let yearIndex = 0;
+        let yearData = data.filter(d => d.year === years[yearIndex])
+            .sort(yearSort);
 
+        y.domain(yearData.map(d => d.source));
 
-      if (!dimensions) return;
+        const svg = d3.select(svgRef.current);
+        svg.attr('font-family', fontFamily);
 
-      var keys = data.columns.slice(1);
+        let gView = svg.append("g")
+            .classed("view", true)
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-      data.sort(function(a, b) { return b.total - a.total; });
-      x.domain(data.map(function(d) { return d.State; }));
-      y.domain([0, d3.max(data, function(d) { return d.total; })]).nice();
-      z.domain(keys);
+        // Draw the bars.
+        let bars = gView.selectAll("rect")
+            .data(yearData)
+            .join("rect")
+            .attr("fill", d => color(d.source))
+            .attr("x", 0)
+            .attr("y", d => y(d.source))
+            .attr("width", d => x(d.cost))
+            .attr("height", y.bandwidth());
 
-      g.append("g")
-        .selectAll("g")
-        .data(d3.stack().keys(keys)(data))
-        .enter().append("g")
-            .classed("bar-group", true)
-          .attr("fill", function(d) { return z(d.key); })
-        .selectAll("rect")
-        .data(function(d) { return d; }, d => d.data.State)
-        .enter().append("rect")
-            .classed("bar", true)
-          .attr("x", function(d) { return x(d.data.State); })
-          .attr("y", function(d) { return y(d[1]); })
-          .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-          .attr("width", x.bandwidth());
+        // Draw the title.
+        let title = svg.append("g")
+            .classed("title", true)
+            .attr("transform", `translate(${margin.left}, 0)`)
+            .append("text")
+            .classed("title", true)
+            .attr("y", titleFontSize)
+            .text(d => titleText(yearData));
 
-      g.append("g")
-          .attr("class", "axis x")
-          .attr("transform", "translate(0," + height + ")")
-          .call(xAxis);
+        svg.append("g")
+            .classed("x-axis", true)
+            .call(xAxis);
 
-      g.append("g")
-          .attr("class", "axis y")
-          .call(d3.axisLeft(y).ticks(null, "s"))
-        .append("text")
-          .attr("x", 2)
-          .attr("y", y(y.ticks().pop()) + 0.5)
-          .attr("dy", "0.32em")
-          .attr("fill", "#000")
-          .attr("font-weight", "bold")
-          .attr("text-anchor", "start")
-          .text("Population");
+        let gy = svg.append("g")
+            .classed("y-axis", true)
+            .call(yAxis);
 
-      var legend = g.append("g")
-          .attr("font-family", "sans-serif")
-          .attr("font-size", 10)
-          .attr("text-anchor", "end")
-        .selectAll("g")
-        .data(keys.slice().reverse())
-        .enter().append("g")
-          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+        setInterval(() => {
+            let t = svg.transition()
+                .duration(transitionDuration);
 
-      legend.append("rect")
-          .attr("x", width - 19)
-          .attr("width", 19)
-          .attr("height", 19)
-          .attr("fill", z);
+            // Increment the year index. If the new index exceeds the length of the
+            // the number of years, then go back to index 0.
+            yearIndex++;
+            if (yearIndex >= years.length) {
+                yearIndex = 0;
+            }
 
-      legend.append("text")
-          .attr("x", width - 24)
-          .attr("y", 9.5)
-          .attr("dy", "0.32em")
-          .text(function(d) { return d; });
-    }, [data, dimensions]);
+            let yearData = data.filter(d => d.year === years[yearIndex])
+                .sort(yearSort);
+
+            y.domain(yearData.map(d => d.source));
+
+            gy.transition(t)
+                .call(yAxis);
+
+            bars.data(yearData, d => d.source)
+                .transition(t)
+                .attr("y", d => y(d.source))
+                .attr("width", d => x(d.cost));
+
+            // Update the title.
+            title.text(titleText(yearData));
+
+        }, timerInterval);
+
+    }, [dimensions]);
 
     return (
         <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
@@ -129,4 +216,4 @@ export const StackBarChart = ({ data }: any) => {
             </svg>
         </div>
     );
-}
+};
