@@ -12,7 +12,6 @@ const Extensions = {
 };
 
 interface ISlideShowProps {
-    initialState: number,
     images: string[],
     maxWidth?: number | string,
     maxHeight?: number | string
@@ -56,7 +55,7 @@ const Slides =  ({ images, index, maxWidth, maxHeight} : ISlides): JSX.Element =
     )
 };
 
-export const SlideShow = ({ initialState=0 , images, maxWidth, maxHeight}: ISlideShowProps): JSX.Element => {
+export const SlideShow = ({ images, maxWidth, maxHeight}: ISlideShowProps): JSX.Element => {
     const [index, setIndex] = useState<number>(0);
     const normalize = (count: number) => {
         let len = images.length;

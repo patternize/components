@@ -1,8 +1,14 @@
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
 import { Button } from './index'
+import {withInfo} from "@storybook/addon-info";
 
-storiesOf('React Components', module).add('Button', () => React.createElement(() => {
+const stories = storiesOf("React Components", module);
+
+stories.addDecorator(withInfo);
+stories.addParameters({ info: { inline: true } });
+
+stories.add('Button', () => {
 
     return (
         <div className={'controller'}>
@@ -15,4 +21,4 @@ storiesOf('React Components', module).add('Button', () => React.createElement(()
             </Button>
         </div>
     );
-}));
+});

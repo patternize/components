@@ -1,34 +1,37 @@
 import * as React from "react";
 import "./Button.scss";
-
+const { useEffect } = React;
 interface IProps {
-  size: "regular" | "large";
+  /**
+    Children of the Button
+   */
   children: React.ReactNode;
+  /**
+    OnClick Action that defines what happens when the user clicks on the Button
+   */
   onClick?: () => void;
+  /**
+    Whether or not this Button is disabled
+   */
   disabled?: boolean;
 }
 
-export class Button extends React.PureComponent<IProps> {
-  componentDidMount(){
+export const Button = ({ children, onClick, disabled}: IProps): JSX.Element => {
+  useEffect(() => {
     document.addEventListener("keydown", event => {
       event.stopPropagation();
       console.log('key pressed', event);
     });
-  }
-  render() {
-    const { size, children, onClick, ...rest } = this.props;
-    return (
-      <button
-          onClick={onClick}
-          className={'pat-button'}
-          {...rest}
-      >
-        {children}
-      </button>
-    );
-  }
+  });
+  return (
+    <button
+        onClick={onClick}
+        className={'pat-button'}
+        disabled={disabled}
+    >
+      {children}
+    </button>
+  );
+};
 
-  static defaultProps = {
-    size: "regular"
-  };
-}
+export default Button;
