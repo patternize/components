@@ -27,6 +27,6 @@ const series = [
   }
 ];
 
-storiesOf('Lab', module).add('Line', () => (
+storiesOf('D3 Modules', module).add('LineChart', () => (
   <LinearChart series={series} />
 ));
