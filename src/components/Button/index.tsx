@@ -1,5 +1,5 @@
-import * as React from "react";
-import "./Button.scss";
+import * as React from 'react';
+import './Button.scss';
 const { useEffect } = React;
 interface IProps {
   /**
@@ -16,19 +16,19 @@ interface IProps {
   disabled?: boolean;
 }
 
-export const Button = ({ children, onClick, disabled}: IProps): JSX.Element => {
+export const Button = ({
+  children,
+  onClick,
+  disabled
+}: IProps): JSX.Element => {
   useEffect(() => {
-    document.addEventListener("keydown", event => {
+    document.addEventListener('keydown', event => {
       event.stopPropagation();
       console.log('key pressed', event);
     });
   });
   return (
-    <button
-        onClick={onClick}
-        className={'pat-button'}
-        disabled={disabled}
-    >
+    <button onClick={onClick} className={'pat-button'} disabled={disabled}>
       {children}
     </button>
   );

@@ -1,1 +1,1 @@
-export { Array } from "./Array";
+export { Array } from './Array';
