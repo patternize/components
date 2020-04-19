@@ -19,18 +19,20 @@ interface ILineChartProps {
   parseDate?: (string) => Date;
 }
 
-const _parseDate = string => d3.utcParse('%Y-%m-%d')(string);
+const _parseDate = (string) => d3.utcParse('%Y-%m-%d')(string);
 const _mergeDates = (series: TimeSeries[]): Date[] => {
   let dates = [];
-  series.map(timeSeries => {
-    dates = [timeSeries.values.map(e => _parseDate(e.date)), ...dates];
+  series.map((timeSeries) => {
+    dates = [...timeSeries.values.map((e) => _parseDate(e.date)), ...dates];
   });
+  debugger;
+
   return dates;
 };
 const _mergeValues = (series: TimeSeries[]): number[] => {
   let values = [];
-  series.map(timeSeries => {
-    values = [timeSeries.values.map(e => e.value), ...values];
+  series.map((timeSeries) => {
+    values = [...timeSeries.values.map((e) => e.value), ...values];
   });
   return values;
 };
@@ -47,7 +49,7 @@ export const LinearChart = ({ series, parseDate }: ILineChartProps) => {
     if (!dimensions) return;
     const margin = { top: 80, right: 40, bottom: 40, left: 80 };
     const width = dimensions.width - margin.left - margin.right;
-    const height = dimensions.height - margin.left - margin.right;
+    const height = dimensions.height - margin.top - margin.bottom;
     // scales
     // Scale data. Make sure to use ScaleTime()
     const xScale = d3
@@ -63,20 +65,18 @@ export const LinearChart = ({ series, parseDate }: ILineChartProps) => {
     // line generator
     const lineGen = d3
       .line()
-      .x(d => xScale(_parseDate(d.date)))
-      .y(d => yScale(d.value));
+      .x((d) => xScale(_parseDate(d.date)))
+      .y((d) => yScale(d.value));
 
     // append g at svgRef.current
     svg
-      .append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
     // Draw x axis.
     const xAxis = d3.axisBottom(xScale).tickSizeOuter(0);
     svg
-      .append('g')
+      .select('.x-axis')
       .attr('transform', `translate(0, ${height})`)
-      .attr('class', 'a axis')
       .call(xAxis);
 
     // Draw y axis.
@@ -86,21 +86,18 @@ export const LinearChart = ({ series, parseDate }: ILineChartProps) => {
       .tickSizeOuter(0)
       .tickSizeInner(-width);
 
-    svg
-      .append('g')
-      .attr('class', 'y axis')
-      .call(yAxis);
+    svg.select('.y-axis').call(yAxis);
+
     // Draw Lines
-    const chartGroup = svg.append('g').attr('class', 'line-chart');
+    const chartGroup = svg.selectAll('.line-chart');
     chartGroup
       .selectAll('.line-series')
       .data(series)
-      .enter()
-      .append('path')
-      .attr('class', d => `line-series ${d.name.toLowerCase()}`)
-      .attr('d', d => lineGen(d.values))
+      .join('path')
+      .attr('class', `line-series`)
+      .attr('d', (d) => lineGen(d.values))
       .style('fill', 'none')
-      .style('stroke', d => d.color);
+      .style('stroke', (d) => d.color);
   }, [series, dimensions]);
 
   return (
@@ -108,6 +105,7 @@ export const LinearChart = ({ series, parseDate }: ILineChartProps) => {
       <svg ref={svgRef} className={'bar-chart'} style={{ height: '500px' }}>
         <g className='x-axis' />
         <g className='y-axis' />
+        <g className='line-chart' />
       </svg>
     </div>
   );
