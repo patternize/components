@@ -71,7 +71,6 @@ export const HorizontalAnimatedBarChart = ({
             .attr('height', yScale.bandwidth());
         },
         (update) => {
-          debugger;
           update
             .transition(t)
             .delay((d, i) => i * 20)

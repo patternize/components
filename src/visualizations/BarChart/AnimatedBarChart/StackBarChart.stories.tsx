@@ -53,7 +53,6 @@ storiesOf('D3 Modules', module).add('AnimatedStackBarChart', () =>
       setIndex(idx);
       setDatapoints(currentDatapoints);
     };
-    console.log(datapoints);
 
     return (
       <div className={'controller'}>
