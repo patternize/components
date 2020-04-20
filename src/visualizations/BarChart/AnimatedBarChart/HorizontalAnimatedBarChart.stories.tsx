@@ -1,19 +1,8 @@
 import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import { StackBarChart } from './StackBarChart';
 import { HorizontalAnimatedBarChart } from './HorizontalAnimatedBarChart';
 import { Button } from 'components/Button';
-
-storiesOf('D3 Modules', module).add('AnimatedStackBarChart-1', () =>
-  React.createElement(() => {
-    return (
-      <div className={'controller'}>
-        <StackBarChart />
-      </div>
-    );
-  })
-);
 
 storiesOf('D3 Modules', module).add('AnimatedStackBarChart', () =>
   React.createElement(() => {
