@@ -25,7 +25,6 @@ const _mergeDates = (series: TimeSeries[]): Date[] => {
   series.map((timeSeries) => {
     dates = [...timeSeries.values.map((e) => _parseDate(e.date)), ...dates];
   });
-  debugger;
 
   return dates;
 };
