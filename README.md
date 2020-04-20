@@ -1,6 +1,6 @@
 # Component library for Patternize.io
 
-![](./img/logo-component.jpg)
+![](./img/logo-components.jpg)
 
 ## Getting Started
 
