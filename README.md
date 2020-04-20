@@ -1,5 +1,7 @@
 # Component library for Patternize.io
 
+![](./img/logo-component.jpg)
+
 ## Getting Started
 
 ```
