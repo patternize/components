@@ -74,13 +74,13 @@ export const SlideShow = ({
     }
     return normalizedIndex;
   };
-  const increment = () => setIndex((index) => normalize(index + 1));
-  const decrement = () => setIndex((index) => normalize(index - 1));
+  const increment = () => setIndex(normalize(index + 1));
+  const decrement = () => setIndex(normalize(index - 1));
   const setAuto = () =>
     setInterval(() => {
-      increment();
+      setIndex(index => normalize(index+1));
     }, 1000);
-  const autoTimeout = () => {
+  const nextFiveAuto = () => {
     for (let i = 1; i <= 5; i++) {
       setTimeout(() => {
         setIndex(normalize(index + i));
@@ -96,7 +96,7 @@ export const SlideShow = ({
 
       <div className='slides-nav'>
         <Button onClick={decrement}>Previous</Button>
-        <Button onClick={autoTimeout}> Autoplay next 5 images</Button>
+        <Button onClick={nextFiveAuto}> Autoplay next 5 images</Button>
         <Button onClick={setAuto}> Set Auto</Button>
         <Button onClick={increment}>Next</Button>
       </div>
