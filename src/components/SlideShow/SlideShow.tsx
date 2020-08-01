@@ -8,7 +8,7 @@ const Extensions = {
   SVG: '.svg',
   JPG: '.jpg',
   JPEG: '.jpeg',
-  NULL: 'NULL'
+  NULL: 'NULL',
 };
 
 interface ISlideShowProps {
@@ -24,11 +24,13 @@ interface ISlides {
   maxHeight?: number | string;
 }
 
+let obj = { name: 'carl', age: 16, character: { sex: 'male' } };
+
 const Slides = ({
   images,
   index,
   maxWidth,
-  maxHeight
+  maxHeight,
 }: ISlides): JSX.Element => {
   let slides = images.map((imgUrl: string, i: number) => {
     let extensionMatch = imgUrl.match(/\.[0-9a-z]+$/i);
@@ -39,7 +41,7 @@ const Slides = ({
           <object
             className={`img ${index === i ? 'active' : ''}`}
             key={i}
-            type="image/svg+xml"
+            type='image/svg+xml'
             data={imgUrl}
             width={maxWidth}
             height={maxHeight}
@@ -57,13 +59,13 @@ const Slides = ({
         );
     }
   });
-  return <div className="slides">{slides}</div>;
+  return <div className='slides'>{slides}</div>;
 };
 
 export const SlideShow = ({
   images,
   maxWidth,
-  maxHeight
+  maxHeight,
 }: ISlideShowProps): JSX.Element => {
   const [index, setIndex] = useState<number>(0);
   const normalize = (count: number) => {
@@ -74,18 +76,30 @@ export const SlideShow = ({
     }
     return normalizedIndex;
   };
-  const increment = () => setIndex(normalize(index + 1));
-  const decrement = () => setIndex(normalize(index - 1));
-
+  const increment = () => setIndex((index) => normalize(index + 1));
+  const decrement = () => setIndex((index) => normalize(index - 1));
+  const setAuto = () =>
+    setInterval(() => {
+      increment();
+    }, 1000);
+  const autoTimeout = () => {
+    for (let i = 1; i <= 5; i++) {
+      setTimeout(() => {
+        setIndex(normalize(index + i));
+      }, 1000 * i);
+    }
+  };
   return (
     <div
-      className="slideshow"
+      className='slideshow'
       style={{ maxWidth: maxWidth, maxHeight: maxHeight }}
     >
       <Slides images={images} index={index} {...maxWidth} {...maxHeight} />
 
-      <div className="slides-nav">
+      <div className='slides-nav'>
         <Button onClick={decrement}>Previous</Button>
+        <Button onClick={autoTimeout}> Autoplay next 5 images</Button>
+        <Button onClick={setAuto}> Set Auto</Button>
         <Button onClick={increment}>Next</Button>
       </div>
     </div>
