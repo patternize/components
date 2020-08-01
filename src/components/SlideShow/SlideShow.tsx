@@ -24,8 +24,6 @@ interface ISlides {
   maxHeight?: number | string;
 }
 
-let obj = { name: 'carl', age: 16, character: { sex: 'male' } };
-
 const Slides = ({
   images,
   index,
