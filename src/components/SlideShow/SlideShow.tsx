@@ -91,7 +91,7 @@ export const SlideShow = ({
       <div className="slides-nav">
         <Button onClick={decrement}>Previous</Button>
         <Button onClick={increment}>Next</Button>
-        <Button>+1s</Button>
+        <Button onClick={cycle1}>+1s</Button>
       </div>
     </div>
   );
