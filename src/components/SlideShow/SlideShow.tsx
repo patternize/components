@@ -76,7 +76,11 @@ export const SlideShow = ({
   };
   const increment = () => setIndex(normalize(index + 1));
   const decrement = () => setIndex(normalize(index - 1));
-
+  var lock = 0;
+  const cycle1 = () => {
+    clearInterval(lock);
+    lock = setInterval(()=>setIndex(index=>normalize(index+1)),1000);
+  }
   return (
     <div
       className="slideshow"
@@ -87,6 +91,7 @@ export const SlideShow = ({
       <div className="slides-nav">
         <Button onClick={decrement}>Previous</Button>
         <Button onClick={increment}>Next</Button>
+        <Button>+1s</Button>
       </div>
     </div>
   );
