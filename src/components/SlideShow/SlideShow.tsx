@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button } from 'components/Button';
 import './SlideShow.scss';
 
-const { useState } = React;
+const { useState, useRef } = React;
 
 const Extensions = {
   SVG: '.svg',
@@ -76,10 +76,10 @@ export const SlideShow = ({
   };
   const increment = () => setIndex(normalize(index + 1));
   const decrement = () => setIndex(normalize(index - 1));
-  var lock = 0;
+  let lock = useRef(0);
   const cycle1 = () => {
-    clearInterval(lock);
-    lock = setInterval(()=>setIndex(index=>normalize(index+1)),1000);
+    clearInterval(lock.current);
+    lock.current = setInterval(()=>setIndex(index=>normalize(index+1)),1000);
   }
   return (
     <div
