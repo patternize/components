@@ -11,11 +11,10 @@ const Extensions = {
   NULL: 'NULL'
 };
 
-type SlideShowProps = {
+export type SlideShowProps = {
   images: string[];
   maxWidth?: number | string;
   maxHeight?: number | string;
-  color?: string;
 };
 
 type SlidesProps = {
@@ -23,17 +22,15 @@ type SlidesProps = {
   index: number; // current Index
   maxWidth?: number | string;
   maxHeight?: number | string;
-  color?: string;
 };
 
 const Slides: React.FC<SlidesProps> = ({
   images,
   index,
   maxWidth,
-  maxHeight,
-  color
+  maxHeight
 }) => {
-  const classes = useStyles({ color });
+  const classes = useStyles();
 
   const slides = images.map((imgUrl: string, i: number) => {
     const extensionMatch = imgUrl.match(/\.[0-9a-z]+$/i);
@@ -69,10 +66,9 @@ const Slides: React.FC<SlidesProps> = ({
 export const SlideShow: React.FC<SlideShowProps> = ({
   images,
   maxWidth,
-  maxHeight,
-  color
+  maxHeight
 }) => {
-  const classes = useStyles({ color });
+  const classes = useStyles();
 
   const [index, setIndex] = useState<number>(0);
   const normalize = (count: number) => {

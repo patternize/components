@@ -1,3 +1,7 @@
+import { VerticalBarChart } from './visualizations/BarChart';
+import { TreeChart } from './visualizations/Tree/TreeChart';
 import { Button } from './components/Button';
+import { SlideShow } from './components/SlideShow/SlideShow';
+import { Array } from './visualizations/Array';
 
-export default { Button };
+export { Array, VerticalBarChart, SlideShow, Button, TreeChart };

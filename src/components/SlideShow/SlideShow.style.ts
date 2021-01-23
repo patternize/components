@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 
-export default createUseStyles((theme: any) => ({
+export default createUseStyles({
   slideshow: {
     width: '100%',
     height: '600px'
@@ -54,4 +54,4 @@ export default createUseStyles((theme: any) => ({
       float: 'right'
     }
   }
-}));
+});

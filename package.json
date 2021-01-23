@@ -1,21 +1,10 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.53",
-    "@types/react-dom": "^16.9.8",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-jss": "^10.5.0",
-    "react-scripts": "4.0.1",
-    "typescript": "^4.0.3"
-  },
+  "name": "@patternize/components",
+  "description": "React components for Patternize.io",
+  "version": "0.0.7",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "start": "react-scripts start",
     "clean": "rm -rf ./lib",
@@ -25,6 +14,22 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "d3": "^6.4.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-jss": "^10.5.0",
+    "react-scripts": "4.0.1",
+    "resize-observer-polyfill": "^1.5.1",
+    "typescript": "^4.0.3"
   },
   "eslintConfig": {
     "extends": [
