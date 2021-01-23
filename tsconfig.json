@@ -7,7 +7,7 @@
       "esnext"
     ],
     "outDir": "lib",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "module": "esnext",
     "declaration": true,
     "declarationMap": true,
@@ -29,8 +29,7 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "isolatedModules": true,
-    "noEmit": false
+    "isolatedModules": true
   },
   "include": [
     "src"

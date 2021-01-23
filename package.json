@@ -6,13 +6,12 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "start-storybook -p 6006 -s public",
     "clean": "rm -rf ./lib",
     "prebuild": "yarn clean",
     "build": "tsc --build \"./tsconfig.json\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
