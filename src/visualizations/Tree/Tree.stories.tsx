@@ -50,5 +50,5 @@ const rawTree: TreeNode = {
 };
 
 storiesOf('D3 Modules', module).add('Tree', () => (
-  <Tree inputData={rawTree} height={800} width={500} />
+  <Tree inputData={rawTree} height={500} width={500} />
 ));
