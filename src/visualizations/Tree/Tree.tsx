@@ -4,6 +4,7 @@ import { Tree, hierarchy } from '@visx/hierarchy';
 import { HierarchyPointNode } from '@visx/hierarchy/lib/types';
 import { LinkVertical } from '@visx/shape';
 import { LinearGradient } from '@visx/gradient';
+import ParentSize from '@visx/responsive/lib/components/ParentSize';
 
 const green = '#26deb0';
 const lightpurple = '#374469';
@@ -75,15 +76,15 @@ const defaultMargin = { top: 20, left: 10, right: 10, bottom: 20 };
 
 export type TreeProps = {
   inputData: TreeNode;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   margin?: { top: number; right: number; bottom: number; left: number };
 };
 
-export default function TreeDiagram({
+export function TreeDiagram({
   inputData,
-  width,
-  height,
+  width = 500,
+  height = 500,
   margin = defaultMargin
 }: TreeProps) {
   const data = useMemo(() => hierarchy(inputData), []);
@@ -91,27 +92,49 @@ export default function TreeDiagram({
   const xMax = width - margin.left - margin.right;
 
   return width < 10 ? null : (
-    <svg width={width} height={height}>
-      <LinearGradient id="lg" from={green} to={green} />
-      <rect width={width} height={height} rx={14} fill={background} />
-      <Tree<TreeNode> root={data} size={[xMax, yMax]}>
-        {(tree) => (
-          <Group top={margin.top} left={margin.left}>
-            {tree.links().map((link, i) => (
-              <LinkVertical
-                key={`link-${i}`}
-                data={link}
-                stroke={lightpurple}
-                strokeWidth="1"
-                fill="none"
-              />
-            ))}
-            {tree.descendants().map((node, i) => (
-              <Node key={`node-${i}`} node={node} />
-            ))}
-          </Group>
-        )}
-      </Tree>
-    </svg>
+    <div>
+      <svg width={width} height={height}>
+        <LinearGradient id="lg" from={green} to={green} />
+        <rect width={width} height={height} rx={14} fill={background} />
+        <Tree<TreeNode> root={data} size={[xMax, yMax]}>
+          {(tree) => (
+            <Group top={margin.top} left={margin.left}>
+              {tree.links().map((link, i) => (
+                <LinkVertical
+                  key={`link-${i}`}
+                  data={link}
+                  stroke={lightpurple}
+                  strokeWidth="1"
+                  fill="none"
+                />
+              ))}
+              {tree.descendants().map((node, i) => (
+                <Node key={`node-${i}`} node={node} />
+              ))}
+            </Group>
+          )}
+        </Tree>
+      </svg>
+    </div>
+  );
+}
+
+export default function ResponsiveTreeDiagram({ inputData }: TreeProps) {
+  return (
+    <ParentSize debounceTime={10}>
+      {({ width = 500, height = 500 }) => {
+        const maxHeight = 500;
+        const maxWidth = 500;
+        const h = Math.min(height, maxHeight);
+        const w = Math.min(width, maxWidth);
+        return (
+          <TreeDiagram
+            inputData={inputData}
+            width={w || maxWidth}
+            height={h || maxHeight}
+          />
+        );
+      }}
+    </ParentSize>
   );
 }

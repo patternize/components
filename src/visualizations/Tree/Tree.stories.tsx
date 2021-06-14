@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { storiesOf } from '@storybook/react';
-import Tree from './Tree';
+import Tree, { TreeDiagram } from './Tree';
 
 interface TreeNode {
   name: string;
@@ -50,5 +50,11 @@ const rawTree: TreeNode = {
 };
 
 storiesOf('D3 Modules', module).add('Tree', () => (
-  <Tree inputData={rawTree} height={500} width={500} />
+  <TreeDiagram inputData={rawTree} height={500} width={500} />
+));
+
+storiesOf('D3 Modules', module).add('Tree Responsive', () => (
+  // <div style={{ height: '500px', width: '500px' }}>
+  <Tree inputData={rawTree} />
+  // </div>
 ));
