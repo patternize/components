@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Patternize Components
+
+- This has to use v16.10.0 version of node for development
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

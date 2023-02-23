@@ -6,13 +6,13 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "start-storybook -p 6006 -s public",
+    "start": "start-storybook -p 6006",
     "clean": "rm -rf ./lib",
     "prebuild": "yarn clean",
     "build": "tsc --build \"./tsconfig.json\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
