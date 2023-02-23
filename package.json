@@ -6,13 +6,13 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "start-storybook -p 6006 -s public",
+    "start": "start-storybook -p 6006",
     "clean": "rm -rf ./lib",
     "prebuild": "yarn clean",
     "build": "tsc --build \"./tsconfig.json\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -22,6 +22,11 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@visx/gradient": "^1.7.0",
+    "@visx/group": "^1.7.0",
+    "@visx/hierarchy": "^1.7.0",
+    "@visx/responsive": "^1.7.0",
+    "@visx/shape": "^1.7.0",
     "d3": "^6.4.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
