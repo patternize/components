@@ -17,8 +17,6 @@ interface TreeNode {
   children?: this[];
 }
 
-type HierarchyNode = HierarchyPointNode<TreeNode>;
-
 /** Handles rendering Root, Parent, and other Nodes. */
 function Node({ node }: { node: HierarchyPointNode<TreeNode> }) {
   const isRoot = node.depth === 0;
@@ -29,14 +27,7 @@ function Node({ node }: { node: HierarchyPointNode<TreeNode> }) {
   return (
     <Group top={node.y} left={node.x}>
       {node.depth !== 0 && (
-        <circle
-          r={12}
-          fill={background}
-          stroke={isParent ? black : grey}
-          onClick={() => {
-            alert(`clicked: ${JSON.stringify(node.data.name)}`);
-          }}
-        />
+        <circle r={12} fill={background} stroke={isParent ? black : grey} />
       )}
       <text
         dy=".33em"
@@ -73,7 +64,7 @@ function RootNode({ node }: { node: HierarchyPointNode<TreeNode> }) {
         fontFamily="Arial"
         textAnchor="middle"
         style={{ pointerEvents: 'none' }}
-        fill={black}
+        fill={white}
       >
         {node.data.name}
       </text>
