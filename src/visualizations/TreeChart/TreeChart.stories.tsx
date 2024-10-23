@@ -1,6 +1,4 @@
-import * as React from 'react';
-
-import { storiesOf } from '@storybook/react';
+import React from 'react';
 import { TreeChart } from './TreeChart';
 
 const tree = {
@@ -12,22 +10,14 @@ const tree = {
         { name: 'Mint', children: [{ name: 'Mint Julep' }] },
         {
           name: 'Vermouth',
-          children: [
-            {
-              name: 'Manhattan'
-            }
-          ]
+          children: [{ name: 'Manhattan' }]
         },
         {
           name: 'Lime',
           children: [
             {
               name: 'Cherry',
-              children: [
-                {
-                  name: 'Whiskey Sour'
-                }
-              ]
+              children: [{ name: 'Whiskey Sour' }]
             }
           ]
         },
@@ -36,11 +26,7 @@ const tree = {
           children: [
             {
               name: 'Orange Peel',
-              children: [
-                {
-                  name: 'Old Fashioned'
-                }
-              ]
+              children: [{ name: 'Old Fashioned' }]
             }
           ]
         }
@@ -51,22 +37,14 @@ const tree = {
       children: [
         {
           name: 'Tomato',
-          children: [
-            {
-              name: 'Bloody Mary'
-            }
-          ]
+          children: [{ name: 'Bloody Mary' }]
         },
         {
           name: 'Kahlua',
           children: [
             {
               name: 'Cream',
-              children: [
-                {
-                  name: 'White Russian'
-                }
-              ]
+              children: [{ name: 'White Russian' }]
             }
           ]
         },
@@ -76,9 +54,7 @@ const tree = {
             {
               name: 'Grapefruit',
               children: [
-                {
-                  name: 'Sea Breeze'
-                },
+                { name: 'Sea Breeze' },
                 {
                   name: 'Lime',
                   children: [{ name: 'Cosmopolitan' }]
@@ -97,27 +73,17 @@ const tree = {
           children: [
             {
               name: 'Coconut',
-              children: [
-                {
-                  name: 'Pina Colada'
-                }
-              ]
+              children: [{ name: 'Pina Colada' }]
             }
           ]
         },
         {
           name: 'Lime',
           children: [
-            {
-              name: 'Mojito'
-            },
+            { name: 'Mojito' },
             {
               name: 'Cola',
-              children: [
-                {
-                  name: 'Cuba Libre'
-                }
-              ]
+              children: [{ name: 'Cuba Libre' }]
             }
           ]
         }
@@ -126,6 +92,9 @@ const tree = {
   ]
 };
 
-storiesOf('D3 Modules', module).add('TreeChart', () => (
-  <TreeChart data={tree} />
-));
+export default {
+  title: 'D3 Modules/TreeChart',
+  component: TreeChart
+};
+
+export const TreeChartStory = () => <TreeChart data={tree} />;
