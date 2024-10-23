@@ -62,7 +62,6 @@ export function TreeChart({ data }) {
       .attr('id', 'link')
       .attr('d', linkGenerator)
       .attr('stroke-dasharray', function (this: any) {
-        // eslint-disable-next-line
         const length = this.getTotalLength();
         return `${length} ${length}`;
       })
@@ -73,7 +72,6 @@ export function TreeChart({ data }) {
     if (data !== previouslyRenderedData) {
       enteringAndUpdatingLinks
         .attr('stroke-dashoffset', function (this: any) {
-          // eslint-disable-next-line
           return this.getTotalLength();
         })
         .transition()

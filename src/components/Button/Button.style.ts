@@ -21,11 +21,11 @@ export default createUseStyles((theme: any) => ({
     paddingRight: 14,
     boxShadow: `0 0 0 0 ${theme.teal2light}`,
     transition: `box-shadow 150ms linear, background-color 150ms linear, border-color 150ms linear`,
-    color: (props) => (props.color ? props.color : theme.grey2),
+    color: (props: any) => (props.color ? props.color : theme.grey2),
     borderColor: 'currentColor',
     backgroundColor: 'transparent',
     '&:not([disabled]):hover': {
-      color: (props) => (props.color ? props.color : theme.grey1),
+      color: (props: any) => (props.color ? props.color : theme.grey1),
       cursor: 'pointer'
     },
     '&[disabled]': {

@@ -87,7 +87,12 @@ export const SlideShow: React.FC<SlideShowProps> = ({
       className={classes.slideshow}
       style={{ maxWidth: maxWidth, maxHeight: maxHeight }}
     >
-      <Slides images={images} index={index} {...maxWidth} {...maxHeight} />
+      <Slides
+        images={images}
+        index={index}
+        maxHeight={maxHeight}
+        maxWidth={maxWidth}
+      />
 
       <div className={classes.slidesNav}>
         <Button onClick={decrement}>Previous</Button>

@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
-import { Group } from '@visx/group';
-import { Tree, hierarchy } from '@visx/hierarchy';
-import { HierarchyPointNode } from '@visx/hierarchy/lib/types';
-import { LinkVertical } from '@visx/shape';
 import { LinearGradient } from '@visx/gradient';
+import { Group } from '@visx/group';
+import { hierarchy, Tree } from '@visx/hierarchy';
+import { HierarchyPointNode } from '@visx/hierarchy/lib/types';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
+import { LinkVertical } from '@visx/shape';
+import { useMemo } from 'react';
 
 const green = '#26deb0';
 const lightpurple = '#374469';

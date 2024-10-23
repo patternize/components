@@ -1,11 +1,9 @@
-import * as React from 'react';
-
-import { storiesOf } from '@storybook/react';
+import React from 'react';
 import Tree, { TreeDiagram } from './Tree';
 
 interface TreeNode {
   name: string;
-  children?: this[];
+  children?: TreeNode[];
 }
 
 const rawTree: TreeNode = {
@@ -20,22 +18,10 @@ const rawTree: TreeNode = {
         {
           name: 'C',
           children: [
-            {
-              name: 'C1'
-            },
+            { name: 'C1' },
             {
               name: 'D',
-              children: [
-                {
-                  name: 'D1'
-                },
-                {
-                  name: 'D2'
-                },
-                {
-                  name: 'D3'
-                }
-              ]
+              children: [{ name: 'D1' }, { name: 'D2' }, { name: 'D3' }]
             }
           ]
         }
@@ -49,12 +35,12 @@ const rawTree: TreeNode = {
   ]
 };
 
-storiesOf('D3 Modules', module).add('Tree', () => (
-  <TreeDiagram inputData={rawTree} height={500} width={500} />
-));
+export default {
+  title: 'D3 Modules'
+};
 
-storiesOf('D3 Modules', module).add('Tree Responsive', () => (
-  // <div style={{ height: '500px', width: '500px' }}>
-  <Tree inputData={rawTree} />
-  // </div>
-));
+export const TreeStory = () => (
+  <TreeDiagram inputData={rawTree} height={500} width={500} />
+);
+
+export const TreeResponsiveStory = () => <Tree inputData={rawTree} />;

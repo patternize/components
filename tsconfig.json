@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "outDir": "lib",
     "jsx": "react-jsx",
     "module": "esnext",
@@ -31,9 +27,7 @@
     "skipLibCheck": true,
     "isolatedModules": true
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "exclude": [
     "node_modules",
     "**/*.test.ts",
@@ -41,7 +35,5 @@
     "**/*.stories.tsx",
     "./src/setupTests.ts"
   ],
-  "files": [
-    "./src/index.ts"
-  ]
+  "files": ["./src/index.ts"]
 }

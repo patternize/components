@@ -1,0 +1,123 @@
+🔎 checking possible migrations..
+Unable to find .eslintrc config file, skipping
+
+🔎 found a 'autodocsTrue' migration:
+╭ Automigration detected ────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                    │
+│   We've changed the configuration of autodocs (previous docsPage), so now the value:               │
+│     - docs.autodocs: true -- means automatically create docs for every CSF file                    │
+│     - docs.autodocs: 'tag' -- means only create autodocs for CSF files with the 'autodocs' tag     │
+│     - docs.autodocs: false -- means never create autodocs                                          │
+│                                                                                                    │
+│   Based on your prior configuration,  we can set the `docs.autodocs` to keep your old behaviour:   │
+│                                                                                                    │
+│   docs: { autodocs: true }                                                                         │
+│                                                                                                    │
+│   More info: https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#autodocs-changes      │
+│                                                                                                    │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'autodocsTrue' migration on your project? › (Y/n)✔ Do you want to run the 'autodocsTrue' migration on your project? … yes
+✅ Setting 'docs.autodocs' to true in main.js
+✅ ran autodocsTrue migration
+
+🔎 found a 'react-docgen' migration:
+╭ Automigration detected ─────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                 │
+│   Since Storybook 8.0, react-docgen is now the default for generating component controls, replacing react-docgen-typescript.    │
+│   This offers better performance and suits most cases.                                                                          │
+│   However, for complex TypeScript types or specific type features, the generated controls might not be as precise.              │
+│                                                                                                                                 │
+│   For more on this change, check the migration guide:                                                                           │
+│   https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#react-docgen-component-analysis-by-default                    │
+│                                                                                                                                 │
+│   For known "react-docgen" limitations, see:                                                                                    │
+│   https://github.com/storybookjs/storybook/issues/26606                                                                         │
+│                                                                                                                                 │
+│   Press Y to revert to react-docgen-typescript, press N to use react-docgen                                                     │
+│                                                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'react-docgen' migration on your project? › (Y/n)✔ Do you want to run the 'react-docgen' migration on your project? … yes
+✅ Setting typescript.reactDocgen
+✅ ran react-docgen migration
+
+🔎 found a 'visual-tests-addon' migration:
+╭ Automigration detected ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                       │
+│   New to Storybook 8: Storybook's Visual Tests addon helps you catch unintentional changes/bugs in your stories. The addon is powered by Chromatic,   │
+│   a cloud-based testing tool developed by Storybook's core team.                                                                                      │
+│                                                                                                                                                       │
+│   Learn more: https://storybook.js.org/docs/writing-tests/visual-testing                                                                              │
+│                                                                                                                                                       │
+│   Install Visual Tests addon in your project?                                                                                                         │
+│                                                                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'visual-tests-addon' migration on your project? › (Y/n)✔ Do you want to run the 'visual-tests-addon' migration on your project? … yes
+
+An error occurred while installing dependencies:
+NPM error ERESOLVE - Dependency resolution error.
+
+Please check the logfile generated at ./storybook.log for troubleshooting and try again.
+❌ error when running visual-tests-addon migration
+HandledError: Error: NPM error ERESOLVE - Dependency resolution error.
+
+Please check the logfile generated at ./storybook.log for troubleshooting and try again.
+    at _F.addDependencies (/Users/gazcn007/.npm/_npx/ab4ff886f6c56557/node_modules/@storybook/core/dist/common/index.cjs:142282:72)
+    at async Object.run (/Users/gazcn007/.npm/_npx/ab4ff886f6c56557/node_modules/@storybook/cli/dist/bin/index.cjs:475:141)
+    ... 3 lines matching cause stack trace ...
+    at async Command.<anonymous> (/Users/gazcn007/.npm/_npx/ab4ff886f6c56557/node_modules/@storybook/cli/dist/bin/index.cjs:597:2867) {
+  handled: true,
+  cause: Error: NPM error ERESOLVE - Dependency resolution error.
+  
+  Please check the logfile generated at ./storybook.log for troubleshooting and try again.
+      at _F.runAddDeps (/Users/gazcn007/.npm/_npx/ab4ff886f6c56557/node_modules/@storybook/core/dist/common/index.cjs:142600:24)
+      at async _F.addDependencies (/Users/gazcn007/.npm/_npx/ab4ff886f6c56557/node_modules/@storybook/core/dist/common/index.cjs:142279:9)
+      at async Object.run (/Users/gazcn007/.npm/_npx/ab4ff886f6c56557/node_modules/@storybook/cli/dist/bin/index.cjs:475:141)
+      at async runFixes (/Users/gazcn007/.npm/_npx/ab4ff886f6c56557/node_modules/@storybook/cli/dist/bin/index.cjs:529:1791)
+      at async automigrate (/Users/gazcn007/.npm/_npx/ab4ff886f6c56557/node_modules/@storybook/cli/dist/bin/index.cjs:527:1620)
+      at async doAutomigrate (/Users/gazcn007/.npm/_npx/ab4ff886f6c56557/node_modules/@storybook/cli/dist/bin/index.cjs:527:636)
+      at async Command.<anonymous> (/Users/gazcn007/.npm/_npx/ab4ff886f6c56557/node_modules/@storybook/cli/dist/bin/index.cjs:597:2867)
+}
+
+
+🔎 found a 'autodocs-tags' migration:
+╭ Automigration detected ───────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                   │
+│   The docs.autodocs setting in .storybook/main.js is deprecated.                                                  │
+│                                                                                                                   │
+│   Learn more: https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#mainjs-docsautodocs-is-deprecated   │
+│                                                                                                                   │
+│   Remove docs.autodocs and update .storybook/preview.js?                                                          │
+│                                                                                                                   │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'autodocs-tags' migration on your project? › (Y/n)✔ Do you want to run the 'autodocs-tags' migration on your project? … yes
+✅ Adding "autodocs" tag to .storybook/preview.js
+✅ Removing "docs.autodocs" from .storybook/main.js
+✅ ran autodocs-tags migration
+
+╭ Migration check ran with failures ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                     │
+│   Successful migrations:                                                                                                                            │
+│                                                                                                                                                     │
+│   autodocsTrue, react-docgen, autodocs-tags                                                                                                         │
+│                                                                                                                                                     │
+│   Failed migrations:                                                                                                                                │
+│                                                                                                                                                     │
+│   visual-tests-addon:                                                                                                                               │
+│   Error: NPM error ERESOLVE - Dependency resolution error.                                                                                          │
+│                                                                                                                                                     │
+│   Please check the logfile generated at ./storybook.log for troubleshooting and try again.                                                          │
+│                                                                                                                                                     │
+│   You can find the full logs in /Users/gazcn007/Development/Personal/components/migration-storybook.log                                             │
+│                                                                                                                                                     │
+│   ─────────────────────────────────────────────────                                                                                                 │
+│                                                                                                                                                     │
+│   If you'd like to run the migrations again, you can do so by running 'npx storybook automigrate'                                                   │
+│                                                                                                                                                     │
+│   The automigrations try to migrate common patterns in your project, but might not contain everything needed to migrate to the latest version of    │
+│   Storybook.                                                                                                                                        │
+│                                                                                                                                                     │
+│   Please check the changelog and migration guide for manual migrations and more information: https://storybook.js.org/docs/8.0/migration-guide      │
+│   And reach out on Discord if you need help: https://discord.gg/storybook                                                                           │
+│                                                                                                                                                     │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
