@@ -1,5 +1,7 @@
 import { Graticule, Mercator } from '@visx/geo';
+import { ParentSize } from '@visx/responsive';
 import { scaleLog } from '@visx/scale';
+import { useState } from 'react';
 import * as topojson from 'topojson-client';
 import topology from './world-topo.json';
 
@@ -8,7 +10,6 @@ export const background = '#f9f7e8';
 export type GeoMercatorProps = {
   width: number;
   height: number;
-  events?: boolean;
 };
 
 interface FeatureShape {
@@ -54,12 +55,10 @@ const color = scaleLog({
   range: ['#ffb01d', '#f63a48']
 });
 
-export default function ({ width, height, events = false }: GeoMercatorProps) {
-  const centerX = width / 2;
-  const centerY = height / 2;
-  const scale = (width / 630) * 100;
+export const WorldMap = ({ width, height }: GeoMercatorProps) => {
+  const [hoveredCountry, setHoveredCountry] = useState<string | null>(null);
 
-  return width < 10 ? null : (
+  return (
     <svg width={width} height={height}>
       <rect
         x={0}
@@ -71,8 +70,8 @@ export default function ({ width, height, events = false }: GeoMercatorProps) {
       />
       <Mercator<FeatureShape>
         data={world.features}
-        scale={scale}
-        translate={[centerX, centerY + 50]}
+        scale={(width / 630) * 100} // Adjusted scale based on width
+        translate={[width / 2, height / 2 + 50]}
       >
         {(mercator) => (
           <g>
@@ -84,16 +83,23 @@ export default function ({ width, height, events = false }: GeoMercatorProps) {
               const country = feature.id;
               const daysSpent = daysMap[country];
               const fillColor = daysSpent ? color(daysSpent) : '#cccccc'; // Grey for unvisited
+              const isHovered = hoveredCountry === country;
+              // Brighten the fill color for hovered country
+              const brightenedFillColor =
+                isHovered && !daysSpent
+                  ? `rgba(155, 155, 155, 0.9)`
+                  : fillColor;
               return (
                 <path
                   key={`map-feature-${i}`}
                   d={path || ''}
-                  fill={fillColor}
+                  fill={brightenedFillColor}
                   stroke={background}
                   strokeWidth={0.5}
+                  onMouseEnter={() => setHoveredCountry(country)}
+                  onMouseLeave={() => setHoveredCountry(null)}
                   onClick={() => {
-                    if (events)
-                      alert(`Clicked: ${country} (${feature.properties.name})`);
+                    alert(`Clicked: ${country} (${feature.properties.name})`);
                   }}
                 />
               );
@@ -102,5 +108,19 @@ export default function ({ width, height, events = false }: GeoMercatorProps) {
         )}
       </Mercator>
     </svg>
+  );
+};
+
+export default function ResponsiveWorldMap() {
+  return (
+    <ParentSize debounceTime={10}>
+      {({ width = 1000, height = 500 }) => {
+        const maxHeight = 500;
+        const maxWidth = 1000;
+        const h = Math.min(height, maxHeight);
+        const w = Math.min(width, maxWidth);
+        return <WorldMap width={w || maxWidth} height={h || maxHeight} />;
+      }}
+    </ParentSize>
   );
 }

@@ -1,0 +1,290 @@
+[
+  {
+      "username": "Patricia",
+      "age": 44,
+      "gender": "FEMALE",
+      "bio": "Enjoys watching anime and playing video games. Always up for a good anime convention. Favorites include 'Attack on Titan' and 'The Legend of Zelda'.",
+      "hometown": "Miami, Florida",
+      "profession": "Graphic Designer",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_1.png"]
+  },
+  {
+      "username": "amanda",
+      "age": 48,
+      "gender": "FEMALE",
+      "bio": "My days are spent leveling up my characters and exploring new game worlds. When not gaming, I enjoy reading manga and watching anime. Favorites include 'Final Fantasy' and 'One Piece'.",
+      "hometown": "Portland, Oregon",
+      "profession": "Veterinarian ",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_2.png"]
+  },
+  {
+      "username": "laura",
+      "age": 53,
+      "gender": "FEMALE",
+      "bio": "My work is my passion, and I love to see my anime-inspired designs come to life. In my personal time, I enjoy attending anime festivals and gaining inspiration from Japanese culture. Favorites include 'Sailor Moon' and 'Studio Ghibli films'.",
+      "hometown": "Chicago, Illinois",
+      "profession": "architect",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_3.png"]
+  },
+  {
+      "username": "susan",
+      "age": 47,
+      "gender": "FEMALE",
+      "bio": "My career is demanding, but I find balance through playing strategy games and watching anime. Favorites include 'Fire Emblem' and 'Naruto'.",
+      "hometown": "Boston, Massachusetts",
+      "profession": "Lawyer",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_4.png"]
+  },
+  {
+      "username": "emily",
+      "age": 42,
+      "gender": "FEMALE",
+      "bio": "Enjoys reading manga, watching anime, and discussing the latest game releases. Looking for someone who shares her passion for the otaku culture. Favorites include 'Death Note' and 'Pokemon'.",
+      "hometown": "Austin, Texas",
+      "profession": "High School Teacher",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_5.png"]
+  },
+  {
+      "username": "dylann",
+      "age": 25,
+      "gender": "MALE",
+      "bio": "I'm all about exploring new game worlds, trying out funky food joints, and meeting cool people along the way. Favorites include 'The Witcher' and 'Dark Souls'.",
+      "hometown": "Seattle",
+      "profession": "street artist",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_6.png"]
+  },
+  {
+      "username": "stephanie",
+      "age": 45,
+      "gender": "FEMALE",
+      "bio": "Mountain lover，Documenting my hiking adventures one snap at a time. Favorites include 'Attack on Titan' and 'The Legend of Zelda'.",
+      "hometown": "Santa Barbara, California",
+      "profession": "Landscape Architect",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_7.png"]
+  },
+  {
+      "username": "Heather",
+      "age": 27,
+      "gender": "FEMALE",
+      "bio": "I'm looking for someone who values intelligence and has a solid financial acumen. Favorites include 'Final Fantasy' and 'One Piece'.",
+      "hometown": "Dallas, Texas",
+      "profession": "Bartender",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_8.png"]
+  },
+  {
+      "username": "Jessica",
+      "age": 29,
+      "gender": "FEMALE",
+      "bio": "My work is both challenging and rewarding. Outside of my career, I enjoy gaming and keeping up with the latest tech innovations. I'm searching for someone who shares my passion for technology. Favorites include 'Sailor Moon' and 'Studio Ghibli films'.",
+      "hometown": "San Jose, California",
+      "profession": "Software Engineer",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_9.png"]
+  },
+  {
+      "username": "lucas",
+      "age": 27,
+      "gender": "MALE",
+      "bio": "outgoing and adventurous;often exploring remote trails and camping under the stars. Favorites include 'Fire Emblem' and 'Naruto'.",
+      "hometown": "Minneapolis",
+      "profession": "Architect",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_10.png"]
+  },
+  {
+      "username": "Cynthia",
+      "age": 25,
+      "gender": "FEMALE",
+      "bio": "Writing allows me to express myself and connect with others through stories. I spend my days crafting narratives that inspire and entertain. In my free time, I enjoy attending literary events and finding new sources of inspiration. Favorites include 'Death Note' and 'Pokemon'.",
+      "hometown": "Nashville, Tennessee",
+      "profession": "Author",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_11.png"]
+  },
+  {
+      "username": "Angela",
+      "age": 24,
+      "gender": "FEMALE",
+      "bio": "My work as an environmental scientist is driven by a passion for preserving our planet. I enjoy conducting research and advocating for sustainable practices. I'm seeking someone who shares my dedication to environmental conservation. Favorites include 'The Witcher' and 'Dark Souls'.",
+      "hometown": "Boulder, Colorado",
+      "profession": "Environmental Scientist",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_12.png"]
+  },
+  {
+      "username": "Melissa",
+      "age": 28,
+      "gender": "FEMALE",
+      "bio": "I find joy in creating melodies that resonate with people. My free time is spent exploring new music genres and attending concerts. Looking for someone who appreciates the power of music. Favorites include 'Attack on Titan' and 'The Legend of Zelda'.",
+      "hometown": "Austin, Texas",
+      "profession": "Musician",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_13.png"]
+  },
+  {
+      "username": "Barbara",
+      "age": 28,
+      "gender": "FEMALE",
+      "bio": "As a real estate agent, I take pride in helping people find the perfect place to call home. My job allows me to connect with people and explore beautiful properties. I'm seeking a partner who values stability and has a sense of adventure. Favorites include 'Final Fantasy' and 'One Piece'.",
+      "hometown": "Atlanta, Georgia",
+      "profession": "Real Estate Agent",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_14.png"]
+  },
+  {
+      "username": "Debra",
+      "age": 27,
+      "gender": "FEMALE",
+      "bio": "My kitchen is always filled with laughter and delicious aromas. I dream of sharing my life and culinary creations with someone special. Favorites include 'Sailor Moon' and 'Studio Ghibli films'.",
+      "hometown": "Charleston, South Carolina",
+      "profession": "Chef",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_15.png"]
+  },
+  {
+      "username": "Pamela",
+      "age": 25,
+      "gender": "FEMALE",
+      "bio": "I enjoy sketching new designs and attending fashion shows for inspiration. Seeking a partner who appreciates style and creativity as much as I do. Favorites include 'Death Note' and 'Pokemon'.",
+      "hometown": "New York City, New York",
+      "profession": "Fashion Designer  ",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_16.png"]
+  },
+  {
+      "username": "ryan",
+      "age": 30,
+      "gender": "MALE",
+      "bio": "spends my free time weight liftng and training for marathons~. Favorites include 'Fire Emblem' and 'Naruto'.",
+      "hometown": "San Diego",
+      "profession": "Data Analyst",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_17.png"]
+  },
+  {
+      "username": "isabella",
+      "age": 36,
+      "gender": "FEMALE",
+      "bio": "Digging up the past in Albuquerque, searching for a treasure to bring into my future. Favorites include 'The Witcher' and 'Dark Souls'.",
+      "hometown": "Albuquerque, New Mexico",
+      "profession": "Archaeologist",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_18.png"]
+  },
+  {
+      "username": "tyler",
+      "age": 28,
+      "gender": "MALE",
+      "bio": "I'm an adrenaline junkie who loves skydiving, bungee jumping, and anything that gets my heart racing. Favorites include 'Final Fantasy' and 'One Piece'.",
+      "hometown": "Orlando",
+      "profession": "bartender",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_19.png"]
+  },
+  {
+      "username": "Sophia",
+      "age": 26,
+      "gender": "FEMALE",
+      "bio": "I'm a cosplayer and a gamer. I love to dress up as my favorite characters and attend gaming conventions. Favorites include 'Overwatch' and 'League of Legends'.",
+      "hometown": "Los Angeles, California",
+      "profession": "Cosplayer",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_20.png"]
+  },
+  {
+      "username": "Nathan",
+      "age": 31,
+      "gender": "MALE",
+      "bio": "I'm a competitive gamer and a streamer. I spend most of my time playing and streaming my favorite games. Favorites include 'Fortnite' and 'Call of Duty'.",
+      "hometown": "Las Vegas, Nevada",
+      "profession": "Streamer",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_21.png"]
+  },
+  {
+      "username": "Olivia",
+      "age": 23,
+      "gender": "FEMALE",
+      "bio": "I'm a manga artist and a game developer. I love to create new stories and games. Favorites include 'One Punch Man' and 'The Legend of Zelda'.",
+      "hometown": "San Francisco, California",
+      "profession": "Manga Artist",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_22.png"]
+  },
+  {
+      "username": "Ethan",
+      "age": 29,
+      "gender": "MALE",
+      "bio": "I'm a professional esports player. I spend most of my time training and competing in tournaments. Favorites include 'Dota 2' and 'Counter-Strike: Global Offensive'.",
+      "hometown": "Houston, Texas",
+      "profession": "Esports Player",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_23.png"]
+  },
+  {
+      "username": "Ava",
+      "age": 25,
+      "gender": "FEMALE",
+      "bio": "I'm a game tester and a cosplayer. I love to play and test new games. Favorites include 'Minecraft' and 'World of Warcraft'.",
+      "hometown": "Phoenix, Arizona",
+      "profession": "Game Tester",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_24.png"]
+  },
+  {
+      "username": "Noah",
+      "age": 27,
+      "gender": "MALE",
+      "bio": "I'm a game designer and a manga reader. I love to create new game concepts and read new manga. Favorites include 'The Elder Scrolls V: Skyrim' and 'Bleach'.",
+      "hometown": "Philadelphia, Pennsylvania",
+      "profession": "Game Designer",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_25.png"]
+  },
+  {
+      "username": "Mia",
+      "age": 24,
+      "gender": "FEMALE",
+      "bio": "I'm a game journalist and a cosplayer. I love to write about games and cosplay as my favorite characters. Favorites include 'The Witcher 3: Wild Hunt' and 'Sword Art Online'.",
+      "hometown": "San Antonio, Texas",
+      "profession": "Game Journalist",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_26.png"]
+  },
+  {
+      "username": "Mason",
+      "age": 30,
+      "gender": "MALE",
+      "bio": "I'm a game developer and a manga reader. I love to create new games and read new manga. Favorites include 'Red Dead Redemption 2' and 'Attack on Titan'.",
+      "hometown": "San Jose, California",
+      "profession": "Game Developer",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_27.png"]
+  },
+  {
+      "username": "Harper",
+      "age": 28,
+      "gender": "FEMALE",
+      "bio": "I'm a game artist and a cosplayer. I love to create new game art and cosplay as my favorite characters. Favorites include 'Assassin's Creed Odyssey' and 'My Hero Academia'.",
+      "hometown": "San Diego, California",
+      "profession": "Game Artist",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_28.png"]
+  },
+  {
+      "username": "Evelyn",
+      "age": 26,
+      "gender": "FEMALE",
+      "bio": "I'm a game streamer and a manga reader. I love to stream my favorite games and read new manga. Favorites include 'The Legend of Zelda: Breath of the Wild' and 'One Piece'.",
+      "hometown": "Dallas, Texas",
+      "profession": "Game Streamer",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_29.png"]
+  },
+  {
+      "username": "Liam",
+      "age": 29,
+      "gender": "MALE",
+      "bio": "I'm a game tester and a manga reader. I love to test new games and read new manga. Favorites include 'The Witcher 3: Wild Hunt' and 'Naruto'.",
+      "hometown": "San Francisco, California",
+      "profession": "Game Tester",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_30.png"]
+  },
+  {
+      "username": "Aria",
+      "age": 25,
+      "gender": "FEMALE",
+      "bio": "I'm a game journalist and a cosplayer. I love to write about games and cosplay as my favorite characters. Favorites include 'Persona 5' and 'Fairy Tail'.",
+      "hometown": "Austin, Texas",
+      "profession": "Game Journalist",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_31.png"]
+  },
+  {
+      "username": "Zoe",
+      "age": 27,
+      "gender": "FEMALE",
+      "bio": "Eldenring, Darksouls, Bloodborne, and Dark Souls are my favorite games. I love to play them and discuss them with others. Favorites include 'Eldenring' and 'Dark Souls'.",
+      "hometown": "Austin, Texas",
+      "profession": "Game Journalist",
+      "customAvatars": ["https://file.archat.us/cai/dh_avatar/anime_friend/anime_friend_32.png"]
+  }
+]
