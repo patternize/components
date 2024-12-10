@@ -99,7 +99,15 @@ export const WorldMap = ({ width, height }: GeoMercatorProps) => {
                   onMouseEnter={() => setHoveredCountry(country)}
                   onMouseLeave={() => setHoveredCountry(null)}
                   onClick={() => {
-                    alert(`Clicked: ${country} (${feature.properties.name})`);
+                    if (daysSpent) {
+                      alert(
+                        `I have spent ${daysSpent} days in ${feature.properties.name}`
+                      );
+                    } else {
+                      alert(
+                        `I have not visited ${feature.properties.name} yet, but I plan to visit it soon!`
+                      );
+                    }
                   }}
                 />
               );
@@ -113,7 +121,7 @@ export const WorldMap = ({ width, height }: GeoMercatorProps) => {
 
 export default function ResponsiveWorldMap() {
   return (
-    <ParentSize debounceTime={10}>
+    <ParentSize>
       {({ width = 1000, height = 500 }) => {
         const maxHeight = 500;
         const maxWidth = 1000;

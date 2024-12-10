@@ -1,6 +1,6 @@
+import { hierarchy, linkHorizontal, select, tree } from 'd3';
 import * as React from 'react';
-import { select, hierarchy, tree, linkHorizontal } from 'd3';
-import { useResizeObserver, usePrevious } from '../../hooks';
+import { usePrevious, useResizeObserver } from '../../hooks';
 import createUseStyles from './TreeChart.style';
 
 const { useRef, useEffect } = React;
@@ -97,7 +97,7 @@ export function TreeChart({ data }) {
   }, [data, dimensions]);
 
   return (
-    <div ref={wrapperRef} style={{ marginBottom: '2rem' }}>
+    <div ref={wrapperRef} style={{ maxWidth: '1000px', marginBottom: '2rem' }}>
       <svg ref={svgRef} className={treechart} height={700} />
     </div>
   );
