@@ -15,7 +15,6 @@ export default createUseStyles({
 
   appHeader: {
     backgroundColor: '#282c34',
-    minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -55,7 +54,6 @@ export default createUseStyles({
 
   playgroundContainer: {
     display: 'flex',
-    minHeight: '100vh',
     padding: '20px',
     gap: '20px'
   },

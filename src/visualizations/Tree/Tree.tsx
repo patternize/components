@@ -3,7 +3,7 @@ import { Group } from '@visx/group';
 import { hierarchy, Tree } from '@visx/hierarchy';
 import { HierarchyPointNode } from '@visx/hierarchy/lib/types';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
-import { LinkVertical } from '@visx/shape';
+import { LinePath, LinkVertical } from '@visx/shape';
 import { useMemo } from 'react';
 
 const green = '#26deb0';
@@ -13,9 +13,36 @@ const grey = '#8e8e8e';
 const black = '#000000';
 export const background = white;
 
+interface ExtraEdge {
+  from: string;
+  to: string;
+}
+
 interface TreeNode {
   name: string;
-  children?: this[];
+  children?: TreeNode[];
+}
+
+interface TreeProps {
+  inputData: TreeNode;
+  width?: number;
+  height?: number;
+  margin?: { top: number; right: number; bottom: number; left: number };
+  extraEdges?: ExtraEdge[];
+}
+
+function findNodeByName(
+  root: HierarchyPointNode<TreeNode>,
+  name: string
+): HierarchyPointNode<TreeNode> | null {
+  if (root.data.name === name) return root;
+  if (!root.children) return null;
+
+  for (const child of root.children) {
+    const found = findNodeByName(child, name);
+    if (found) return found;
+  }
+  return null;
 }
 
 /** Handles rendering Root, Parent, and other Nodes. */
@@ -74,20 +101,14 @@ function RootNode({ node }: { node: HierarchyPointNode<TreeNode> }) {
 }
 const defaultMargin = { top: 20, left: 10, right: 10, bottom: 20 };
 
-export type TreeProps = {
-  inputData: TreeNode;
-  width?: number;
-  height?: number;
-  margin?: { top: number; right: number; bottom: number; left: number };
-};
-
 export function TreeDiagram({
   inputData,
   width = 500,
   height = 500,
-  margin = defaultMargin
+  margin = defaultMargin,
+  extraEdges = []
 }: TreeProps) {
-  const data = useMemo(() => hierarchy(inputData), []);
+  const data = useMemo(() => hierarchy(inputData), [inputData]);
   const yMax = height - margin.top - margin.bottom;
   const xMax = width - margin.left - margin.right;
 
@@ -95,19 +116,64 @@ export function TreeDiagram({
     <div>
       <svg width={width} height={height}>
         <LinearGradient id="lg" from={green} to={green} />
+        <defs>
+          <marker
+            id="arrow"
+            viewBox="0 0 10 10"
+            refX="8"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M 0 0 L 10 5 L 0 10 z" fill={green} />
+          </marker>
+        </defs>
         <rect width={width} height={height} rx={14} fill={background} />
         <Tree<TreeNode> root={data} size={[xMax, yMax]}>
           {(tree) => (
             <Group top={margin.top} left={margin.left}>
               {tree.links().map((link, i) => (
-                <LinkVertical
+                <LinePath
                   key={`link-${i}`}
-                  data={link}
                   stroke={lightpurple}
-                  strokeWidth="1"
-                  fill="none"
+                  strokeWidth={1}
+                  data={[
+                    { x: link.source.x, y: link.source.y },
+                    { x: link.target.x, y: link.target.y }
+                  ]}
+                  x={(d) => d.x}
+                  y={(d) => d.y}
                 />
               ))}
+              {extraEdges.map((edge, i) => {
+                const sourceNode = findNodeByName(tree, edge.from);
+                const targetNode = findNodeByName(tree, edge.to);
+
+                if (sourceNode && targetNode) {
+                  return (
+                    <LinkVertical
+                      key={`extra-edge-${i}`}
+                      data={{
+                        source: {
+                          x: sourceNode.x,
+                          y: sourceNode.y
+                        },
+                        target: {
+                          x: targetNode.x,
+                          y: targetNode.y
+                        }
+                      }}
+                      stroke={green}
+                      strokeWidth="1"
+                      strokeDasharray="4"
+                      fill="none"
+                      markerEnd="url(#arrow)"
+                    />
+                  );
+                }
+                return null;
+              })}
               {tree.descendants().map((node, i) => (
                 <Node key={`node-${i}`} node={node} />
               ))}
@@ -119,7 +185,10 @@ export function TreeDiagram({
   );
 }
 
-export default function ResponsiveTreeDiagram({ inputData }: TreeProps) {
+export default function ResponsiveTreeDiagram({
+  inputData,
+  extraEdges
+}: TreeProps) {
   return (
     <ParentSize debounceTime={10}>
       {({ width = 500, height = 500 }) => {
@@ -132,6 +201,7 @@ export default function ResponsiveTreeDiagram({ inputData }: TreeProps) {
             inputData={inputData}
             width={w || maxWidth}
             height={h || maxHeight}
+            extraEdges={extraEdges}
           />
         );
       }}

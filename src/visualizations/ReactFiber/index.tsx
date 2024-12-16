@@ -171,14 +171,14 @@ function App() {
             onClick={clickStack}
             disabled={clicked}
           >
-            Run Stack Reconcilor
+            Run Old Reconcilor (❌Laggy)
           </button>
           <button
             className={classes.button}
             onClick={clickFiber}
             disabled={clicked}
           >
-            Run Fiber Reconcilor
+            Run Fiber Reconcilor (✅Smooth)
           </button>
           <button
             className={classes.button}

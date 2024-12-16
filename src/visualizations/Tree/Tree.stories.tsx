@@ -7,30 +7,28 @@ interface TreeNode {
 }
 
 const rawTree: TreeNode = {
-  name: 'Root',
+  name: 'App',
   children: [
     {
       name: 'A',
       children: [
-        { name: 'A1' },
-        { name: 'A2' },
-        { name: 'A3' },
         {
-          name: 'C',
-          children: [
-            { name: 'C1' },
-            {
-              name: 'D',
-              children: [{ name: 'D1' }, { name: 'D2' }, { name: 'D3' }]
-            }
-          ]
+          name: 'C1',
+          children: [{ name: 'D1' }]
+        },
+        {
+          name: 'C2',
+          children: [{ name: 'D2' }]
         }
       ]
     },
-    { name: 'Z' },
     {
       name: 'B',
-      children: [{ name: 'B1' }, { name: 'B2' }, { name: 'B3' }]
+      children: [
+        {
+          name: 'C1'
+        }
+      ]
     }
   ]
 };
@@ -40,7 +38,14 @@ export default {
 };
 
 export const TreeStory = () => (
-  <TreeDiagram inputData={rawTree} height={500} width={500} />
+  <TreeDiagram
+    inputData={rawTree}
+    height={500}
+    width={500}
+    extraEdges={[{ from: 'D3', to: 'A3' }]}
+  />
 );
 
-export const TreeResponsiveStory = () => <Tree inputData={rawTree} />;
+export const TreeResponsiveStory = () => (
+  <Tree inputData={rawTree} extraEdges={[{ from: 'D1', to: 'A' }]} />
+);
