@@ -1,19 +1,14 @@
-import { Button } from './components/Button';
-import { SlideShow } from './components/SlideShow/SlideShow';
-import { Array } from './visualizations/Array';
-import { VerticalBarChart } from './visualizations/BarChart';
-import WorldMap from './visualizations/Map/WorldMap';
-import ReactFiber from './visualizations/ReactFiber/index';
-import Timeline from './visualizations/Timeline/Timeline';
-import { TreeChart } from './visualizations/TreeChart/TreeChart';
+// Components
+export { Button } from './components/Button';
+export { SlideShow } from './components/SlideShow/SlideShow';
 
-export {
-  Array,
-  Button,
-  ReactFiber,
-  SlideShow,
-  Timeline,
-  TreeChart,
-  VerticalBarChart,
-  WorldMap
-};
+// Visualizations
+export { Array } from './visualizations/Array';
+export { VerticalBarChart } from './visualizations/BarChart';
+export { default as WorldMap } from './visualizations/Map/WorldMap';
+export { default as ReactFiber } from './visualizations/ReactFiber';
+export { default as Timeline } from './visualizations/Timeline/Timeline';
+export { TreeChart } from './visualizations/TreeChart/TreeChart';
+
+// Hooks
+export { usePrevious, useResizeObserver } from './hooks';

@@ -2,9 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "outDir": "lib",
     "jsx": "react-jsx",
-    "module": "esnext",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
@@ -34,6 +32,5 @@
     "**/*.test.tsx",
     "**/*.stories.tsx",
     "./src/setupTests.ts"
-  ],
-  "files": ["./src/index.ts"]
+  ]
 }
