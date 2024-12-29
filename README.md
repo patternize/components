@@ -19,6 +19,7 @@ You will also see any lint errors in the console.
 ### How to publish to NPM
 
 - `yarn build`
+- update the version in `package.json`
 - `npm publish`
 
 ## Learn More

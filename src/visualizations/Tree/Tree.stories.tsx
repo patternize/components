@@ -49,3 +49,27 @@ export const TreeStory = () => (
 export const TreeResponsiveStory = () => (
   <Tree inputData={rawTree} extraEdges={[{ from: 'D1', to: 'A' }]} />
 );
+
+
+export const BinaryTreeStory = () => (
+  <Tree inputData={{
+    name: '5',
+    children: [
+      {
+        name: '1'
+      },
+      {
+        name: '12',
+        children: [
+          {
+            name: '15'
+          },
+          {
+            name: '16'
+          }
+        ]
+      }
+    ]
+  }} maxHeight={250}/>
+);
+

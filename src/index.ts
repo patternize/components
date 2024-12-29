@@ -9,6 +9,7 @@ export { default as WorldMap } from './visualizations/Map/WorldMap';
 export { default as ReactFiber } from './visualizations/ReactFiber';
 export { default as Timeline } from './visualizations/Timeline/Timeline';
 export { TreeChart } from './visualizations/TreeChart/TreeChart';
+export { default as Tree } from './visualizations/Tree/Tree';
 
 // Hooks
 export { usePrevious, useResizeObserver } from './hooks';

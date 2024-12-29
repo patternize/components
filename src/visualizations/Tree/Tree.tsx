@@ -25,6 +25,8 @@ interface TreeNode {
 
 interface TreeProps {
   inputData: TreeNode;
+  maxWidth?: number;
+  maxHeight?: number;
   width?: number;
   height?: number;
   margin?: { top: number; right: number; bottom: number; left: number };
@@ -48,22 +50,22 @@ function findNodeByName(
 /** Handles rendering Root, Parent, and other Nodes. */
 function Node({ node }: { node: HierarchyPointNode<TreeNode> }) {
   const isRoot = node.depth === 0;
-  const isParent = !!node.children;
+  const isNull = node.data.name === 'null';
 
   if (isRoot) return <RootNode node={node} />;
 
   return (
     <Group top={node.y} left={node.x}>
       {node.depth !== 0 && (
-        <circle r={12} fill={background} stroke={isParent ? black : grey} />
+        <circle r={16} fill={background} stroke={isNull ? grey : black} />
       )}
       <text
         dy=".33em"
-        fontSize={9}
+        fontSize={11}
         fontFamily="Arial"
         textAnchor="middle"
         style={{ pointerEvents: 'none' }}
-        fill={isParent ? black : grey}
+        fill={isNull ? grey : black}
       >
         {node.data.name}
       </text>
@@ -72,8 +74,8 @@ function Node({ node }: { node: HierarchyPointNode<TreeNode> }) {
 }
 
 function RootNode({ node }: { node: HierarchyPointNode<TreeNode> }) {
-  const width = 40;
-  const height = 20;
+  const width = 50;
+  const height = 25;
   const centerX = -width / 2;
   const centerY = -height / 2;
 
@@ -84,11 +86,11 @@ function RootNode({ node }: { node: HierarchyPointNode<TreeNode> }) {
         height={height}
         y={centerY}
         x={centerX}
-        fill={black}
+        fill={green}
       />
       <text
         dy=".33em"
-        fontSize={9}
+        fontSize={11}
         fontFamily="Arial"
         textAnchor="middle"
         style={{ pointerEvents: 'none' }}
@@ -187,13 +189,13 @@ export function TreeDiagram({
 
 export default function ResponsiveTreeDiagram({
   inputData,
-  extraEdges
+  extraEdges,
+  maxHeight = 500,
+  maxWidth = 500
 }: TreeProps) {
   return (
     <ParentSize debounceTime={10}>
       {({ width = 500, height = 500 }) => {
-        const maxHeight = 500;
-        const maxWidth = 500;
         const h = Math.min(height, maxHeight);
         const w = Math.min(width, maxWidth);
         return (
