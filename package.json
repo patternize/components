@@ -32,6 +32,7 @@
     "publish": "yarn build && npm publish"
   },
   "dependencies": {
+    "@react-spring/web": "^9.7.5",
     "@storybook/react-webpack5": "^8.3.6",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",

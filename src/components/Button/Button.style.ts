@@ -6,7 +6,7 @@ export default createUseStyles((theme: any) => ({
   root: {
     height: MIN_TARGET_SIZE,
     borderRadius: 2,
-    display: 'flex',
+    display: 'inline-flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
     overflow: 'hidden',
@@ -24,6 +24,7 @@ export default createUseStyles((theme: any) => ({
     color: (props: any) => (props.color ? props.color : theme.grey2),
     borderColor: 'currentColor',
     backgroundColor: 'transparent',
+    marginRight: 8,
     '&:not([disabled]):hover': {
       color: (props: any) => (props.color ? props.color : theme.grey1),
       cursor: 'pointer'
