@@ -301,18 +301,30 @@ export function TreeDiagram({
                 const targetNode = findNodeByName(tree, edge.to);
 
                 if (sourceNode && targetNode) {
-                  // Calculate control point for curved path
-                  const midX = (sourceNode.x + targetNode.x) / 2;
-                  const midY = (sourceNode.y + targetNode.y) / 2;
-                  const dx = targetNode.x + sourceNode.x;
-                  const dy = targetNode.y + sourceNode.y;
-                  const controlX = midX + dy * 0.2; // Increase 0.2 for more curve
-                  const controlY = midY - dx * 0.2; // Increase 0.2 for more curve
+                  let pathD;
+
+                  // Check if nodes share X or Y coordinate
+                  if (Math.abs(sourceNode.x - targetNode.x) < 1) {
+                    // Vertical straight line
+                    pathD = `M ${sourceNode.x} ${sourceNode.y} L ${targetNode.x} ${targetNode.y}`;
+                  } else if (Math.abs(sourceNode.y - targetNode.y) < 1) {
+                    // Horizontal straight line
+                    pathD = `M ${sourceNode.x} ${sourceNode.y} L ${targetNode.x} ${targetNode.y}`;
+                  } else {
+                    // Curved line for other cases
+                    const midX = (sourceNode.x + targetNode.x) / 2;
+                    const midY = (sourceNode.y + targetNode.y) / 2;
+                    const dx = targetNode.x + sourceNode.x;
+                    const dy = targetNode.y + sourceNode.y;
+                    const controlX = midX + dy * 0.2;
+                    const controlY = midY - dx * 0.2;
+                    pathD = `M ${sourceNode.x} ${sourceNode.y} Q ${controlX} ${controlY} ${targetNode.x} ${targetNode.y}`;
+                  }
 
                   return (
                     <path
                       key={`extra-edge-${i}`}
-                      d={`M ${sourceNode.x} ${sourceNode.y} Q ${controlX} ${controlY} ${targetNode.x} ${targetNode.y}`}
+                      d={pathD}
                       stroke={green}
                       strokeWidth="1"
                       strokeDasharray="4"
