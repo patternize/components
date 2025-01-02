@@ -1,32 +1,32 @@
 import { useState } from 'react';
-import { Button } from '../../components/Button';
-import ResponsiveTreeDiagram, { TreeNode } from '../Tree/Tree';
-import { applyDiffs } from '../Tree/utils';
+import Button from '../../../components/Button';
+import ResponsiveTreeDiagram, { TreeNode } from '../Tree';
+import { applyDiffs } from '../utils';
 
-export const MorrisTraversal = () => {
-  // Base tree structure for DFS traversal: App -> A -> C1 -> D1 -> C2 -> D2 -> B -> C1
+export const BTDFSTraversal = () => {
+  // Base tree structure for DFS traversal: 1 -> 2 -> 4 -> 8 -> 4 -> 2 -> 5 -> 9 -> 5 -> 2 -> 1 -> 3 -> 6
   const initialRawTree: TreeNode = {
-    name: 'App',
+    name: '1',
     visitingCursorColor: '#26deb0',
     children: [
       {
-        name: 'A',
+        name: '2',
         children: [
           {
-            name: 'C1',
-            children: [{ name: 'D1' }]
+            name: '4',
+            children: [{ name: '8' }]
           },
           {
-            name: 'C2',
-            children: [{ name: 'D2' }]
+            name: '5',
+            children: [{ name: '9' }]
           }
         ]
       },
       {
-        name: 'B',
+        name: '3',
         children: [
           {
-            name: 'C1'
+            name: '6'
           }
         ]
       }
@@ -37,13 +37,13 @@ export const MorrisTraversal = () => {
   const treeSteps = [
     // Step 0: Initial state (rawTree)
     [],
-    // Step 1: App visited, A visiting
+    // Step 1: 1 visited, 2 visiting
     [
       { path: ['visited'], value: '#26deb0' },
       { path: ['visitingCursorColor'], value: null, remove: true },
       { path: ['children', 0, 'visitingCursorColor'], value: '#26deb0' }
     ],
-    // Step 2: A visited, C1 visiting
+    // Step 2: 2 visited, 4 visiting
     [
       { path: ['children', 0, 'visited'], value: '#26deb0' },
       {
@@ -56,7 +56,7 @@ export const MorrisTraversal = () => {
         value: '#26deb0'
       }
     ],
-    // Step 3: C1 visited, D1 visiting
+    // Step 3: 4 visited, 8 visiting
     [
       { path: ['children', 0, 'children', 0, 'visited'], value: '#26deb0' },
       {
@@ -77,7 +77,7 @@ export const MorrisTraversal = () => {
         value: '#26deb0'
       }
     ],
-    // Step 4: D1 visited, back to A visiting
+    // Step 4: 8 visited, back to 4 visiting
     [
       {
         path: ['children', 0, 'children', 0, 'children', 0, 'visited'],
@@ -96,9 +96,21 @@ export const MorrisTraversal = () => {
         value: null,
         remove: true
       },
+      {
+        path: ['children', 0, 'children', 0, 'visitingCursorColor'],
+        value: '#26deb0'
+      }
+    ],
+    // Step 5: Back to 2 visiting
+    [
+      {
+        path: ['children', 0, 'children', 0, 'visitingCursorColor'],
+        value: null,
+        remove: true
+      },
       { path: ['children', 0, 'visitingCursorColor'], value: '#26deb0' }
     ],
-    // Step 5: C2 visiting
+    // Step 6: 5 visiting
     [
       {
         path: ['children', 0, 'visitingCursorColor'],
@@ -110,7 +122,7 @@ export const MorrisTraversal = () => {
         value: '#26deb0'
       }
     ],
-    // Step 6: C2 visited, D2 visiting
+    // Step 7: 5 visited, 9 visiting
     [
       { path: ['children', 0, 'children', 1, 'visited'], value: '#26deb0' },
       {
@@ -131,7 +143,7 @@ export const MorrisTraversal = () => {
         value: '#26deb0'
       }
     ],
-    // Step 7: D2 visited, back to App visiting
+    // Step 8: 9 visited, back to 5 visiting
     [
       {
         path: ['children', 0, 'children', 1, 'children', 0, 'visited'],
@@ -150,14 +162,35 @@ export const MorrisTraversal = () => {
         value: null,
         remove: true
       },
+      {
+        path: ['children', 0, 'children', 1, 'visitingCursorColor'],
+        value: '#26deb0'
+      }
+    ],
+    // Step 9: Back to 2 visiting
+    [
+      {
+        path: ['children', 0, 'children', 1, 'visitingCursorColor'],
+        value: null,
+        remove: true
+      },
+      { path: ['children', 0, 'visitingCursorColor'], value: '#26deb0' }
+    ],
+    // Step 10: Back to 1 visiting
+    [
+      {
+        path: ['children', 0, 'visitingCursorColor'],
+        value: null,
+        remove: true
+      },
       { path: ['visitingCursorColor'], value: '#26deb0' }
     ],
-    // Step 8: B visiting
+    // Step 11: 3 visiting
     [
       { path: ['visitingCursorColor'], value: null, remove: true },
       { path: ['children', 1, 'visitingCursorColor'], value: '#26deb0' }
     ],
-    // Step 9: B visited, C1 visiting
+    // Step 12: 3 visited, 6 visiting
     [
       { path: ['children', 1, 'visited'], value: '#26deb0' },
       {
@@ -170,7 +203,7 @@ export const MorrisTraversal = () => {
         value: '#26deb0'
       }
     ],
-    // Step 10: Final state - C1 visited
+    // Step 13: Final state - 6 visited
     [
       { path: ['children', 1, 'children', 0, 'visited'], value: '#26deb0' },
       {
@@ -201,41 +234,39 @@ export const MorrisTraversal = () => {
     setCurrentTree(initialRawTree);
   };
 
+  // Define the stack for each step
   const stackStates = [
-    ['App'],
-    ['A'],
-    ['C1'],
-    ['D1'],
-    ['A'],
-    ['C2'],
-    ['D2'],
-    ['App'],
-    ['B'],
-    ['C1'],
-    ['App', 'O(1) Space always!']
+    ['1'],
+    ['1', '2'],
+    ['1', '2', '4'],
+    ['1', '2', '4', '8'],
+    ['1', '2', '4'],
+    ['1', '2'],
+    ['1', '2', '5'],
+    ['1', '2', '5', '9'],
+    ['1', '2', '5'],
+    ['1', '2'],
+    ['1'],
+    ['1', '3'],
+    ['1', '3', '6'],
+    ['1', '3']
   ];
 
   return (
     <div>
-      <ResponsiveTreeDiagram
-        inputData={currentTree}
-        height={400}
-        width={500}
-        extraEdges={[
-          { from: 'D1', to: 'A' },
-          { from: 'D2', to: 'App' }
-        ]}
-      />
+      <ResponsiveTreeDiagram inputData={currentTree} height={300} width={500} />
       <br />
-      <Button onClick={handleClick} disabled={step === treeSteps.length - 1}>
-        Next Step
-      </Button>
-      <Button onClick={resetTree} warning>
-        Reset Tree
-      </Button>
-      <span style={{ fontFamily: 'sans-serif' }}>
-        Stack: {stackStates[step].join(', ')}
-      </span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <Button onClick={handleClick} disabled={step === treeSteps.length - 1}>
+          Next Step
+        </Button>
+        <Button onClick={resetTree} warning>
+          Reset Tree
+        </Button>
+        <span style={{ fontFamily: 'sans-serif' }}>
+          Stack: {stackStates[step].join(', ')}
+        </span>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from '../../components/Button';
-import { TreeDiagram, TreeNode } from '../Tree/Tree';
-import { applyDiffs } from './utils';
+import ResponsiveTreeDiagram, { TreeNode } from '../Tree/Tree';
+import { applyDiffs } from '../Tree/utils';
 
 export const ConcurrentTraversal = () => {
   const initialRawTree: TreeNode = {
@@ -270,7 +270,7 @@ export const ConcurrentTraversal = () => {
 
   return (
     <div>
-      <TreeDiagram
+      <ResponsiveTreeDiagram
         inputData={currentTree}
         height={400}
         width={500}

@@ -352,7 +352,7 @@ export function TreeDiagram({
 export default function ResponsiveTreeDiagram({
   inputData,
   extraEdges,
-  maxHeight = 500,
+  maxHeight = 400,
   maxWidth = 500
 }: TreeProps) {
   return (

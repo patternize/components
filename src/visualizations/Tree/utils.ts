@@ -1,4 +1,4 @@
-import { TreeNode } from '../Tree/Tree';
+import { TreeNode } from './Tree';
 
 // Helper function to apply diffs to a tree
 export const applyDiffs = (

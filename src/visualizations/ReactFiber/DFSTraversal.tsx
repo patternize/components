@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from '../../components/Button';
-import { TreeDiagram, TreeNode } from '../Tree/Tree';
-import { applyDiffs } from './utils';
+import ResponsiveTreeDiagram, { TreeNode } from '../Tree/Tree';
+import { applyDiffs } from '../Tree/utils';
 
 export const DFSTraversal = () => {
   // Base tree structure for DFS traversal: App -> A -> C1 -> D1 -> C1 -> A -> C2 -> D2 -> C2 -> A -> App -> B -> C1
@@ -254,7 +254,7 @@ export const DFSTraversal = () => {
 
   return (
     <div>
-      <TreeDiagram inputData={currentTree} height={400} width={500} />
+      <ResponsiveTreeDiagram inputData={currentTree} height={400} width={500} />
       <br />
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         <Button onClick={handleClick} disabled={step === treeSteps.length - 1}>

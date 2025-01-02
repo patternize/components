@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { BTBFSTraversal } from './BinaryTree/BTBFSTraversal';
+import { BTDFSTraversal } from './BinaryTree/BTDFSTraversal';
 import Tree, { TreeDiagram, TreeNode } from './Tree';
 
 const initialRawTree: TreeNode = {
@@ -72,4 +74,12 @@ export const BinaryTreeStory = () => {
   });
 
   return <Tree inputData={binaryTree} maxHeight={250} />;
+};
+
+export const BTDFSTraversalStory = () => {
+  return <BTDFSTraversal />;
+};
+
+export const BTBFSTraversalStory = () => {
+  return <BTBFSTraversal />;
 };
