@@ -3022,7 +3022,7 @@
     d3-hierarchy "^1.1.4"
     prop-types "^15.6.1"
 
-"@visx/responsive@^3.10.2":
+"@visx/responsive@^3.3.0":
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/@visx/responsive/-/responsive-3.12.0.tgz#5622e2dcf951642ff8ca49b81c8a477281fe6066"
   integrity sha512-GV1BTYwAGlk/K5c9vH8lS2syPnTuIqEacI7L6LRPbsuaLscXMNi+i9fZyzo0BWvAdtRV8v6Urzglo++lvAXT1Q==

@@ -1,7 +1,7 @@
 {
   "name": "@patternize/components",
   "description": "React components for Patternize.io",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "license": "MIT",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -41,7 +41,7 @@
     "@visx/gradient": "^3.3.0",
     "@visx/group": "^3.3.0",
     "@visx/hierarchy": "^3.3.0",
-    "@visx/responsive": "^3.10.2",
+    "@visx/responsive": "^3.3.0",
     "@visx/shape": "^3.5.0",
     "d3": "^7.9.0",
     "d3-geo": "^3.1.1",

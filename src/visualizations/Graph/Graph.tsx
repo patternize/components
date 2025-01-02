@@ -3,7 +3,7 @@ import { LinearGradient } from '@visx/gradient';
 import { Group } from '@visx/group';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import { LinePath } from '@visx/shape';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const green = '#26deb0';
 const lightpurple = '#374469';
@@ -36,7 +36,17 @@ interface GraphProps {
   maxWidth?: number;
 }
 
-function Node({ node, x, y }: { node: GraphNode; x: number; y: number }) {
+function Node({
+  node,
+  x,
+  y,
+  scale = 1
+}: {
+  node: GraphNode;
+  x: number;
+  y: number;
+  scale?: number;
+}) {
   const isVisiting = node.visitingCursorColor;
   const visitedColor = node.visited;
 
@@ -55,17 +65,17 @@ function Node({ node, x, y }: { node: GraphNode; x: number; y: number }) {
   return (
     <Group top={y} left={x}>
       <circle
-        r={16}
+        r={16 / scale}
         fill={background}
         stroke={black}
-        strokeWidth={isVisiting ? 2 : 1}
+        strokeWidth={(isVisiting ? 2 : 1) / scale}
         style={{
           fill: visitedColor ? lightenColor(visitedColor) : background
         }}
       />
       <text
         dy=".33em"
-        fontSize={11}
+        fontSize={11 / scale}
         fontFamily="Arial"
         textAnchor="middle"
         style={{ pointerEvents: 'none' }}
@@ -77,7 +87,7 @@ function Node({ node, x, y }: { node: GraphNode; x: number; y: number }) {
   );
 }
 
-const defaultMargin = { top: 20, left: 20, right: 20, bottom: 20 };
+const defaultMargin = { top: 20, left: 10, right: 20, bottom: 20 };
 
 interface AnimatedCircleProps {
   animations: Array<{
@@ -144,6 +154,44 @@ export function GraphDiagram({
     }>
   >([]);
 
+  // Calculate scaling and positioning based on viewport
+  const scale = useMemo(() => {
+    // Find bounds of the graph
+    const minX = Math.min(...nodes.map((n) => n.x));
+    const maxX = Math.max(...nodes.map((n) => n.x));
+    const minY = Math.min(...nodes.map((n) => n.y));
+    const maxY = Math.max(...nodes.map((n) => n.y));
+
+    const graphWidth = maxX - minX + 100; // Add padding
+    const graphHeight = maxY - minY + 100;
+
+    // Calculate scale to fit
+    const xScale = (width - margin.left - margin.right) / graphWidth;
+    const yScale = (height - margin.top - margin.bottom) / graphHeight;
+
+    return Math.min(xScale, yScale, 1); // Don't scale up, only down
+  }, [nodes, width, height, margin]);
+
+  // Calculate center offset to keep graph centered
+  const centerOffset = useMemo(() => {
+    const graphCenterX =
+      (Math.min(...nodes.map((n) => n.x)) +
+        Math.max(...nodes.map((n) => n.x))) /
+      2;
+    const graphCenterY =
+      (Math.min(...nodes.map((n) => n.y)) +
+        Math.max(...nodes.map((n) => n.y))) /
+      2;
+
+    const viewportCenterX = width / 2;
+    const viewportCenterY = height / 2;
+
+    return {
+      x: viewportCenterX - graphCenterX * scale,
+      y: viewportCenterY - graphCenterY * scale
+    };
+  }, [nodes, width, height, scale]);
+
   useEffect(() => {
     if (prevNodes) {
       const findVisitingNodes = (
@@ -176,7 +224,10 @@ export function GraphDiagram({
             if (prevNodeWithCursor) {
               animations.push({
                 cursorId: color,
-                source: { x: prevNodeWithCursor.x, y: prevNodeWithCursor.y },
+                source: {
+                  x: prevNodeWithCursor.x,
+                  y: prevNodeWithCursor.y
+                },
                 target: { x: node.x, y: node.y }
               });
             } else {
@@ -210,7 +261,9 @@ export function GraphDiagram({
       <svg width={width} height={height}>
         <LinearGradient id="lg" from={green} to={green} />
         <rect width={width} height={height} rx={14} fill={background} />
-        <Group top={margin.top} left={margin.left}>
+        <Group
+          transform={`translate(${centerOffset.x},${centerOffset.y}) scale(${scale})`}
+        >
           {edges.map((edge, i) => {
             const source = nodes.find((n) => n.id === edge.source)!;
             const target = nodes.find((n) => n.id === edge.target)!;
@@ -221,17 +274,14 @@ export function GraphDiagram({
               y: (source.y + target.y) / 2
             };
 
-            // Check if edge is vertical (or nearly vertical)
             const isVertical = Math.abs(source.x - target.x) < 20;
-
-            // If vertical, offset the label to the right
             const labelOffset = isVertical ? 8 : 0;
 
             return (
               <Group key={`edge-${i}`}>
                 <LinePath
                   stroke={lightpurple}
-                  strokeWidth={1}
+                  strokeWidth={1 / scale} // Adjust stroke width for scaling
                   strokeDasharray={edge.dashed ? '5,5' : undefined}
                   data={[
                     { x: source.x, y: source.y },
@@ -245,13 +295,9 @@ export function GraphDiagram({
                     x={midPoint.x + labelOffset}
                     y={midPoint.y}
                     dy="-5"
-                    fontSize={11}
+                    fontSize={11 / scale} // Adjust font size for scaling
                     textAnchor="middle"
                     fill={black}
-                    style={{
-                      background: white,
-                      padding: '2px'
-                    }}
                   >
                     {edge.weight}
                   </text>
@@ -260,34 +306,55 @@ export function GraphDiagram({
             );
           })}
           {nodes.map((node, i) => (
-            <Node key={`node-${i}`} node={node} x={node.x} y={node.y} />
+            <Node
+              key={`node-${i}`}
+              node={node}
+              x={node.x}
+              y={node.y}
+              scale={scale}
+            />
           ))}
           {animationNodes.length > 0 && (
-            <AnimatedCircle animations={animationNodes} />
+            <AnimatedCircle
+              animations={animationNodes.map((n) => ({
+                ...n,
+                source: {
+                  x: n.source.x,
+                  y: n.source.y
+                },
+                target: {
+                  x: n.target.x,
+                  y: n.target.y
+                }
+              }))}
+            />
           )}
         </Group>
       </svg>
     </div>
   );
 }
+
 export default function ResponsiveGraphDiagram({
   maxHeight = 400,
   maxWidth = 500,
   ...props
 }: GraphProps) {
   return (
-    <ParentSize debounceTime={10}>
-      {({ width = 500, height = 500 }) => {
-        const h = Math.min(height, maxHeight);
-        const w = Math.min(width, maxWidth);
-        return (
-          <GraphDiagram
-            {...props}
-            width={w || maxWidth}
-            height={h || maxHeight}
-          />
-        );
-      }}
-    </ParentSize>
+    <div style={{ height: maxHeight, width: '100%', minHeight: maxHeight }}>
+      <ParentSize debounceTime={0}>
+        {({ width = 500, height = 500 }) => {
+          const h = Math.min(height, maxHeight);
+          const w = Math.min(width, maxWidth);
+          return (
+            <GraphDiagram
+              {...props}
+              width={w || maxWidth}
+              height={h || maxHeight}
+            />
+          );
+        }}
+      </ParentSize>
+    </div>
   );
 }
