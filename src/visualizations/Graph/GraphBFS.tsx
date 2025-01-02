@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Button from '../../components/Button';
-import { GraphDiagram, GraphNode } from './Graph';
+import ResponsiveGraphDiagram, { GraphNode } from './Graph';
 
 const initialNodes: GraphNode[] = [
   { id: 'A', visitingCursorColor: '#26deb0', x: 100, y: 100 },
@@ -130,7 +130,12 @@ export const GraphBFS = () => {
 
   return (
     <div>
-      <GraphDiagram nodes={nodes} edges={edges} width={500} height={400} />
+      <ResponsiveGraphDiagram
+        nodes={nodes}
+        edges={edges}
+        width={500}
+        height={400}
+      />
       <div style={{ marginTop: '1rem', display: 'flex', gap: '1rem' }}>
         <Button onClick={handleNext} disabled={step === bfsSteps.length - 1}>
           Next Step

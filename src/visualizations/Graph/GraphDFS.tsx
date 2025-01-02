@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Button from '../../components/Button';
-import { GraphDiagram, GraphNode } from './Graph';
+import ResponsiveGraphDiagram, { GraphNode } from './Graph';
 
 export default {
   title: 'Graph'
@@ -156,7 +156,12 @@ export const GraphDFS = () => {
 
   return (
     <div>
-      <GraphDiagram nodes={nodes} edges={edges} width={500} height={400} />
+      <ResponsiveGraphDiagram
+        nodes={nodes}
+        edges={edges}
+        width={500}
+        height={400}
+      />
       <div style={{ marginTop: '1rem', display: 'flex', gap: '1rem' }}>
         <Button onClick={handleNext} disabled={step === dfsSteps.length - 1}>
           Next Step
