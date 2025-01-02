@@ -32,6 +32,8 @@ interface GraphProps {
   width?: number;
   height?: number;
   margin?: { top: number; right: number; bottom: number; left: number };
+  maxHeight?: number;
+  maxWidth?: number;
 }
 
 function Node({ node, x, y }: { node: GraphNode; x: number; y: number }) {
@@ -268,13 +270,24 @@ export function GraphDiagram({
     </div>
   );
 }
-
-export default function ResponsiveGraphDiagram(props: GraphProps) {
+export default function ResponsiveGraphDiagram({
+  maxHeight = 400,
+  maxWidth = 500,
+  ...props
+}: GraphProps) {
   return (
-    <ParentSize>
-      {({ width, height }) => (
-        <GraphDiagram {...props} width={width} height={height} />
-      )}
+    <ParentSize debounceTime={10}>
+      {({ width = 500, height = 500 }) => {
+        const h = Math.min(height, maxHeight);
+        const w = Math.min(width, maxWidth);
+        return (
+          <GraphDiagram
+            {...props}
+            width={w || maxWidth}
+            height={h || maxHeight}
+          />
+        );
+      }}
     </ParentSize>
   );
 }

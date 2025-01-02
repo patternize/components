@@ -10,6 +10,10 @@ export { default as Graph } from './visualizations/Graph/Graph';
 export { GraphBFS } from './visualizations/Graph/GraphBFS';
 export { GraphDFS } from './visualizations/Graph/GraphDFS';
 export { GraphDijkstra } from './visualizations/Graph/GraphDijkstra';
+export {
+  LLInsertOperation,
+  LLRemoveOperation
+} from './visualizations/LinkedList/LinkedList.stories';
 export { default as WorldMap } from './visualizations/Map/WorldMap';
 export { default as ReactFiber } from './visualizations/ReactFiber';
 export { ConcurrentTraversal } from './visualizations/ReactFiber/ConcurrentTraversal';
