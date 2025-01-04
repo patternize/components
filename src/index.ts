@@ -19,6 +19,7 @@ export { default as ReactFiber } from './visualizations/ReactFiber';
 export { ConcurrentTraversal } from './visualizations/ReactFiber/ConcurrentTraversal';
 export { DFSTraversal } from './visualizations/ReactFiber/DFSTraversal';
 export { MorrisTraversal } from './visualizations/ReactFiber/MorrisTraversal';
+export { Sorting } from './visualizations/Sorting/Sorting';
 export { default as Timeline } from './visualizations/Timeline/Timeline';
 export { BTBFSTraversal } from './visualizations/Tree/BinaryTree/BTBFSTraversal';
 export { BTDFSTraversal } from './visualizations/Tree/BinaryTree/BTDFSTraversal';

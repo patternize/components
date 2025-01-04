@@ -1,5 +1,5 @@
+import { axisBottom, axisRight, scaleBand, scaleLinear, select } from 'd3';
 import * as React from 'react';
-import { select, axisBottom, axisRight, scaleLinear, scaleBand } from 'd3';
 import { useResizeObserver } from '../../hooks';
 import createUseStyles from './BarChart.style';
 
@@ -59,20 +59,26 @@ export const VerticalBarChart = ({ data }: IBarChartProps) => {
       .attr('x', (value, index) => xScale(index))
       .attr('y', -dimensions.height)
       .attr('width', xScale.bandwidth())
-      .on('mouseenter', (value, index) => {
+      .on('mouseenter', (event, value) => {
+        // Add value label above bar
+        const index = data.indexOf(value);
         svg
-          .selectAll('.tooltip')
+          .selectAll('.value-label')
           .data([value])
-          .join((enter) => enter.append('text').attr('y', yScale(value) - 4))
-          .attr('class', 'tooltip')
+          .join('text')
+          .attr('class', 'value-label')
           .text(value)
           .attr('x', xScale(index) + xScale.bandwidth() / 2)
+          .attr('y', yScale(value) - 5)
           .attr('text-anchor', 'middle')
+          .attr('opacity', 0)
           .transition()
-          .attr('y', yScale(value) - 8)
+          .duration(200)
           .attr('opacity', 1);
       })
-      .on('mouseleave', () => svg.select('.tooltip').remove())
+      .on('mouseleave', () => {
+        svg.selectAll('.value-label').remove();
+      })
       .transition()
       .attr('fill', colorScale)
       .attr('height', (value) => dimensions.height - yScale(value));
