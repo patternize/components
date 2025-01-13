@@ -17,9 +17,9 @@ export {
   LLRemoveOperation
 } from './visualizations/LinkedList/LinkedList.stories';
 export {
-  ConcurrentTraversalStoryStory,
-  DFSTraversalStoryStory,
-  MorrisTraversalStoryStory,
+  ConcurrentTraversalStory,
+  DFSTraversalStory,
+  MorrisTraversalStory,
   ReactFiberStory
 } from './visualizations/ReactFiber/ReactFiber.stories';
 

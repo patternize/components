@@ -10,7 +10,7 @@ export default {
 
 export const ReactFiberStory = () => <ReactFiber />;
 
-export const MorrisTraversalStoryStory = () => {
+export const MorrisTraversalStory = () => {
   // Base tree structure for DFS traversal: App -> A -> C1 -> D1 -> C2 -> D2 -> B -> C1
   const initialRawTree: TreeNode = {
     name: 'App',
@@ -247,7 +247,7 @@ export const MorrisTraversalStoryStory = () => {
   );
 };
 
-export const DFSTraversalStoryStory = () => {
+export const DFSTraversalStory = () => {
 
   // Base tree structure for DFS traversal: App -> A -> C1 -> D1 -> C1 -> A -> C2 -> D2 -> C2 -> A -> App -> B -> C1
   const initialRawTree: TreeNode = {
@@ -516,7 +516,7 @@ export const DFSTraversalStoryStory = () => {
   );
 };
 
-export const ConcurrentTraversalStoryStory = () => {
+export const ConcurrentTraversalStory = () => {
 
   const initialRawTree: TreeNode = {
     name: 'App',
