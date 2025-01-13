@@ -11,9 +11,23 @@ export const Sorting = ({
   steps: string[];
 }) => {
   const [index, setIndex] = React.useState(0);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isHydrated, setIsHydrated] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
+  React.useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  if (!isHydrated) {
+    return null; // or a loading placeholder
+  }
 
   return (
-    <div className={'controller'}>
+    <div className={`sorting-container ${isLoading ? 'loading' : ''}`}>
       <Array data={data[index]} />
       <VerticalBarChart data={data[index]} />
       <br />
@@ -27,6 +41,7 @@ export const Sorting = ({
         Next
       </Button>
       <span style={{ marginLeft: '10px' }}>{steps[index]}</span>
+      {isLoading && <div className="loading-spinner">Loading...</div>}
     </div>
   );
 };
