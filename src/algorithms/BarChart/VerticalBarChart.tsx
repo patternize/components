@@ -6,9 +6,19 @@ import createUseStyles from './BarChart.style';
 const { useRef, useEffect } = React;
 interface IBarChartProps {
   data: number[];
+  colorRanges?: ColorRange[];
 }
 
-export const VerticalBarChart = ({ data }: IBarChartProps) => {
+interface ColorRange {
+  start: number;
+  end: number;
+  color: string;
+}
+
+export const VerticalBarChart = ({
+  data,
+  colorRanges = []
+}: IBarChartProps) => {
   const svgRef = useRef(null);
   const wrapperRef = useRef(null);
   const dimensions = useResizeObserver(wrapperRef);
@@ -49,6 +59,11 @@ export const VerticalBarChart = ({ data }: IBarChartProps) => {
       .style('transform', `translateX(${dimensions.width}px)`)
       .call(yAxis);
 
+    const getColor = (index: number) => {
+      const range = colorRanges.find((r) => index >= r.start && index <= r.end);
+      return range ? range.color : colorScale(data[index]);
+    };
+
     // draw the bars
     svg
       .selectAll('.bar')
@@ -56,9 +71,10 @@ export const VerticalBarChart = ({ data }: IBarChartProps) => {
       .join('rect')
       .attr('class', 'bar')
       .style('transform', 'scale(1, -1)')
-      .attr('x', (value, index) => xScale(index))
+      .attr('x', (_, index) => xScale(index))
       .attr('y', -dimensions.height)
       .attr('width', xScale.bandwidth())
+      .attr('fill', (_, i) => getColor(i))
       .on('mouseenter', (event, value) => {
         // Add value label above bar
         const index = data.indexOf(value);
@@ -80,9 +96,8 @@ export const VerticalBarChart = ({ data }: IBarChartProps) => {
         svg.selectAll('.value-label').remove();
       })
       .transition()
-      .attr('fill', colorScale)
       .attr('height', (value) => dimensions.height - yScale(value));
-  }, [data, dimensions]);
+  }, [data, dimensions, colorRanges]);
 
   return (
     <div ref={wrapperRef} style={{ marginBottom: '2rem' }}>

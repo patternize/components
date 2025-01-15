@@ -6,12 +6,16 @@ import useStyles from './Array.style';
 const { useRef, useEffect } = React;
 const { select } = d3;
 
-type ArrayProps = {
-  data: number[]; // This component only takes in a number array as data
-};
+interface ColorRange {
+  start: number;
+  end: number;
+  color: string;
+}
 
-/* Component */
-export const Array: React.FC<ArrayProps> = ({ data }) => {
+export const Array: React.FC<{
+  data: number[];
+  colorRanges?: ColorRange[];
+}> = ({ data, colorRanges = [] }) => {
   const svgRef = useRef(null);
   const wrapperRef = useRef(null);
 
@@ -41,6 +45,14 @@ export const Array: React.FC<ArrayProps> = ({ data }) => {
         return pos;
       });
 
+      // Get color for index based on colorRanges
+      const getColor = (index: number) => {
+        const range = colorRanges.find(
+          (r) => index >= r.start && index <= r.end
+        );
+        return range ? range.color : 'black';
+      };
+
       svg
         .selectAll('text')
         .data(data, (d) => d)
@@ -48,8 +60,8 @@ export const Array: React.FC<ArrayProps> = ({ data }) => {
           (enter) =>
             enter
               .append('text')
-              .attr('fill', 'green')
-              .attr('x', (d, i) => positions[i])
+              .attr('fill', (_, i) => getColor(i))
+              .attr('x', (_, i) => positions[i])
               .attr('y', -30)
               .style('font-size', 24)
               .text((d) => d)
@@ -57,9 +69,10 @@ export const Array: React.FC<ArrayProps> = ({ data }) => {
           (update) =>
             update
               .attr('class', 'text')
+              .attr('fill', (_, i) => getColor(i))
               .attr('y', 0)
               .call((update) =>
-                update.transition(t).attr('x', (d, i) => positions[i])
+                update.transition(t).attr('x', (_, i) => positions[i])
               ),
           (exit) =>
             exit
@@ -67,7 +80,7 @@ export const Array: React.FC<ArrayProps> = ({ data }) => {
               .call((exit) => exit.transition(t).attr('y', 30).remove())
         );
     }
-  }, [data]);
+  }, [data, colorRanges]);
 
   return (
     <div ref={wrapperRef} style={{ marginBottom: '2rem' }}>

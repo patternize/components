@@ -31,11 +31,12 @@ const daysIHaveSpent = [
   { CZE: 4 },
   { DEU: 1 },
   { AUT: 10 },
-  { THA: 10 },
+  { THA: 15 },
   { JPN: 20 },
   { ITA: 10 },
   { HUN: 3 },
-  { PRK: 3 }
+  { PRK: 3 },
+  { AUS: 10 }
 ];
 
 // Create a map for easy lookup

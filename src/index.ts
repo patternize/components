@@ -2,43 +2,58 @@
 export { Button } from './components/Button';
 export { SlideShow } from './components/SlideShow/SlideShow';
 
-// Visualizations
-export { AnimatedCityMap, CityMap } from './visualizations/2DMap/2DMap';
-export { Array } from './visualizations/Array';
-export { VerticalBarChart } from './visualizations/BarChart';
-export { default as Graph } from './visualizations/Graph/Graph';
+// Basics
+export { Array } from './algorithms/Array';
+export { VerticalBarChart } from './algorithms/BarChart';
+
+// Graph
+export { default as Graph } from './algorithms/Graph/Graph';
 export {
   GraphBFSStory,
   GraphDFSStory,
   GraphDijkstraStory
-} from './visualizations/Graph/Graph.stories';
-export {
-  LLInsertOperation,
-  LLRemoveOperation
-} from './visualizations/LinkedList/LinkedList.stories';
+} from './algorithms/Graph/Graph.stories';
+export { default as ReactFiber } from './algorithms/ReactFiber';
 export {
   ConcurrentTraversalStory,
   DFSTraversalStory,
   MorrisTraversalStory,
   ReactFiberStory
-} from './visualizations/ReactFiber/ReactFiber.stories';
+} from './algorithms/ReactFiber/ReactFiber.stories';
 
-export { Sorting } from './visualizations/Sorting/Sorting';
-export { default as Timeline } from './visualizations/Timeline/Timeline';
+// Linked List
+export {
+  LLInsertOperation,
+  LLRemoveOperation
+} from './algorithms/LinkedList/LinkedList.stories';
+
+// Trees
+export {
+  BTreeDeletion,
+  BTreeInsertion
+} from './algorithms/BTree/BTree.stories';
+export { default as Tree } from './algorithms/Tree/Tree';
 export {
   BTBFSTraversalStory,
   BTDFSTraversalStory
-} from './visualizations/Tree/Tree.stories';
-export { default as Tree } from './visualizations/Tree/Tree';
-export { TreeChart } from './visualizations/TreeChart/TreeChart';
-export {
-  BTreeInsertion,
-  BTreeDeletion
-} from './visualizations/BTree/BTree.stories';
-export { TrieInsertion, TrieSearch } from './visualizations/Trie/Trie.stories';
+} from './algorithms/Tree/Tree.stories';
+export { TrieInsertion, TrieSearch } from './algorithms/Trie/Trie.stories';
 
+// Sorting
+export { Sorting } from './algorithms/Sorting/Sorting';
+export { MergeSortStory } from './algorithms/Sorting/Sorting.stories';
+
+// Timeline
+export { default as Timeline } from './visualizations/Timeline/Timeline';
+
+// Tree Chart
+export { TreeChart } from './algorithms/TreeChart/TreeChart';
+
+// World Map
 export { default as WorldMap } from './visualizations/Map/WorldMap';
-export { default as ReactFiber } from './visualizations/ReactFiber';
 
 // Hooks
 export { usePrevious, useResizeObserver } from './hooks';
+
+// Advanced
+export { AnimatedCityMap, CityMap } from './algorithms/2DMap/2DMap';
