@@ -18,12 +18,29 @@ You will also see any lint errors in the console.
 
 ### How to publish to NPM
 
-- `yarn build`
-- update the version in `package.json`
-- `npm publish`
+Since you have GitHub Actions set up with npm-publish.yml that triggers on version tags, you only need to:
+
+1. Bump the version:
+   ```bash
+   npm version patch
+   ```
+   This will:
+   - Update package.json version
+   - Create a git commit
+   - Create a version tag
+
+2. Push the changes and tag:
+   ```bash
+   git push --follow-tags
+   ```
+
+The GitHub Action will automatically:
+- Build the package
+- Publish to npm when it detects the version tag
 
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
