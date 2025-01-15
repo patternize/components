@@ -30,6 +30,13 @@ jobs:
       - name: Publish to npm
         run: |
           echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
-          yarn publish --non-interactive
+          yarn publish --non-interactive || {
+            if grep -q "You cannot publish over the previously published versions" <<< "$(cat /home/runner/.npm/_logs/*-debug-0.log)"; then
+              echo "Version already exists on npm - treating as success"
+              exit 0
+            else
+              exit 1
+            fi
+          }
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
