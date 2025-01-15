@@ -1,46 +1,84 @@
 # Patternize Components
 
-- This has to use v16.10.0 version of node for development
+React components for algorithm visualization and interactive learning.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation
 
-## Available Scripts
+```bash
+npm install @patternize/components
+# or
+yarn add @patternize/components
+```
 
-In the project directory, you can run:
+## Features
 
-### `yarn start`
+### Algorithm Visualizations
+- **Sorting Algorithms**
+  - Merge Sort
+  - Bubble Sort
+  - Selection Sort
+- **Tree Operations**
+  - DFS/BFS Traversals
+  - B-Tree Operations
+  - Trie Operations
+- **Graph Algorithms**
+  - Depth-First Search
+  - Breadth-First Search
+  - Dijkstra's Algorithm
+- **Data Structures**
+  - Linked List Operations
+  - Binary Tree Operations
+  - React Fiber Visualization
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Interactive Components
+- Array Visualization
+- Tree Charts
+- Timeline
+- World Map
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Usage Examples
 
-### How to publish to NPM
+```jsx
+import { 
+  Sorting, 
+  Graph, 
+  Tree, 
+  LinkedList 
+} from '@patternize/components';
 
-Since you have GitHub Actions set up with npm-publish.yml that triggers on version tags, you only need to:
+// Merge Sort Example
+export const SortingExample = () => {
+  return <MergeSortStory />;
+};
 
-1. Bump the version:
-   ```bash
-   npm version patch
-   ```
-   This will:
-   - Update package.json version
-   - Create a git commit
-   - Create a version tag
+// Graph Traversal Example
+export const GraphExample = () => {
+  return <GraphDFSStory />;
+};
+```
 
-2. Push the changes and tag:
-   ```bash
-   git push --follow-tags
-   ```
+## Development
 
-The GitHub Action will automatically:
-- Build the package
-- Publish to npm when it detects the version tag
+This project uses Node.js v16.10.0 for development.
 
-## Learn More
+### Available Scripts
+- `yarn start` - Runs Storybook for development
+- `yarn build` - Builds the package
+- `yarn test` - Runs tests
+- `yarn lint` - Runs linter
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Publishing
+1. Bump version:
+```bash
+npm version patch
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. Push changes with tags:
+```bash
+git push --follow-tags
+```
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
 
