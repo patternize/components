@@ -1,12 +1,11 @@
 import { useState } from 'react';
+import Button from '../../components/Button';
+import ResponsiveGraphDiagram, { GraphNode } from './Graph';
 export default {
   title: 'Graph'
 };
-import Button from '../../components/Button';
-import ResponsiveGraphDiagram from './Graph';
-import { GraphNode } from './Graph';
 
-export const GraphDFSStory = () => {
+export const GraphBFSStory = () => {
   const initialNodes: GraphNode[] = [
     { id: 'A', visitingCursorColor: '#26deb0', x: 100, y: 100 },
     { id: 'B', x: 200, y: 100 },
@@ -155,7 +154,7 @@ export const GraphDFSStory = () => {
   );
 };
 
-export const GraphBFSStory = () => {
+export const GraphDFSStory = () => {
   const initialNodes: GraphNode[] = [
     { id: 'A', visitingCursorColor: '#26deb0', x: 100, y: 100 },
     { id: 'B', x: 200, y: 100 },
