@@ -1,4 +1,5 @@
 import { animated } from '@react-spring/web';
+import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import { useState } from 'react';
 
 const styles = `
@@ -41,12 +42,17 @@ interface MapProps {
   friends: Friend[];
 }
 
-export const CityMap = ({
+interface CityMapProps extends MapProps {
+  maxWidth?: number;
+  maxHeight?: number;
+}
+
+function CityMapDiagram({
   width = 500,
   height = 500,
   gridSize = 4,
   friends
-}: MapProps) => {
+}: MapProps) {
   const padding = 20;
   const innerWidth = width - padding * 2;
   const innerHeight = height - padding * 2;
@@ -243,7 +249,29 @@ export const CityMap = ({
       })}
     </svg>
   );
-};
+}
+
+export function CityMap({
+  maxWidth = 800,
+  maxHeight = 800,
+  ...props
+}: CityMapProps) {
+  return (
+    <ParentSize debounceTime={10}>
+      {({ width = 500, height = 500 }) => {
+        const h = Math.min(height, maxHeight);
+        const w = Math.min(width, maxWidth);
+        return (
+          <CityMapDiagram
+            {...props}
+            width={w || maxWidth}
+            height={h || maxHeight}
+          />
+        );
+      }}
+    </ParentSize>
+  );
+}
 
 interface AnimatedMapProps extends MapProps {
   steps: Array<Friend[]>;

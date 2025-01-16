@@ -86,8 +86,24 @@ export const ManhattanDistanceOptimizedStory = () => {
       { ...FRIENDS[4], destination: { x: 6, y: 6 } },
       { ...FRIENDS[5], destination: { x: 6, y: 6 } }
     ],
-    // Final summary step - no destinations
-    FRIENDS.map((friend) => ({ ...friend }))
+    // Final summary step - show B->D and C->D paths
+    FRIENDS.map((friend) => {
+      if (friend.id === 'B') {
+        return {
+          ...friend,
+          destination: FRIENDS[3].position,
+          color: '#26deb0'
+        }; // Green path from B to D
+      }
+      if (friend.id === 'C') {
+        return {
+          ...friend,
+          destination: FRIENDS[3].position,
+          color: '#26deb0'
+        }; // Green path from C to D
+      }
+      return { ...friend };
+    })
   ];
 
   const [step, setStep] = useState(0);
@@ -121,7 +137,7 @@ export const ManhattanDistanceOptimizedStory = () => {
 
     if (stepIndex === MOVEMENT_STEPS.length - 1) {
       // Final summary
-      return 'Summary: The maximum Manhattan distance between any two points on a 6x6 grid is 12 (e.g., from (0,0) to (6,6))';
+      return `Summary: The maximum Manhattan distance between any two friends is 8, shown by the green paths from B and C to D`;
     }
 
     const currentFriends = MOVEMENT_STEPS[stepIndex];
@@ -160,7 +176,7 @@ export const ManhattanDistanceOptimizedStory = () => {
 
   return (
     <div>
-      <CityMap gridSize={6} friends={friends} />
+      <CityMap gridSize={6} friends={friends} maxHeight={500} maxWidth={500} />
       <div
         style={{
           marginTop: '1rem',
@@ -232,8 +248,24 @@ export const ManhattanDistanceBruteForceStory = () => {
       ...friend,
       destination: FRIENDS[5].position
     })),
-    // Final summary step - no destinations
-    FRIENDS.map((friend) => ({ ...friend }))
+    // Final summary step - show B->D and C->D paths
+    FRIENDS.map((friend) => {
+      if (friend.id === 'B') {
+        return {
+          ...friend,
+          destination: FRIENDS[3].position,
+          color: '#26deb0'
+        }; // Green path from B to D
+      }
+      if (friend.id === 'C') {
+        return {
+          ...friend,
+          destination: FRIENDS[3].position,
+          color: '#26deb0'
+        }; // Green path from C to D
+      }
+      return { ...friend };
+    })
   ];
 
   const [step, setStep] = useState(0);
@@ -261,23 +293,7 @@ export const ManhattanDistanceBruteForceStory = () => {
     }
 
     if (stepIndex === MOVEMENT_STEPS.length - 1) {
-      // Calculate all pairwise distances
-      let maxDist = 0;
-      let maxPair = '';
-
-      for (let i = 0; i < FRIENDS.length; i++) {
-        for (let j = i + 1; j < FRIENDS.length; j++) {
-          const dist = getManhattanDistance(
-            FRIENDS[i].position,
-            FRIENDS[j].position
-          );
-          if (dist > maxDist) {
-            maxDist = dist;
-            maxPair = `${FRIENDS[i].id}-${FRIENDS[j].id}`;
-          }
-        }
-      }
-      return `Summary: The maximum Manhattan distance between any two friends is ${maxDist} (between ${maxPair})`;
+      return `Summary: The maximum Manhattan distance between any two friends is 8, shown by the green paths from B and C to D`;
     }
 
     const currentFriends = MOVEMENT_STEPS[stepIndex];
@@ -318,7 +334,7 @@ export const ManhattanDistanceBruteForceStory = () => {
 
   return (
     <div>
-      <CityMap gridSize={6} friends={friends} />
+      <CityMap gridSize={6} friends={friends} maxHeight={500} maxWidth={500} />
       <div
         style={{
           marginTop: '1rem',
