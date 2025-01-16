@@ -5,7 +5,7 @@ import { applyDiffs } from '../Tree/utils';
 import ReactFiber from './index';
 
 export default {
-  title: 'React Fiber'
+  title: 'Case Studies/React Fiber'
 };
 
 export const ReactFiberStory = () => <ReactFiber />;
@@ -248,7 +248,6 @@ export const MorrisTraversalStory = () => {
 };
 
 export const DFSTraversalStory = () => {
-
   // Base tree structure for DFS traversal: App -> A -> C1 -> D1 -> C1 -> A -> C2 -> D2 -> C2 -> A -> App -> B -> C1
   const initialRawTree: TreeNode = {
     name: 'App',
@@ -517,7 +516,6 @@ export const DFSTraversalStory = () => {
 };
 
 export const ConcurrentTraversalStory = () => {
-
   const initialRawTree: TreeNode = {
     name: 'App',
     visitingCursorColor: '#26deb0',

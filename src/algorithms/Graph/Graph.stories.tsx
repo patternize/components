@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from '../../components/Button';
 import ResponsiveGraphDiagram, { GraphNode } from './Graph';
 export default {
-  title: 'Graph'
+  title: 'Algorithms/Graph'
 };
 
 export const GraphBFSStory = () => {

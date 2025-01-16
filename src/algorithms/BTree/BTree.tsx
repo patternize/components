@@ -1,8 +1,8 @@
 import { Group } from '@visx/group';
 import { Tree } from '@visx/hierarchy';
 import { HierarchyPointNode } from '@visx/hierarchy/lib/types';
-import { hierarchy } from 'd3-hierarchy';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
+import { hierarchy } from 'd3-hierarchy';
 
 const green = '#26deb0';
 const white = '#ffffff';
@@ -53,7 +53,13 @@ export function Node({ node, scale = 1 }: NodeProps) {
             dy=".33em"
             fontSize={12}
             textAnchor="middle"
-            fill={node.data.highlight === 'deleted' ? '#ff0000' : node.data.highlight === key.toString() ? green : black}
+            fill={
+              node.data.highlight === 'deleted'
+                ? '#ff0000'
+                : node.data.highlight === key.toString()
+                  ? green
+                  : black
+            }
           >
             {key}
           </text>
@@ -74,15 +80,15 @@ interface BTreeProps {
 function BTreeDiagram({ data, width = 800, height = 600 }: BTreeProps) {
   const root = hierarchy(data);
   const margin = { top: 20, left: 20, right: 20, bottom: 20 };
-  
+
   const yMax = height - margin.top - margin.bottom;
   const xMax = width - margin.left - margin.right;
 
   return (
     <svg width={width} height={height}>
       <rect width={width} height={height} fill={white} rx={14} />
-      <Tree 
-        root={root} 
+      <Tree
+        root={root}
         size={[xMax, yMax * 0.6]}
         separation={(a, b) => (a.parent === b.parent ? 1.5 : 2)}
       >
@@ -131,4 +137,4 @@ export function BTree({
   );
 }
 
-export default BTree; 
+export default BTree;

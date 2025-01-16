@@ -4,7 +4,7 @@ import { HorizontalBarChart } from './HorizontalBarChart';
 import { VerticalBarChart } from './VerticalBarChart';
 
 export default {
-  title: 'D3 Modules'
+  title: 'Visualizations/Barchart'
 };
 
 export const VerticalBarChartStory = () => {

@@ -4,7 +4,7 @@ import { Button } from '../../components/Button';
 import { Array } from './index';
 
 export default {
-  title: 'D3 Modules/Array',
+  title: 'Data Structures/Array',
   component: Array
 };
 

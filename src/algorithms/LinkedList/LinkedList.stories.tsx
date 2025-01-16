@@ -174,5 +174,5 @@ export const LLRemoveOperation = () => {
 };
 
 export default {
-  title: 'LinkedList'
+  title: 'Data Structures/LinkedList'
 };

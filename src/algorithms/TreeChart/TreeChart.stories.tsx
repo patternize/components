@@ -153,7 +153,7 @@ const tree2 = {
 };
 
 export default {
-  title: 'D3 Modules/TreeChart',
+  title: 'Algorithms/Backtracking',
   component: TreeChart
 };
 

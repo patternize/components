@@ -4,7 +4,7 @@ import Button from '../../components/Button';
 import { BTree } from './BTree';
 
 const meta = {
-  title: 'BTree',
+  title: 'Data Structures/BTree',
   component: BTree
 } satisfies Meta<typeof BTree>;
 
@@ -368,7 +368,9 @@ export const BTreeInsertion = () => {
         }}
       >
         <Button
-          onClick={() => setStep((s) => Math.min(s + 1, insertionSteps.length - 1))}
+          onClick={() =>
+            setStep((s) => Math.min(s + 1, insertionSteps.length - 1))
+          }
           disabled={step === insertionSteps.length - 1}
         >
           Next Step
@@ -399,7 +401,9 @@ export const BTreeDeletion = () => {
         }}
       >
         <Button
-          onClick={() => setStep((s) => Math.min(s + 1, deletionSteps.length - 1))}
+          onClick={() =>
+            setStep((s) => Math.min(s + 1, deletionSteps.length - 1))
+          }
           disabled={step === deletionSteps.length - 1}
         >
           Next Step

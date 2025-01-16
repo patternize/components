@@ -3,7 +3,7 @@ import { Button } from '../../../components/Button';
 import { HorizontalAnimatedBarChart } from './HorizontalAnimatedBarChart';
 
 export default {
-  title: 'D3 Modules/AnimatedStackBarChart',
+  title: 'Visualizations/AnimatedStackBarChart',
   component: HorizontalAnimatedBarChart
 };
 

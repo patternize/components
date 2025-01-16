@@ -2,7 +2,7 @@ import React from 'react';
 import { SlideShow } from './SlideShow';
 
 export default {
-  title: 'Example/SlideShow'
+  title: 'Basics/SlideShow'
 };
 
 export const SlideShowStory = () => (

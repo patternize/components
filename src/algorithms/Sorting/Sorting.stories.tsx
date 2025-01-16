@@ -1,7 +1,7 @@
 import { Sorting } from './Sorting';
 
 export default {
-  title: 'Sorting'
+  title: 'Algorithms/Sorting'
 };
 
 export const BubbleSortStory = () => {

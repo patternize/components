@@ -4,7 +4,7 @@ import Button from '../../components/Button';
 import ResponsiveTreeDiagram from '../Tree/Tree';
 
 const meta = {
-  title: 'Trie',
+  title: 'Data Structures/Trie',
   component: ResponsiveTreeDiagram
 } satisfies Meta<typeof ResponsiveTreeDiagram>;
 
@@ -19,74 +19,111 @@ const insertionSteps = [
   // Insert "cat"
   {
     name: 'root',
-    children: [{
-      name: 'c',
-      children: [{
-        name: 'a',
-        children: [{
-          name: 't',
-          children: [{
-            name: '*',  // end marker
-            highlight: 'inserted-cat'
-          }]
-        }]
-      }]
-    }]
+    children: [
+      {
+        name: 'c',
+        children: [
+          {
+            name: 'a',
+            children: [
+              {
+                name: 't',
+                children: [
+                  {
+                    name: '*', // end marker
+                    highlight: 'inserted-cat'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   // Insert "car"
   {
     name: 'root',
-    children: [{
-      name: 'c',
-      children: [{
-        name: 'a',
-        children: [{
-          name: 't',
-          children: [{
-            name: '*'
-          }]
-        }, {
-          name: 'r',
-          children: [{
-            name: '*',
-            highlight: 'inserted-car'
-          }]
-        }]
-      }]
-    }]
+    children: [
+      {
+        name: 'c',
+        children: [
+          {
+            name: 'a',
+            children: [
+              {
+                name: 't',
+                children: [
+                  {
+                    name: '*'
+                  }
+                ]
+              },
+              {
+                name: 'r',
+                children: [
+                  {
+                    name: '*',
+                    highlight: 'inserted-car'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   // Insert "dog"
   {
     name: 'root',
-    children: [{
-      name: 'c',
-      children: [{
-        name: 'a',
-        children: [{
-          name: 't',
-          children: [{
-            name: '*'
-          }]
-        }, {
-          name: 'r',
-          children: [{
-            name: '*'
-          }]
-        }]
-      }]
-    }, {
-      name: 'd',
-      children: [{
-        name: 'o',
-        children: [{
-          name: 'g',
-          children: [{
-            name: '*',
-            highlight: 'inserted-dog'
-          }]
-        }]
-      }]
-    }]
+    children: [
+      {
+        name: 'c',
+        children: [
+          {
+            name: 'a',
+            children: [
+              {
+                name: 't',
+                children: [
+                  {
+                    name: '*'
+                  }
+                ]
+              },
+              {
+                name: 'r',
+                children: [
+                  {
+                    name: '*'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: 'd',
+        children: [
+          {
+            name: 'o',
+            children: [
+              {
+                name: 'g',
+                children: [
+                  {
+                    name: '*',
+                    highlight: 'inserted-dog'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ];
 
@@ -102,10 +139,7 @@ export const TrieInsertion = () => {
 
   return (
     <div>
-      <ResponsiveTreeDiagram 
-        inputData={insertionSteps[step]} 
-        maxHeight={400} 
-      />
+      <ResponsiveTreeDiagram inputData={insertionSteps[step]} maxHeight={400} />
       <div
         style={{
           marginTop: '1rem',
@@ -115,7 +149,9 @@ export const TrieInsertion = () => {
         }}
       >
         <Button
-          onClick={() => setStep((s) => Math.min(s + 1, insertionSteps.length - 1))}
+          onClick={() =>
+            setStep((s) => Math.min(s + 1, insertionSteps.length - 1))
+          }
           disabled={step === insertionSteps.length - 1}
         >
           Next Step
@@ -136,139 +172,211 @@ const searchSteps = [
   {
     name: 'root',
     visitingCursorColor: '#26deb0',
-    children: [{
-      name: 'c',
-      children: [{
-        name: 'a',
-        children: [{
-          name: 't',
-          children: [{
-            name: '*'
-          }]
-        }, {
-          name: 'r',
-          children: [{
-            name: '*'
-          }]
-        }]
-      }]
-    }, {
-      name: 'd',
-      children: [{
-        name: 'o',
-        children: [{
-          name: 'g',
-          children: [{
-            name: '*'
-          }]
-        }]
-      }]
-    }]
+    children: [
+      {
+        name: 'c',
+        children: [
+          {
+            name: 'a',
+            children: [
+              {
+                name: 't',
+                children: [
+                  {
+                    name: '*'
+                  }
+                ]
+              },
+              {
+                name: 'r',
+                children: [
+                  {
+                    name: '*'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: 'd',
+        children: [
+          {
+            name: 'o',
+            children: [
+              {
+                name: 'g',
+                children: [
+                  {
+                    name: '*'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   // Searching "ca": Step 1 - visit 'c'
   {
     name: 'root',
-    children: [{
-      name: 'c',
-      visitingCursorColor: '#26deb0',
-      children: [{
-        name: 'a',
-        children: [{
-          name: 't',
-          children: [{
-            name: '*'
-          }]
-        }, {
-          name: 'r',
-          children: [{
-            name: '*'
-          }]
-        }]
-      }]
-    }, {
-      name: 'd',
-      children: [{
-        name: 'o',
-        children: [{
-          name: 'g',
-          children: [{
-            name: '*'
-          }]
-        }]
-      }]
-    }]
+    children: [
+      {
+        name: 'c',
+        visitingCursorColor: '#26deb0',
+        children: [
+          {
+            name: 'a',
+            children: [
+              {
+                name: 't',
+                children: [
+                  {
+                    name: '*'
+                  }
+                ]
+              },
+              {
+                name: 'r',
+                children: [
+                  {
+                    name: '*'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: 'd',
+        children: [
+          {
+            name: 'o',
+            children: [
+              {
+                name: 'g',
+                children: [
+                  {
+                    name: '*'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   // Searching "ca": Step 2 - visit 'a', found prefix match
   {
     name: 'root',
-    children: [{
-      name: 'c',
-      visited: '#26deb0',
-      children: [{
-        name: 'a',
-        visitingCursorColor: '#26deb0',
-        children: [{
-          name: 't',
-          children: [{
-            name: '*'
-          }]
-        }, {
-          name: 'r',
-          children: [{
-            name: '*'
-          }]
-        }]
-      }]
-    }, {
-      name: 'd',
-      children: [{
-        name: 'o',
-        children: [{
-          name: 'g',
-          children: [{
-            name: '*'
-          }]
-        }]
-      }]
-    }]
+    children: [
+      {
+        name: 'c',
+        visited: '#26deb0',
+        children: [
+          {
+            name: 'a',
+            visitingCursorColor: '#26deb0',
+            children: [
+              {
+                name: 't',
+                children: [
+                  {
+                    name: '*'
+                  }
+                ]
+              },
+              {
+                name: 'r',
+                children: [
+                  {
+                    name: '*'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: 'd',
+        children: [
+          {
+            name: 'o',
+            children: [
+              {
+                name: 'g',
+                children: [
+                  {
+                    name: '*'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   // Searching "ca": Step 3 - highlight all matches
   {
     name: 'root',
-    children: [{
-      name: 'c',
-      visited: '#26deb0',
-      children: [{
-        name: 'a',
+    children: [
+      {
+        name: 'c',
         visited: '#26deb0',
-        children: [{
-          name: 't',
-          visited: '#ff9900',
-          children: [{
-            name: '*',
-            visited: '#ff9900'
-          }]
-        }, {
-          name: 'r',
-          visited: '#ff9900',
-          children: [{
-            name: '*',
-            visited: '#ff9900'
-          }]
-        }]
-      }]
-    }, {
-      name: 'd',
-      children: [{
-        name: 'o',
-        children: [{
-          name: 'g',
-          children: [{
-            name: '*'
-          }]
-        }]
-      }]
-    }]
+        children: [
+          {
+            name: 'a',
+            visited: '#26deb0',
+            children: [
+              {
+                name: 't',
+                visited: '#ff9900',
+                children: [
+                  {
+                    name: '*',
+                    visited: '#ff9900'
+                  }
+                ]
+              },
+              {
+                name: 'r',
+                visited: '#ff9900',
+                children: [
+                  {
+                    name: '*',
+                    visited: '#ff9900'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: 'd',
+        children: [
+          {
+            name: 'o',
+            children: [
+              {
+                name: 'g',
+                children: [
+                  {
+                    name: '*'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ];
 
@@ -284,10 +392,7 @@ export const TrieSearch = () => {
 
   return (
     <div>
-      <ResponsiveTreeDiagram 
-        inputData={searchSteps[step]} 
-        maxHeight={400} 
-      />
+      <ResponsiveTreeDiagram inputData={searchSteps[step]} maxHeight={400} />
       <div
         style={{
           marginTop: '1rem',
@@ -297,7 +402,9 @@ export const TrieSearch = () => {
         }}
       >
         <Button
-          onClick={() => setStep((s) => Math.min(s + 1, searchSteps.length - 1))}
+          onClick={() =>
+            setStep((s) => Math.min(s + 1, searchSteps.length - 1))
+          }
           disabled={step === searchSteps.length - 1}
         >
           Next Step
@@ -314,4 +421,4 @@ export const TrieSearch = () => {
 };
 
 export const Insertion = () => <TrieInsertion />;
-export const Search = () => <TrieSearch />; 
+export const Search = () => <TrieSearch />;
