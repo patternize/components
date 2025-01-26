@@ -24,40 +24,33 @@ const world = topojson.feature(topology, topology.objects.units) as {
   features: FeatureShape[];
 };
 
-const daysIHaveSpent = [
-  { CHN: 6935 },
-  { CAN: 3600 },
-  { USA: 150 },
-  { CZE: 4 },
-  { DEU: 1 },
-  { AUT: 10 },
-  { THA: 15 },
-  { JPN: 20 },
-  { ITA: 10 },
-  { HUN: 3 },
-  { PRK: 3 },
-  { AUS: 10 }
-];
+interface DayCount {
+  [countryCode: string]: number;
+}
 
-// Create a map for easy lookup
-const daysMap = daysIHaveSpent.reduce(
-  (acc, obj) => {
-    const [country, days] = Object.entries(obj)[0];
-    acc[country] = days;
-    return acc;
-  },
-  {} as Record<string, number>
-);
+interface WorldMapProps extends GeoMercatorProps {
+  daysSpent?: DayCount[];
+}
 
-const maxDays = Math.max(...Object.values(daysMap));
-
-const color = scaleLog({
-  domain: [1, maxDays],
-  range: ['#ffb01d', '#f63a48']
-});
-
-export const WorldMap = ({ width, height }: GeoMercatorProps) => {
+export const WorldMap = ({ width, height, daysSpent = [] }: WorldMapProps) => {
   const [hoveredCountry, setHoveredCountry] = useState<string | null>(null);
+
+  // Create a map for easy lookup from the passed in daysSpent
+  const daysMap = daysSpent.reduce(
+    (acc, obj) => {
+      const [country, days] = Object.entries(obj)[0];
+      acc[country] = days;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
+
+  const maxDays = Math.max(...Object.values(daysMap), 1);
+
+  const color = scaleLog({
+    domain: [1, maxDays],
+    range: ['#ffb01d', '#f63a48']
+  });
 
   return (
     <svg width={width} height={height}>
@@ -120,7 +113,13 @@ export const WorldMap = ({ width, height }: GeoMercatorProps) => {
   );
 };
 
-export default function ResponsiveWorldMap() {
+interface ResponsiveWorldMapProps {
+  daysSpent?: DayCount[];
+}
+
+export default function ResponsiveWorldMap({
+  daysSpent
+}: ResponsiveWorldMapProps) {
   return (
     <ParentSize>
       {({ width = 1000, height = 500 }) => {
@@ -128,7 +127,13 @@ export default function ResponsiveWorldMap() {
         const maxWidth = 1000;
         const h = Math.min(height, maxHeight);
         const w = Math.min(width, maxWidth);
-        return <WorldMap width={w || maxWidth} height={h || maxHeight} />;
+        return (
+          <WorldMap
+            width={w || maxWidth}
+            height={h || maxHeight}
+            daysSpent={daysSpent}
+          />
+        );
       }}
     </ParentSize>
   );

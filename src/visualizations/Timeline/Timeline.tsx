@@ -1,41 +1,19 @@
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import { animated, useSpring } from 'react-spring';
 
-const Timeline = ({ width, height }) => {
-  const events = [
-    { year: 1994, title: 'Birthday', detail: 'Beijing, China' },
-    {
-      year: 2007,
-      title: 'High School',
-      detail: 'Calgary, Alberta'
-    },
-    {
-      year: 2013,
-      title: 'McGill University',
-      detail: 'Montreal, Quebec'
-    },
-    {
-      year: 2015,
-      title: 'Metanautix',
-      detail: 'Palo Alto, California'
-    },
-    {
-      year: 2018,
-      title: 'Tableau',
-      detail: 'Seattle, Washington'
-    },
-    {
-      year: 2020,
-      title: 'Airbnb',
-      detail: 'Beijing, China'
-    },
-    {
-      year: 2022,
-      title: 'Presence',
-      detail: 'Bay Area, California'
-    }
-  ];
+interface TimelineEvent {
+  year: number;
+  title: string;
+  detail: string;
+}
 
+interface TimelineProps {
+  width?: number;
+  height?: number;
+  events: TimelineEvent[];
+}
+
+const Timeline = ({ width = 1000, height = 500, events }: TimelineProps) => {
   const lineY = height / 2;
   const baseCircleRadius = 5; // Base radius for scaling
 
@@ -190,7 +168,11 @@ const Timeline = ({ width, height }) => {
   );
 };
 
-export function ResponsiveTimeline() {
+interface ResponsiveTimelineProps {
+  events: TimelineEvent[];
+}
+
+export function ResponsiveTimeline({ events }: ResponsiveTimelineProps) {
   return (
     <ParentSize>
       {({ width = 1000, height = 500 }) => {
@@ -198,7 +180,13 @@ export function ResponsiveTimeline() {
         const maxWidth = 1000;
         const h = Math.min(height, maxHeight);
         const w = Math.min(width, maxWidth);
-        return <Timeline width={w || maxWidth} height={h || maxHeight} />;
+        return (
+          <Timeline
+            width={w || maxWidth}
+            height={h || maxHeight}
+            events={events}
+          />
+        );
       }}
     </ParentSize>
   );
