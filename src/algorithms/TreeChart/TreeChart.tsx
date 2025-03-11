@@ -87,8 +87,8 @@ export function TreeChart({ data }) {
       .join((enter) => enter.append('text').attr('opacity', 0))
       .attr('className', label)
       .attr('id', 'label')
-      .attr('x', (node) => node.y)
-      .attr('y', (node) => node.x - 12)
+      .attr('x', (node) => node.y - node.data.name.length * 3) // Centering the text based on its length
+      .attr('y', (node) => node.x + (node.depth % 2 === 0 ? -12 : 20)) // Adjusting y based on even/odd depth
       .text((node) => node.data.name)
       .transition()
       .duration(500)

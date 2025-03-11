@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../../components/Button';
 import { TreeChart } from './TreeChart';
 
 const tree = {
@@ -158,3 +159,107 @@ export default {
 };
 
 export const TreeChartStory = () => <TreeChart data={tree2} />;
+
+export const BackgroundTreeChartStory = () => {
+  const [showMyBackground, setShowMyBackground] = React.useState(false);
+
+  const tree = {
+    name: '📝 Application',
+    children: [
+      {
+        name: '✅ Most Important',
+        children: [
+          {
+            name: '📄 SOP (Statement of Purpose)'
+          }
+        ]
+      },
+      {
+        name: '📌 Highly Important',
+        children: [{ name: '📨 LORs (3 Letters of Recommendation)' }]
+      },
+      {
+        name: '⚙ Important',
+        children: [
+          {
+            name: '🎓 Undergraduate',
+            children: [
+              { name: '🏛️ School Reputation' },
+              { name: '📊 Undergrad GPA' },
+              { name: '📚 Major & Coursework' }
+            ]
+          },
+          {
+            name: '💼 Experience',
+            children: [
+              { name: '👔 Professional' },
+              { name: '🌱 Personal Projects' }
+            ]
+          }
+        ]
+      },
+      {
+        name: '📉 Less Important',
+        children: [{ name: '📝 TOEFL/GRE' }]
+      }
+    ]
+  };
+
+  const myBackgroundTree = {
+    name: 'My Background',
+    children: [
+      {
+        name: '📄 SOP'
+      },
+      {
+        name: '📨 LORs',
+        children: [
+          { name: 'Professor from Columbia University' },
+          { name: 'Professor from McGill University' },
+          { name: 'Top Management from Meta/Google tier company' },
+          { name: 'CEO of my current company' }
+        ]
+      },
+      {
+        name: '🎓 Undergraduate',
+        children: [
+          { name: '🏛️ McGill University, Canada' },
+          { name: '📊 GPA: Average ~3.5/4.0' },
+          { name: '📚 Computer Science' }
+        ]
+      },
+      {
+        name: '💼 Experience',
+        children: [
+          {
+            name: '👔 Professional',
+            children: [
+              { name: 'Tableau Software' },
+              { name: 'Airbnb' },
+              { name: 'Presence' }
+            ]
+          },
+          {
+            name: '🌱 Personal Projects',
+            children: [{ name: 'Patternize.io ~500 ⭐️ on github' }]
+          }
+        ]
+      },
+      {
+        name: '📝 TOEFL/GRE',
+        children: [{ name: 'GRE: 337/400' }]
+      }
+    ]
+  };
+
+  return (
+    <div>
+      <TreeChart data={showMyBackground ? myBackgroundTree : tree} />
+      <Button onClick={() => setShowMyBackground(!showMyBackground)}>
+        {showMyBackground
+          ? 'Show Application Components'
+          : 'Show My Background'}
+      </Button>
+    </div>
+  );
+};
