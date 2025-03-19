@@ -59,6 +59,26 @@
   font-size: 12px;
 }
 
+/* Bounce Cards styling */
+.globe-map-bounce-cards-container {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.globe-map-bounce-cards {
+  pointer-events: auto;
+}
+
+/* Make the bounce cards more visible over the map */
+.globe-map-bounce-cards .card {
+  border: 5px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
 /* Hide Mapbox logo and attribution */
 .mapboxgl-ctrl-logo,
 .mapboxgl-ctrl-attrib {

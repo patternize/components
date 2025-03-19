@@ -31,7 +31,8 @@ A Mapbox access token is required for this component to work properly.
     height: { control: 'number' },
     mapboxToken: { control: 'text' },
     enableAnimation: { control: 'boolean' },
-    interactiveMarkers: { control: 'boolean' }
+    interactiveMarkers: { control: 'boolean' },
+    showBounceCards: { control: 'boolean' }
   }
 } as Meta;
 
@@ -58,7 +59,14 @@ CustomStyling.args = {
       color: '#FF5733',
       size: 20,
       name: 'Paris',
-      description: 'The City of Light, known for its culture and history.'
+      description: 'The City of Light, known for its culture and history.',
+      images: [
+        'https://picsum.photos/id/1018/600/600', // Mountain landscape
+        'https://picsum.photos/id/1015/600/600', // River and forest
+        'https://picsum.photos/id/1019/600/600', // Nature landscape
+        'https://picsum.photos/id/1016/600/600', // Mountain and lake
+        'https://picsum.photos/id/1025/600/600' // Birds on a branch
+      ]
     },
     {
       id: 2,
@@ -67,7 +75,14 @@ CustomStyling.args = {
       color: '#FFC300',
       size: 20,
       name: 'Dubai',
-      description: 'A global city and business hub of the Middle East.'
+      description: 'A global city and business hub of the Middle East.',
+      images: [
+        'https://picsum.photos/id/1011/600/600', // Girl with a camera
+        'https://picsum.photos/id/1012/600/600', // Person looking at mountains
+        'https://picsum.photos/id/1027/600/600', // Man in the desert
+        'https://picsum.photos/id/1035/600/600', // Desert landscape
+        'https://picsum.photos/id/1039/600/600' // City skyline
+      ]
     },
     {
       id: 3,
@@ -76,7 +91,14 @@ CustomStyling.args = {
       color: '#DAF7A6',
       size: 20,
       name: 'Moscow',
-      description: 'The capital and most populous city of Russia.'
+      description: 'The capital and most populous city of Russia.',
+      images: [
+        'https://picsum.photos/id/1047/600/600', // Town or village
+        'https://picsum.photos/id/1044/600/600', // Interior architecture
+        'https://picsum.photos/id/1040/600/600', // Castle on a hill
+        'https://picsum.photos/id/1041/600/600', // Aerial view of a coast
+        'https://picsum.photos/id/1043/600/600' // Child and pup in a boat
+      ]
     },
     {
       id: 4,
@@ -85,7 +107,14 @@ CustomStyling.args = {
       color: '#C70039',
       size: 20,
       name: 'Shanghai',
-      description: 'A global financial center and transport hub.'
+      description: 'A global financial center and transport hub.',
+      images: [
+        'https://picsum.photos/id/1053/600/600', // Brick building
+        'https://picsum.photos/id/1055/600/600', // Office building
+        'https://picsum.photos/id/1061/600/600', // Car close-up
+        'https://picsum.photos/id/1067/600/600', // Urban street
+        'https://picsum.photos/id/1076/600/600' // Concrete building
+      ]
     },
     {
       id: 5,
@@ -94,12 +123,35 @@ CustomStyling.args = {
       color: '#581845',
       size: 20,
       name: 'Los Angeles',
-      description: 'The entertainment capital of the world.'
+      description: 'The entertainment capital of the world.',
+      images: [
+        'https://picsum.photos/id/1001/600/600', // Urban street
+        'https://picsum.photos/id/1002/600/600', // Open book
+        'https://picsum.photos/id/1003/600/600', // Deer in nature
+        'https://picsum.photos/id/1004/600/600', // Person on cliff
+        'https://picsum.photos/id/1005/600/600' // People at the beach
+      ]
     }
   ],
   enableAnimation: false,
   interactiveMarkers: true,
+  showBounceCards: true,
   onMarkerClick: (marker) => {
     console.log('Marker clicked:', marker);
   }
+};
+
+// Animation enabled
+export const WithAnimation = Template.bind({});
+WithAnimation.args = {
+  ...CustomStyling.args,
+  enableAnimation: true,
+  showBounceCards: false
+};
+
+// Without bounce cards
+export const WithoutBounceCards = Template.bind({});
+WithoutBounceCards.args = {
+  ...CustomStyling.args,
+  showBounceCards: false
 };

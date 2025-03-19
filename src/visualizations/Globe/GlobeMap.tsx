@@ -1,8 +1,9 @@
 // @ts-ignore - Type declarations for react-map-gl may vary between versions
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 // Import from specific subpath as required by react-map-gl v8+
 import Map, { Marker, NavigationControl, Popup } from 'react-map-gl/mapbox';
+import BounceCards from './BounceCards';
 import './GlobeMap.css';
 
 // Define the prop types for the GlobeMap component
@@ -14,6 +15,7 @@ interface MarkerData {
   color?: string;
   name?: string;
   description?: string;
+  images?: string[]; // Added images property for bounce cards
 }
 
 interface GlobeMapProps {
@@ -31,6 +33,7 @@ interface GlobeMapProps {
   onMarkerClick?: (marker: MarkerData) => void;
   enableAnimation?: boolean;
   interactiveMarkers?: boolean;
+  showBounceCards?: boolean; // New prop to control bounce cards feature
 }
 
 export function GlobeMap({
@@ -45,26 +48,59 @@ export function GlobeMap({
   markers = [],
   onMarkerClick,
   enableAnimation = false,
-  interactiveMarkers = true
+  interactiveMarkers = true,
+  showBounceCards = true // Default to true
 }: GlobeMapProps) {
   const [viewState, setViewState] = useState(initialViewState);
   const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
+  const [showCards, setShowCards] = useState(false);
+  const mapRef = useRef(null);
+  console.log(showCards);
+
+  // Default images to use if marker doesn't provide any
+  const defaultImages = [
+    'https://picsum.photos/400/400?grayscale',
+    'https://picsum.photos/500/500?grayscale',
+    'https://picsum.photos/600/600?grayscale',
+    'https://picsum.photos/700/700?grayscale',
+    'https://picsum.photos/300/300?grayscale'
+  ];
+
+  // Default transform styles for bounce cards
+  const defaultTransformStyles = [
+    'rotate(5deg) translate(-150px)',
+    'rotate(0deg) translate(-70px)',
+    'rotate(-5deg)',
+    'rotate(5deg) translate(70px)',
+    'rotate(-5deg) translate(150px)'
+  ];
 
   // Handle marker click
   const handleMarkerClick = useCallback(
     (marker: MarkerData) => {
       setSelectedMarker(marker);
+      if (showBounceCards) {
+        setShowCards(true);
+      }
       if (onMarkerClick) {
         onMarkerClick(marker);
       }
     },
-    [onMarkerClick]
+    [onMarkerClick, showBounceCards]
   );
 
-  // Close popup when clicking on the map
+  // Close popup and cards when clicking on the map
   const handleMapClick = useCallback(() => {
-    setSelectedMarker(null);
+    // setSelectedMarker(null);
+    // setShowCards(false);
   }, []);
+
+  // Reset cards when selected marker changes
+  useEffect(() => {
+    if (!selectedMarker) {
+      // setShowCards(false);
+    }
+  }, [selectedMarker]);
 
   // Add auto-rotation effect if enabled
   useEffect(() => {
@@ -84,6 +120,7 @@ export function GlobeMap({
     <div style={{ width, height, position: 'relative' }}>
       {/* @ts-ignore - Using @ts-ignore to bypass type issues with react-map-gl */}
       <Map
+        ref={mapRef}
         {...viewState}
         style={{ width: '100%', height: '100%' }}
         mapStyle="mapbox://styles/mapbox/light-v9"
@@ -150,6 +187,23 @@ export function GlobeMap({
           </Popup>
         )}
       </Map>
+
+      {/* Bounce Cards */}
+      {showBounceCards && showCards && selectedMarker && (
+        <div className="globe-map-bounce-cards-container">
+          <BounceCards
+            className="globe-map-bounce-cards"
+            images={selectedMarker.images || defaultImages}
+            containerWidth={500}
+            containerHeight={250}
+            animationDelay={0.2}
+            animationStagger={0.08}
+            easeType="elastic.out(1, 0.5)"
+            transformStyles={defaultTransformStyles}
+            enableHover={true}
+          />
+        </div>
+      )}
 
       {/* Controls overlay */}
       {/* <div className="globe-map-controls">

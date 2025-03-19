@@ -67,6 +67,7 @@
     "@visx/shape": "^3.5.0",
     "d3": "^7.9.0",
     "d3-geo": "^3.1.1",
+    "gsap": "^3.12.7",
     "mapbox-gl": "^3.10.0",
     "postcss": "^8.4.38",
     "postcss-safe-parser": "^7.0.1",

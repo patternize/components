@@ -7,6 +7,7 @@ An interactive 3D globe visualization component using Mapbox GL and react-map-gl
 - Interactive 3D globe with pan, tilt, and zoom
 - Customizable markers with popups
 - Auto-rotation feature
+- Animated "bounce cards" that appear when markers are clicked
 - Dark styling with space/atmosphere effect
 - Responsive design with mobile support
 
@@ -71,6 +72,7 @@ function App() {
 | `onMarkerClick` | function | undefined | Callback function that fires when a marker is clicked |
 | `enableAnimation` | boolean | true | Whether to enable auto-rotation of the globe |
 | `interactiveMarkers` | boolean | true | Whether markers can be clicked to show popups |
+| `showBounceCards` | boolean | true | Whether to show animated bounce cards when a marker is clicked |
 
 ## Marker Object Properties
 
@@ -83,6 +85,7 @@ function App() {
 | `color` | string | (Optional) Color of the marker |
 | `name` | string | (Optional) Name to display in the popup |
 | `description` | string | (Optional) Description to display in the popup |
+| `images` | string[] | (Optional) Array of image URLs to display in bounce cards when the marker is clicked |
 
 ## Type Issues
 
