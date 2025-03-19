@@ -51,6 +51,8 @@ export { Button } from './components/Button';
 export { SlideShow } from './components/SlideShow/SlideShow';
 // Hooks
 export { usePrevious, useResizeObserver } from './hooks';
+// Globe Map
+export { default as GlobeMap } from './visualizations/Globe/GlobeMap';
 // World Map
 export { default as WorldMap } from './visualizations/Map/WorldMap';
 // Timeline
