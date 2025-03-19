@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import ResponsiveTreeDiagram, { TreeNode } from '../../algorithms/Tree/Tree';
+import { applyDiffs } from '../../algorithms/Tree/utils';
 import { Button } from '../../components/Button';
-import ResponsiveTreeDiagram, { TreeNode } from '../Tree/Tree';
-import { applyDiffs } from '../Tree/utils';
 import ReactFiber from './index';
 
 export default {
