@@ -62,10 +62,10 @@ export const GraphExample = () => {
 This project uses Node.js v16.10.0 for development.
 
 ### Available Scripts
-- `yarn start` - Runs Storybook for development
-- `yarn build` - Builds the package
-- `yarn test` - Runs tests
-- `yarn lint` - Runs linter
+- `npm start` - Runs Storybook for development
+- `npm run build` - Builds the package
+- `npm run test` - Runs tests
+- `npm run lint` - Runs linter
 
 ### Publishing
 1. Bump version:

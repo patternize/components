@@ -3,7 +3,7 @@ import React from 'react';
 import { GlobeMap } from './GlobeMap';
 
 export default {
-  title: 'Visualizations/GlobeMap',
+  title: 'Visualizations/Map Modules',
   component: GlobeMap,
   parameters: {
     docs: {

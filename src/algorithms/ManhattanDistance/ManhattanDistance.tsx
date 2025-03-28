@@ -231,6 +231,7 @@ function CityMapDiagram({
               cx={pixelPos.x}
               cy={pixelPos.y}
               opacity={0.8}
+              //@ts-ignore
               title={friend.id}
             />
             <text
