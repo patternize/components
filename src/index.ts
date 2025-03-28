@@ -29,13 +29,6 @@ export {
   ManhattanDistanceBruteForceStory,
   ManhattanDistanceOptimizedStory
 } from './algorithms/ManhattanDistance/ManhattanDistance.stories';
-export { default as ReactFiber } from './algorithms/ReactFiber';
-export {
-  ConcurrentTraversalStory,
-  DFSTraversalStory,
-  MorrisTraversalStory,
-  ReactFiberStory
-} from './algorithms/ReactFiber/ReactFiber.stories';
 // Sorting
 export { Sorting } from './algorithms/Sorting/Sorting';
 export { MergeSortStory } from './algorithms/Sorting/Sorting.stories';
@@ -55,5 +48,12 @@ export { usePrevious, useResizeObserver } from './hooks';
 export { default as GlobeMap } from './visualizations/Globe/GlobeMap';
 // World Map
 export { default as WorldMap } from './visualizations/Map/WorldMap';
+export { default as ReactFiber } from './visualizations/ReactFiber';
+export {
+  ConcurrentTraversalStory,
+  DFSTraversalStory,
+  MorrisTraversalStory,
+  ReactFiberStory
+} from './visualizations/ReactFiber/ReactFiber.stories';
 // Timeline
 export { default as Timeline } from './visualizations/Timeline/Timeline';

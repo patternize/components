@@ -54,18 +54,19 @@ CustomStyling.args = {
   markers: [
     {
       id: 1,
-      longitude: 2.3522,
-      latitude: 48.8566,
+      longitude: 14.4378,
+      latitude: 50.0755,
       color: '#FF5733',
       size: 20,
-      name: 'Paris',
-      description: 'The City of Light, known for its culture and history.',
+      name: 'Prague',
+      description:
+        'The capital city of the Czech Republic, I visited October 2024',
       images: [
-        'https://picsum.photos/id/1018/600/600', // Mountain landscape
-        'https://picsum.photos/id/1015/600/600', // River and forest
-        'https://picsum.photos/id/1019/600/600', // Nature landscape
-        'https://picsum.photos/id/1016/600/600', // Mountain and lake
-        'https://picsum.photos/id/1025/600/600' // Birds on a branch
+        'https://carlrocks.com/assets/images/prague-4b46d4acfffd32f16965b4d2be2a210a.jpg', // Mountain landscape
+        'https://carlrocks.com/assets/images/prague2-7cfa719e695cf5a70189a1f04e962fcb.jpg', // River and forest
+        'https://carlrocks.com/assets/images/bridge2-97fdff535d74995897b5e2af59f9e023.jpg', // Nature landscape
+        'https://carlrocks.com/assets/images/clock2-c6eb3e18a6a8197c40941e3fba671db2.jpg', // Mountain and lake
+        'https://carlrocks.com/assets/images/church-842d95a972602c9b593446e924fc8eb0.JPG' // Birds on a branch
       ]
     },
     {

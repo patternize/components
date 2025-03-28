@@ -79,7 +79,7 @@ export default function BounceCards({
       if (i === hoveredIdx) {
         const noRotationTransform = getNoRotationTransform(baseTransform);
         gsap.to(`.card-${i}`, {
-          transform: noRotationTransform,
+          transform: `${noRotationTransform} scale(1.5)`,
           duration: 0.4,
           ease: 'back.out(1.4)',
           overwrite: 'auto'
