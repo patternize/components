@@ -106,7 +106,7 @@ export const CycleFlow: React.FC<CycleFlowProps> = ({
     const path = `M ${source.x} ${source.y} A ${radius} ${radius} 0 ${largeArc} ${sweep} ${target.x} ${target.y}`;
 
     // Calculate the midpoint of the arc for label placement
-    const midAngle = (sourceAngle + targetAngle) / 2;
+    // const midAngle = (sourceAngle + targetAngle) / 2;
     const bulgeRatio = 0.15; // Controls how far the label sits from the direct line
     const midDistance = distance * bulgeRatio;
 

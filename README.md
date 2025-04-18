@@ -35,7 +35,7 @@ yarn add @patternize/components
 - Tree Charts
 - Timeline
 - World Map
-
+- Cycle Flow
 ## Usage Examples
 
 ```jsx

@@ -55,3 +55,5 @@ export { usePrevious, useResizeObserver } from './hooks';
 export { default as WorldMap } from './visualizations/Map/WorldMap';
 // Timeline
 export { default as Timeline } from './visualizations/Timeline/Timeline';
+// Cycle Flow
+export { CycleFlow } from './components/CycleFlow/CycleFlow';

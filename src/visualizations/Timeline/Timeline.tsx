@@ -68,7 +68,6 @@ const Timeline = ({ width = 1000, height = 500, events }: TimelineProps) => {
       </defs>
       {/* Main Timeline Line */}
       <animated.line
-        // @ts-expect-error animated.line doesn't recognize SVG line attributes
         x1={50}
         y1={lineY}
         y2={lineY}
