@@ -1,59 +1,43 @@
-// Components
-// Basics
-export { Array } from './algorithms/Array';
+// ─────────────────────────────────────────────────────────────────────────
+// @patternize/components — public API
+//
+// Exports are grouped by domain. The library is intentionally composed of
+// small, atomic, data-driven components: feed them data + theme, get a
+// visualization. Interactive demos live in the /workbench, not here.
+// ─────────────────────────────────────────────────────────────────────────
+
+// Theme ─────────────────────────────────────────────────────────────────────
+export * from './theme';
+
+// Machine learning / tensors ────────────────────────────────────────────────
+// (3D tensors live in the optional '@patternize/components/three' entry.)
+export * from './ml';
+
+// Data structures & algorithms ──────────────────────────────────────────────
+export { Array } from './algorithms/Array/Array';
+export type { ArrayProps } from './algorithms/Array/Array';
+export { PriorityQueue } from './algorithms/PriorityQueue/PriorityQueue';
+export type { PriorityQueueProps } from './algorithms/PriorityQueue/PriorityQueue';
 export { VerticalBarChart } from './algorithms/BarChart';
-// Trees
-export {
-  BTreeDeletion,
-  BTreeInsertion
-} from './algorithms/BTree/BTree.stories';
-// Graph
 export { default as Graph } from './algorithms/Graph/Graph';
-export {
-  GraphBFSStory,
-  GraphDFSStory,
-  GraphDijkstraStory
-} from './algorithms/Graph/Graph.stories';
-// Linked List
-export {
-  LLInsertOperation,
-  LLRemoveOperation
-} from './algorithms/LinkedList/LinkedList.stories';
-// Advanced
+export { default as LinkedList } from './algorithms/LinkedList/LinkedList';
+export { default as ReactFiber } from './algorithms/ReactFiber';
+export { Sorting } from './algorithms/Sorting/Sorting';
+export { default as Tree } from './algorithms/Tree/Tree';
+export { TreeChart } from './algorithms/TreeChart/TreeChart';
 export {
   AnimatedCityMap,
   CityMap
 } from './algorithms/ManhattanDistance/ManhattanDistance';
-// Manhattan Distance
-export {
-  ManhattanDistanceBruteForceStory,
-  ManhattanDistanceOptimizedStory
-} from './algorithms/ManhattanDistance/ManhattanDistance.stories';
-export { default as ReactFiber } from './algorithms/ReactFiber';
-export {
-  ConcurrentTraversalStory,
-  DFSTraversalStory,
-  MorrisTraversalStory,
-  ReactFiberStory
-} from './algorithms/ReactFiber/ReactFiber.stories';
-// Sorting
-export { Sorting } from './algorithms/Sorting/Sorting';
-export { MergeSortStory } from './algorithms/Sorting/Sorting.stories';
-export { default as Tree } from './algorithms/Tree/Tree';
-export {
-  BTBFSTraversalStory,
-  BTDFSTraversalStory
-} from './algorithms/Tree/Tree.stories';
-// Tree Chart
-export { TreeChart } from './algorithms/TreeChart/TreeChart';
-export { TrieInsertion, TrieSearch } from './algorithms/Trie/Trie.stories';
+
+// General components ─────────────────────────────────────────────────────────
 export { Button } from './components/Button';
 export { SlideShow } from './components/SlideShow/SlideShow';
-// Hooks
-export { usePrevious, useResizeObserver } from './hooks';
-// World Map
-export { default as WorldMap } from './visualizations/Map/WorldMap';
-// Timeline
-export { default as Timeline } from './visualizations/Timeline/Timeline';
-// Cycle Flow
 export { CycleFlow } from './components/CycleFlow/CycleFlow';
+
+// Visualizations ─────────────────────────────────────────────────────────────
+export { default as WorldMap } from './visualizations/Map/WorldMap';
+export { default as Timeline } from './visualizations/Timeline/Timeline';
+
+// Hooks ──────────────────────────────────────────────────────────────────────
+export { usePrevious, useResizeObserver } from './hooks';

@@ -1,90 +1,113 @@
-import * as d3 from 'd3';
-import * as React from 'react';
-// import { useLocalStorage } from 'hooks';
-import useStyles from './Array.style';
+import React from 'react';
+import { animated, useTransition } from '@react-spring/web';
+import { useTheme } from '../../theme/ThemeProvider';
+import { readableText } from '../../theme/color';
 
-const { useRef, useEffect } = React;
-const { select } = d3;
-
-interface ColorRange {
+export interface ColorRange {
   start: number;
   end: number;
   color: string;
 }
 
-export const Array: React.FC<{
+export interface ArrayProps {
+  /** The values to render, left to right. */
   data: number[];
+  /** Indices to emphasize (e.g. the current comparison window). */
+  highlights?: number[];
+  /** Color contiguous index ranges (used by the Sorting visualizations). */
   colorRanges?: ColorRange[];
-}> = ({ data, colorRanges = [] }) => {
-  const svgRef = useRef(null);
-  const wrapperRef = useRef(null);
+  /** Pixel size of each cell. */
+  cellSize?: number;
+  /** Show the index beneath each cell. */
+  showIndices?: boolean;
+  color?: string;
+  animate?: boolean;
+  width?: number;
+  height?: number;
+  style?: React.CSSProperties;
+}
 
-  const { array } = useStyles();
+/**
+ * A horizontal array of values — the atomic building block for sorting,
+ * sliding-window and two-pointer visualizations.
+ */
+export const Array = ({
+  data,
+  highlights = [],
+  colorRanges = [],
+  cellSize = 44,
+  showIndices = true,
+  color,
+  animate = true,
+  style
+}: ArrayProps) => {
+  const theme = useTheme();
+  const fill = color ?? theme.primary;
+  const rangeColor = (index: number): string | null => {
+    const range = colorRanges.find((r) => index >= r.start && index <= r.end);
+    return range ? range.color : null;
+  };
 
-  useEffect(() => {
-    if (data && svgRef.current) {
-      const svg = select(svgRef.current);
-
-      // Calculate width based on number of digits
-      const getTextWidth = (num: number) => {
-        const digits = Math.abs(num).toString().length;
-        return digits <= 1 ? 35 : digits <= 2 ? 45 : 55; // Wider space for 2+ digits
-      };
-
-      // Calculate total width by summing up individual number widths
-      const totalWidth = data.reduce((acc, num) => acc + getTextWidth(num), 0);
-      svg.attr('width', totalWidth).attr('height', 33);
-
-      const t = svg.transition().duration(750);
-
-      // Keep track of cumulative x position
-      let xPosition = 0;
-      const positions = data.map((num) => {
-        const pos = xPosition;
-        xPosition += getTextWidth(num);
-        return pos;
-      });
-
-      // Get color for index based on colorRanges
-      const getColor = (index: number) => {
-        const range = colorRanges.find(
-          (r) => index >= r.start && index <= r.end
-        );
-        return range ? range.color : 'black';
-      };
-
-      svg
-        .selectAll('text')
-        .data(data, (d) => d)
-        .join(
-          (enter) =>
-            enter
-              .append('text')
-              .attr('fill', (_, i) => getColor(i))
-              .attr('x', (_, i) => positions[i])
-              .attr('y', -30)
-              .style('font-size', 24)
-              .text((d) => d)
-              .call((enter) => enter.transition(t).attr('y', 0)),
-          (update) =>
-            update
-              .attr('class', 'text')
-              .attr('fill', (_, i) => getColor(i))
-              .attr('y', 0)
-              .call((update) =>
-                update.transition(t).attr('x', (_, i) => positions[i])
-              ),
-          (exit) =>
-            exit
-              .attr('fill', 'brown')
-              .call((exit) => exit.transition(t).attr('y', 30).remove())
-        );
-    }
-  }, [data, colorRanges]);
+  const items = data.map((value, index) => ({ value, index, key: index }));
+  const transitions = useTransition(items, {
+    keys: (item) => item.key,
+    from: { opacity: 0, transform: 'translateY(-8px)' },
+    enter: { opacity: 1, transform: 'translateY(0px)' },
+    leave: { opacity: 0, transform: 'translateY(8px)' },
+    immediate: !animate,
+    config: theme.animation.spring
+  });
 
   return (
-    <div ref={wrapperRef} style={{ marginBottom: '2rem' }}>
-      <svg className={array} ref={svgRef} />
+    <div
+      style={{
+        display: 'inline-flex',
+        gap: 6,
+        fontFamily: theme.fontFamily,
+        ...style
+      }}
+    >
+      {transitions((springStyle, item) => {
+        const active = highlights.includes(item.index);
+        const bg = active ? theme.colors.accent : rangeColor(item.index) ?? fill;
+        return (
+          <animated.div
+            style={{
+              ...springStyle,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 4
+            }}
+          >
+            <div
+              style={{
+                width: cellSize,
+                height: cellSize,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: theme.radius / 2,
+                background: bg,
+                color: readableText(bg),
+                fontWeight: 600,
+                fontFamily: theme.monoFamily,
+                boxShadow: active
+                  ? `0 0 0 3px ${theme.colors.text}`
+                  : '0 1px 2px rgba(0,0,0,0.12)',
+                transition: `background ${theme.animation.duration}ms ${theme.animation.easing}`
+              }}
+            >
+              {item.value}
+            </div>
+            {showIndices && (
+              <div style={{ fontSize: 11, color: theme.colors.textMuted }}>
+                {item.index}
+              </div>
+            )}
+          </animated.div>
+        );
+      })}
     </div>
   );
 };
