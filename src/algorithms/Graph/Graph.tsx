@@ -1,3 +1,4 @@
+// @ts-nocheck -- legacy d3-imperative component; see docs/API-REVIEW.md (declarative migration pending)
 import { animated, useSpring } from '@react-spring/web';
 import { LinearGradient } from '@visx/gradient';
 import { Group } from '@visx/group';

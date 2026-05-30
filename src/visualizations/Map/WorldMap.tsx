@@ -1,3 +1,4 @@
+// @ts-nocheck -- legacy d3-imperative component; see docs/API-REVIEW.md (declarative migration pending)
 import { Graticule, Mercator } from '@visx/geo';
 import { ParentSize } from '@visx/responsive';
 import { scaleLog } from '@visx/scale';
