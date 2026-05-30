@@ -1,0 +1,94 @@
+@import 'tailwindcss';
+
+/* shadcn-style design tokens, wired so --primary is configurable at runtime. */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222 20% 18%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 20% 18%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 20% 18%;
+  --primary: 152 71% 44%; /* green #20bf6b */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 20% 96%;
+  --secondary-foreground: 222 20% 18%;
+  --muted: 210 20% 96%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 210 20% 94%;
+  --accent-foreground: 222 20% 18%;
+  --border: 214 20% 90%;
+  --input: 214 20% 90%;
+  --ring: var(--primary);
+  --radius: 0.6rem;
+}
+
+.dark {
+  --background: 222 18% 11%;
+  --foreground: 210 20% 96%;
+  --card: 222 16% 14%;
+  --card-foreground: 210 20% 96%;
+  --popover: 222 16% 14%;
+  --popover-foreground: 210 20% 96%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 222 14% 20%;
+  --secondary-foreground: 210 20% 96%;
+  --muted: 222 14% 20%;
+  --muted-foreground: 215 16% 65%;
+  --accent: 222 14% 24%;
+  --accent-foreground: 210 20% 96%;
+  --border: 222 14% 22%;
+  --input: 222 14% 22%;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* subtle checkerboard for the preview stage so light components stay visible */
+.preview-stage {
+  background-image:
+    linear-gradient(45deg, hsl(var(--muted)) 25%, transparent 25%),
+    linear-gradient(-45deg, hsl(var(--muted)) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, hsl(var(--muted)) 75%),
+    linear-gradient(-45deg, transparent 75%, hsl(var(--muted)) 75%);
+  background-size: 22px 22px;
+  background-position: 0 0, 0 11px, 11px -11px, -11px 0px;
+}
