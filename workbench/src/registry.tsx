@@ -12,6 +12,7 @@ import {
 // Imported directly from source (not the '/three' subpath) so the dev preview
 // build never depends on package-subpath alias resolution.
 import { Tensor3D } from '../../src/ml/Tensor3D/Tensor3D';
+import { Transformer3D } from '../../src/ml/Transformer3D/Transformer3D';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyProps = Record<string, any>;
@@ -45,6 +46,13 @@ export function renderComponent(id: string, props: AnyProps): React.ReactNode {
       return <PArray {...props} />;
     case 'Tensor3D':
       return <Tensor3D {...props} />;
+    case 'Transformer3D':
+      // Give the 3D scene a fixed stage so it has room to orbit.
+      return (
+        <div style={{ width: '100%', maxWidth: 760, height: 520 }}>
+          <Transformer3D {...props} height={520} />
+        </div>
+      );
     case 'Arrow':
       return (
         <svg width={260} height={110} style={{ overflow: 'visible' }}>
@@ -80,6 +88,7 @@ export const RENDERABLE_IDS = new Set([
   'PriorityQueue',
   'Array',
   'Tensor3D',
+  'Transformer3D',
   'Arrow',
   'ThemeProvider'
 ]);

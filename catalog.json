@@ -169,6 +169,27 @@
       ]
     },
     {
+      "id": "Transformer3D",
+      "category": "ml",
+      "atomic": false,
+      "entry": "@patternize/components/three",
+      "import": "import { Transformer3D } from '@patternize/components/three'",
+      "peerDependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "description": "Interactive 3D Transformer architecture: orbit / zoom / pan the full encoder+decoder stack, click any block to fly the camera in and inspect it, with animated data-flow pulses and a cross-attention link. Data-driven; defaults to the 'Attention is All You Need' architecture. Pass decoder={null} for an encoder-only (BERT-style) model.",
+      "props": [
+        { "name": "encoder", "type": "TransformerStackSpec", "required": false, "description": "Left stack spec; defaults to a standard 6× encoder." },
+        { "name": "decoder", "type": "TransformerStackSpec | null", "required": false, "description": "Right stack spec; defaults to a standard 6× decoder. Pass null for encoder-only." },
+        { "name": "spin", "type": "boolean", "required": false, "description": "Slowly auto-orbit when nothing is selected." },
+        { "name": "showFlow", "type": "boolean", "required": false, "description": "Animate data-flow pulses up each stack." },
+        { "name": "height", "type": "number", "required": false, "description": "Canvas height in px (default 560)." },
+        { "name": "onSelect", "type": "(layer | null) => void", "required": false, "description": "Fires when a block is selected or cleared." }
+      ],
+      "examples": [
+        { "name": "Encoder–Decoder", "props": { "spin": true, "showFlow": true } },
+        { "name": "Encoder-only (BERT-style)", "props": { "decoder": null, "spin": true } }
+      ]
+    },
+    {
       "id": "PriorityQueue",
       "category": "algorithms",
       "atomic": true,
