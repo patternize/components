@@ -1,0 +1,225 @@
+{
+  "name": "@patternize/components",
+  "version": "0.3.0",
+  "description": "Atomic, animated React components for visualizing algorithms, data structures, tensors and machine-learning architectures.",
+  "theming": {
+    "summary": "Wrap any tree in <ThemeProvider primary='#hex'> to recolor every component. The default primary is green (#20bf6b). ML channel colors (query/key/value) and a configurable animation speed are also part of the theme.",
+    "example": "import { ThemeProvider, QKVProjection } from '@patternize/components';\n\n<ThemeProvider primary=\"#7c5cff\">\n  <QKVProjection />\n</ThemeProvider>"
+  },
+  "conventions": {
+    "dataDriven": "Components are presentational and data-driven: pass data + options, get a visualization. Feed successive snapshots to animate steps.",
+    "atomic": "Prefer composing the atomic primitives (Matrix, Operator, Arrow, TokenColumn) to build new diagrams rather than reaching for a monolithic component.",
+    "units": "All sizes are in CSS pixels unless noted."
+  },
+  "components": [
+    {
+      "id": "ThemeProvider",
+      "category": "theme",
+      "atomic": true,
+      "import": "import { ThemeProvider } from '@patternize/components'",
+      "description": "Provides the active theme (colors, channels, animation) to all components. Set `primary` to recolor everything at once.",
+      "props": [
+        { "name": "primary", "type": "string", "required": false, "description": "Brand/primary hex color. Default '#20bf6b' (green)." },
+        { "name": "options", "type": "ThemeOptions", "required": false, "description": "Full theme options: { primary, channels, animation, radius, dark }." },
+        { "name": "theme", "type": "Theme", "required": false, "description": "A fully-built theme object (overrides primary/options)." }
+      ],
+      "examples": [
+        { "name": "Purple theme", "props": { "primary": "#7c5cff" }, "renders": "Matrix" }
+      ]
+    },
+    {
+      "id": "Matrix",
+      "category": "ml",
+      "atomic": true,
+      "import": "import { Matrix } from '@patternize/components'",
+      "description": "Colored matrix / grid. The core primitive for weight matrices, embeddings and attention maps. Auto-switches to a canvas renderer for large matrices.",
+      "props": [
+        { "name": "data", "type": "number[][]", "required": true, "description": "Row-major numeric data." },
+        { "name": "scale", "type": "'diverging' | 'sequential' | 'grayscale' | (v:number)=>string", "required": false, "description": "Value-to-color mapping. Default 'diverging'." },
+        { "name": "color", "type": "string", "required": false, "description": "Base color for the sequential scale (defaults to theme primary)." },
+        { "name": "domain", "type": "{ min:number; max:number }", "required": false, "description": "Fixed value domain; inferred when omitted." },
+        { "name": "showValues", "type": "boolean", "required": false, "description": "Print the value in each cell (SVG, small matrices)." },
+        { "name": "rowLabels", "type": "string[]", "required": false, "description": "Labels left of each row." },
+        { "name": "colLabels", "type": "string[]", "required": false, "description": "Labels above each column." },
+        { "name": "shape", "type": "boolean | string", "required": false, "description": "Show a (rows, cols) caption or a custom string." },
+        { "name": "highlight", "type": "{ rows?:number[]; cols?:number[]; cells?:[number,number][] }", "required": false, "description": "Outline cells/rows/cols and dim the rest." },
+        { "name": "animate", "type": "boolean", "required": false, "description": "Fade + scale in on mount." }
+      ],
+      "examples": [
+        {
+          "name": "Signed weights",
+          "props": {
+            "data": [[0.8, -0.3, 0.1], [-0.6, 0.9, -0.2], [0.2, 0.4, -0.9]],
+            "scale": "diverging",
+            "shape": true,
+            "showValues": true,
+            "animate": true
+          }
+        },
+        {
+          "name": "Highlighted row",
+          "props": {
+            "data": [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+            "scale": "sequential",
+            "showValues": true,
+            "highlight": { "rows": [1] }
+          }
+        }
+      ]
+    },
+    {
+      "id": "Operator",
+      "category": "ml",
+      "atomic": true,
+      "import": "import { Operator } from '@patternize/components'",
+      "description": "A single math operator glyph (×, +, =, ·, ⊕, →, σ) for joining matrices in equation layouts.",
+      "props": [
+        { "name": "kind", "type": "'multiply'|'add'|'subtract'|'equals'|'dot'|'concat'|'arrow'|'softmax'", "required": true, "description": "Which glyph to show." },
+        { "name": "size", "type": "number", "required": false, "description": "Badge diameter in px." },
+        { "name": "variant", "type": "'badge' | 'plain'", "required": false, "description": "Filled badge or flat glyph." },
+        { "name": "label", "type": "string", "required": false, "description": "Caption beneath the glyph." }
+      ],
+      "examples": [
+        { "name": "Multiply badge", "props": { "kind": "multiply", "variant": "badge", "label": "matmul" } }
+      ]
+    },
+    {
+      "id": "Arrow",
+      "category": "ml",
+      "atomic": true,
+      "import": "import { Arrow } from '@patternize/components'",
+      "description": "An SVG connector arrow between two points. Render multiple inside one absolutely-positioned overlay <svg> to wire up pipeline stages.",
+      "props": [
+        { "name": "from", "type": "{ x:number; y:number }", "required": true, "description": "Start point." },
+        { "name": "to", "type": "{ x:number; y:number }", "required": true, "description": "End point." },
+        { "name": "curvature", "type": "number", "required": false, "description": "0 = straight, higher bends more." },
+        { "name": "animate", "type": "boolean", "required": false, "description": "Draw the stroke in." },
+        { "name": "label", "type": "string", "required": false, "description": "Mid-arrow label." }
+      ],
+      "examples": [
+        { "name": "Curved arrow", "props": { "from": { "x": 20, "y": 40 }, "to": { "x": 220, "y": 60 }, "curvature": 0.3, "label": "softmax", "animate": true }, "wrap": "svg" }
+      ]
+    },
+    {
+      "id": "TokenColumn",
+      "category": "ml",
+      "atomic": true,
+      "import": "import { TokenColumn } from '@patternize/components'",
+      "description": "A vertical list of token labels aligned to matrix rows (the 'Data / visualization / ...' gutter).",
+      "props": [
+        { "name": "tokens", "type": "string[]", "required": true, "description": "One label per row." },
+        { "name": "height", "type": "number", "required": true, "description": "Total height to distribute rows across." },
+        { "name": "active", "type": "number", "required": false, "description": "Index of the highlighted token." }
+      ],
+      "examples": [
+        { "name": "Tokens", "props": { "tokens": ["Data", "visualization", "em", "powers", "users", "to"], "height": 200, "active": 0 } }
+      ]
+    },
+    {
+      "id": "QKVProjection",
+      "category": "ml",
+      "atomic": false,
+      "composedOf": ["Matrix", "Operator", "TokenColumn"],
+      "import": "import { QKVProjection } from '@patternize/components'",
+      "description": "The Q·K·V projection of self-attention as an equation: Embeddings × W(qkv) + bias = Q·K·V. Synthesizes plausible data when none is provided.",
+      "props": [
+        { "name": "tokens", "type": "string[]", "required": false, "description": "Input tokens (rows)." },
+        { "name": "dModel", "type": "number", "required": false, "description": "Embedding dimension. Default 768." },
+        { "name": "dProj", "type": "number", "required": false, "description": "Per-head projection dim; output width is 3*dProj. Default 768." },
+        { "name": "data", "type": "{ embeddings?, wq?, wk?, wv?, bias?, q?, k?, v? }", "required": false, "description": "Provide real tensors instead of synthesizing." },
+        { "name": "animate", "type": "boolean", "required": false, "description": "Animate blocks in." }
+      ],
+      "examples": [
+        { "name": "Default", "props": { "tokens": ["Data", "visualization", "em", "powers", "users", "to"] } }
+      ]
+    },
+    {
+      "id": "AttentionHeatmap",
+      "category": "ml",
+      "atomic": false,
+      "composedOf": ["Matrix"],
+      "import": "import { AttentionHeatmap } from '@patternize/components'",
+      "description": "Token-by-token attention heatmap (query rows × key columns). Pass real weights or synthesize a causal pattern.",
+      "props": [
+        { "name": "tokens", "type": "string[]", "required": true, "description": "Labels for both axes." },
+        { "name": "weights", "type": "number[][]", "required": false, "description": "n×n attention weights (rows sum to 1)." },
+        { "name": "causal", "type": "boolean", "required": false, "description": "Mask future positions when synthesizing. Default true." },
+        { "name": "showValues", "type": "boolean", "required": false, "description": "Print weights in cells." }
+      ],
+      "examples": [
+        { "name": "Causal attention", "props": { "tokens": ["The", "cat", "sat", "on", "mat"], "causal": true, "showValues": true } }
+      ]
+    },
+    {
+      "id": "Tensor3D",
+      "category": "ml",
+      "atomic": true,
+      "entry": "@patternize/components/three",
+      "import": "import { Tensor3D } from '@patternize/components/three'",
+      "peerDependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "description": "Renders a 3D tensor as a block of colored voxels (a literal cube of numbers) with orbit + auto-spin. Building block for activation volumes / feature maps.",
+      "props": [
+        { "name": "data", "type": "number[][][]", "required": false, "description": "data[depth][height][width]; synthesized when omitted." },
+        { "name": "shape", "type": "[number,number,number]", "required": false, "description": "[depth,height,width] for synthesized data." },
+        { "name": "spin", "type": "boolean", "required": false, "description": "Auto-rotate." },
+        { "name": "color", "type": "string", "required": false, "description": "Voxel ramp base color." }
+      ],
+      "examples": [
+        { "name": "4×6×6 tensor", "props": { "shape": [4, 6, 6], "spin": true } }
+      ]
+    },
+    {
+      "id": "Transformer3D",
+      "category": "ml",
+      "atomic": false,
+      "entry": "@patternize/components/three",
+      "import": "import { Transformer3D } from '@patternize/components/three'",
+      "peerDependencies": ["three", "@react-three/fiber", "@react-three/drei"],
+      "description": "Interactive 3D Transformer architecture: orbit / zoom / pan the full encoder+decoder stack, click any block to fly the camera in and inspect it, with animated data-flow pulses and a cross-attention link. Data-driven; defaults to the 'Attention is All You Need' architecture. Pass decoder={null} for an encoder-only (BERT-style) model.",
+      "props": [
+        { "name": "encoder", "type": "TransformerStackSpec", "required": false, "description": "Left stack spec; defaults to a standard 6× encoder." },
+        { "name": "decoder", "type": "TransformerStackSpec | null", "required": false, "description": "Right stack spec; defaults to a standard 6× decoder. Pass null for encoder-only." },
+        { "name": "spin", "type": "boolean", "required": false, "description": "Slowly auto-orbit when nothing is selected." },
+        { "name": "showFlow", "type": "boolean", "required": false, "description": "Animate data-flow pulses up each stack." },
+        { "name": "height", "type": "number", "required": false, "description": "Canvas height in px (default 560)." },
+        { "name": "onSelect", "type": "(layer | null) => void", "required": false, "description": "Fires when a block is selected or cleared." }
+      ],
+      "examples": [
+        { "name": "Encoder–Decoder", "props": { "spin": true, "showFlow": true } },
+        { "name": "Encoder-only (BERT-style)", "props": { "decoder": null, "spin": true } }
+      ]
+    },
+    {
+      "id": "PriorityQueue",
+      "category": "algorithms",
+      "atomic": true,
+      "import": "import { PriorityQueue } from '@patternize/components'",
+      "description": "A binary-heap priority queue drawn as a tree plus its backing array. Feed successive `values` snapshots to animate insert / extract-min.",
+      "props": [
+        { "name": "values", "type": "number[]", "required": true, "description": "Heap array in level order (children of i are 2i+1, 2i+2)." },
+        { "name": "variant", "type": "'min' | 'max'", "required": false, "description": "Cosmetic label for root semantics." },
+        { "name": "highlight", "type": "number[]", "required": false, "description": "Indices to highlight (e.g. the node being sifted)." },
+        { "name": "showArray", "type": "boolean", "required": false, "description": "Also render the backing array." }
+      ],
+      "examples": [
+        { "name": "Min-heap", "props": { "values": [1, 3, 6, 5, 9, 8], "variant": "min", "highlight": [0] } }
+      ]
+    },
+    {
+      "id": "Array",
+      "category": "algorithms",
+      "atomic": true,
+      "import": "import { Array } from '@patternize/components'",
+      "description": "A horizontal array of values; building block for sorting, sliding-window and two-pointer visualizations.",
+      "props": [
+        { "name": "data", "type": "number[]", "required": true, "description": "Values left to right." },
+        { "name": "highlights", "type": "number[]", "required": false, "description": "Indices to emphasize." },
+        { "name": "colorRanges", "type": "{start,end,color}[]", "required": false, "description": "Color contiguous index ranges." },
+        { "name": "showIndices", "type": "boolean", "required": false, "description": "Show index under each cell." }
+      ],
+      "examples": [
+        { "name": "Window", "props": { "data": [5, 1, 4, 2, 8, 3], "highlights": [1, 2, 3] } }
+      ]
+    }
+  ]
+}

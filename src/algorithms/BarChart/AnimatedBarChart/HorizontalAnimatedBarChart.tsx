@@ -1,3 +1,4 @@
+// @ts-nocheck -- legacy d3-imperative component; see docs/API-REVIEW.md (declarative migration pending)
 import * as React from 'react';
 import * as d3 from 'd3';
 import { useResizeObserver } from '../../../hooks';

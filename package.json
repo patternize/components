@@ -1,7 +1,7 @@
 {
   "name": "@patternize/components",
-  "description": "React components for Patternize.io",
-  "version": "0.2.22",
+  "description": "Atomic, animated React components for visualizing algorithms, data structures, tensors and machine-learning architectures (transformers, CNNs).",
+  "version": "0.3.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -15,99 +15,108 @@
     "react",
     "components",
     "visualization",
-    "algorithms"
+    "algorithms",
+    "machine-learning",
+    "transformers",
+    "tensors",
+    "attention",
+    "data-structures"
   ],
   "publishConfig": {
     "access": "public"
   },
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "unpkg": "./dist/umd/index.js",
-  "jsdelivr": "./dist/umd/index.js",
-  "types": "./dist/cjs/index.d.ts",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/esm/index.d.ts",
-        "default": "./dist/esm/index.js"
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
       },
       "require": {
-        "types": "./dist/cjs/index.d.ts",
-        "default": "./dist/cjs/index.js"
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
       }
-    }
+    },
+    "./three": {
+      "import": {
+        "types": "./dist/three.d.ts",
+        "default": "./dist/three.js"
+      },
+      "require": {
+        "types": "./dist/three.d.cts",
+        "default": "./dist/three.cjs"
+      }
+    },
+    "./catalog.json": "./dist/catalog.json"
   },
   "scripts": {
-    "start": "storybook dev -p 6006",
     "clean": "rm -rf dist",
-    "prebuild": "yarn clean",
-    "build:cjs": "tsc --project tsconfig.cjs.json",
-    "build:esm": "tsc --project tsconfig.esm.json",
-    "build:umd": "webpack --config webpack.config.js",
-    "build": "yarn clean && yarn build:esm && yarn build:cjs && yarn build:umd",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build-storybook": "storybook build",
+    "build": "npm run clean && tsup && npm run build:catalog",
+    "build:catalog": "node scripts/build-catalog.mjs",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-    "publish": "yarn build && npm publish"
+    "format": "prettier --write 'src/**/*.{ts,tsx,md}'",
+    "workbench": "npm --prefix workbench run dev",
+    "workbench:install": "npm --prefix workbench install",
+    "workbench:build": "npm --prefix workbench run build",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@react-spring/web": "^9.7.5",
-    "@storybook/react-webpack5": "^8.3.6",
-    "@testing-library/react": "^16.0.1",
-    "@testing-library/user-event": "^14.5.2",
-    "@types/node": "^12.20.55",
-    "@visx/geo": "^3.5.0",
-    "@visx/gradient": "^3.3.0",
+    "@react-spring/web": "^10.0.1",
+    "@visx/geo": "^3.12.0",
+    "@visx/gradient": "^3.12.0",
     "@visx/group": "^3.12.0",
-    "@visx/hierarchy": "^3.3.0",
-    "@visx/responsive": "^3.3.0",
+    "@visx/hierarchy": "^3.12.0",
+    "@visx/responsive": "^3.12.0",
+    "@visx/scale": "^3.12.0",
     "@visx/shape": "^3.12.0",
     "@visx/text": "^3.12.0",
+    "clsx": "^2.1.1",
     "d3": "^7.9.0",
-    "postcss": "^8.4.38",
-    "postcss-safe-parser": "^7.0.1",
-    "react-jss": "^10.5.0",
-    "react-scripts": "^5.0.1",
-    "react-spring": "^9.7.4",
+    "react-jss": "^10.10.0",
     "resize-observer-polyfill": "^1.5.1",
-    "topojson-client": "^3.1.0",
-    "typescript": "^4"
+    "topojson-client": "^3.1.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18",
+    "@react-three/drei": ">=9",
+    "@react-three/fiber": ">=8",
+    "three": ">=0.160"
+  },
+  "peerDependenciesMeta": {
+    "three": { "optional": true },
+    "@react-three/fiber": { "optional": true },
+    "@react-three/drei": { "optional": true }
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^8.3.6",
-    "@storybook/addon-essentials": "^8.3.6",
-    "@storybook/addon-links": "^8.3.6",
-    "@storybook/node-logger": "^8.1.0",
-    "@storybook/preset-create-react-app": "^8.3.6 ",
-    "@storybook/react": "^8.3.6",
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
+    "@types/d3": "^7.4.3",
+    "@types/node": "^22.10.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.169.0",
+    "@types/topojson-client": "^3.1.5",
     "@typescript-eslint/eslint-plugin": "^8.11.0",
     "@typescript-eslint/parser": "^8.11.0",
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jest": "^28.5.0",
     "eslint-plugin-jsx-a11y": "^6.10.1",
-    "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^5.0.0",
-    "prettier": "^3.3.3",
-    "storybook": "^8.3.2",
-    "ts-loader": "^9.5.2",
-    "webpack": "^5.97.1",
-    "webpack-cli": "^6.0.1"
+    "prettier": "^3.6.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.169.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
   },
   "prettier": {
     "singleQuote": true,
@@ -115,9 +124,5 @@
   },
   "files": [
     "dist"
-  ],
-  "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
-  }
+  ]
 }
