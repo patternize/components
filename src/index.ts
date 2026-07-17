@@ -57,3 +57,46 @@ export { default as WorldMap } from './visualizations/Map/WorldMap';
 export { default as Timeline } from './visualizations/Timeline/Timeline';
 // Cycle Flow
 export { CycleFlow } from './components/CycleFlow/CycleFlow';
+
+// Design tokens & chart palette (Airbnb-inspired, see DESIGN.md)
+export * as theme from './theme';
+
+// Chart primitives
+export {
+  AnimatedNumber,
+  ChartCard,
+  Legend,
+  Tooltip
+} from './visualizations/primitives';
+
+// Animated charts
+export { AreaChart, LineChart } from './visualizations/LineChart/LineChart';
+export { BarChart } from './visualizations/BarChart/BarChart';
+export { DonutChart } from './visualizations/DonutChart/DonutChart';
+export { ScatterPlot } from './visualizations/ScatterPlot/ScatterPlot';
+export { Heatmap } from './visualizations/Heatmap/Heatmap';
+export { StatRow, StatTile } from './visualizations/StatTile/StatTile';
+export { ProgressRing } from './visualizations/ProgressRing/ProgressRing';
+
+// Chart types (for typed markdown/MDX usage)
+export type {
+  LineChartProps,
+  LinePoint,
+  LineSeries
+} from './visualizations/LineChart/LineChart';
+export type {
+  BarChartProps,
+  BarDatum
+} from './visualizations/BarChart/BarChart';
+export type {
+  DonutChartProps,
+  DonutDatum
+} from './visualizations/DonutChart/DonutChart';
+export type {
+  ScatterPlotProps,
+  ScatterPoint,
+  ScatterSeries
+} from './visualizations/ScatterPlot/ScatterPlot';
+export type { HeatmapProps } from './visualizations/Heatmap/Heatmap';
+export type { StatTileProps } from './visualizations/StatTile/StatTile';
+export type { ProgressRingProps } from './visualizations/ProgressRing/ProgressRing';

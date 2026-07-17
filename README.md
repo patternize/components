@@ -36,6 +36,37 @@ yarn add @patternize/components
 - Timeline
 - World Map
 - Cycle Flow
+
+### Animated Charts (Airbnb-inspired design language)
+Props-driven, responsive, and animated with react-spring — built to be dropped
+straight into markdown/MDX pages. Styled per `DESIGN.md`, with a
+colorblind-validated categorical palette (see `src/theme/palette.ts`).
+
+- **LineChart / AreaChart** — staggered draw-in, crosshair + tooltip, direct end labels
+- **BarChart** — bars grow from the baseline, rounded data-ends, hover tooltip
+- **DonutChart** — segments sweep in, animated center total, hover lift
+- **ScatterPlot** — points pop in, nearest-point tooltip (up to 4 series)
+- **Heatmap** — sequential teal/rausch ramps, cells reveal in reading order
+- **StatTile / StatRow** — counting KPI numbers with delta chips
+- **ProgressRing** — animated arc with counting percentage
+
+```jsx
+import { LineChart, StatRow, StatTile } from '@patternize/components';
+
+<StatRow>
+  <StatTile label="Revenue" value={48200} prefix="$" delta={8.3} />
+  <StatTile label="Occupancy" value={87.4} decimals={1} suffix="%" delta={2.1} />
+</StatRow>
+
+<LineChart
+  title="Nights booked"
+  series={[
+    { name: 'Tokyo', data: [{ x: 'Jan', y: 42 }, { x: 'Feb', y: 48 }] },
+    { name: 'Lisbon', data: [{ x: 'Jan', y: 30 }, { x: 'Feb', y: 35 }] }
+  ]}
+/>
+```
+
 ## Usage Examples
 
 ```jsx
